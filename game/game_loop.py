@@ -1,12 +1,14 @@
 from game.safe_room import safe
-# from game.combat import fight
+from game.combat import explore
 
 def main_loop(player):
-    where = input("\nDo you want to look for a [fight], or a [safe] room?: " )
-    while (where != "fight") & (where != "safe"):
-        where = input("Enter [fight] or [safe]: ")
+    where = input("\nDo you want to [explore], or look for a [safe] room?: " )
+    while (where != "explore") & (where != "safe"):
+        where = input("Enter [explore] or [safe]: ")
+
+    
 
     if (where == "safe"):
         safe(player)
-    # if (where == "fight"):
-    #     fight(player)
+    if (where == "explore"):
+        explore(player)
