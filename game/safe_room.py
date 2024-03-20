@@ -14,14 +14,9 @@ def safe(player):
     if (tmp == "stats"):
         player.display()
 
-    
-    # TODO make this work, the dictionary doesn't seem to be doing much
-    # cases = {0 : "stats",
-    #          1 : "heal"
-    #          }
-    
-    # match tmp:
-    #     case 0:
-    #         player.display()
-    #     case 1:
-    #         scrolls = input("How many heal scrolls do you want? ")
+
+    match tmp:
+        case "stats":
+            player.display()
+        case "heal":
+            scrolls = input("How many heal scrolls do you want? ")

@@ -1,6 +1,5 @@
 import random
 from game.mob import Mob
-from game.initialize_mob import initialize
 
 
 def explore(player):
