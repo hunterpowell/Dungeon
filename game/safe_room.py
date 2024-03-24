@@ -10,14 +10,11 @@ def safe(player):
     
     if (tmp != "stats") & (tmp != "heal"):
         tmp = input("Please enter something valid: ")
-    
-    if (tmp == "stats"):
-        player.display()
 
 
     match tmp:
         case "stats":
-            player.display()
+            player.display_player()
         case "heal":
             player.scrolls = input("How many heal scrolls do you want? ")
 
