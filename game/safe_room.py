@@ -19,4 +19,6 @@ def safe(player):
         case "stats":
             player.display()
         case "heal":
-            scrolls = input("How many heal scrolls do you want? ")
+            player.scrolls = input("How many heal scrolls do you want? ")
+
+            

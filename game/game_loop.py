@@ -1,5 +1,5 @@
 from game.safe_room import safe
-from game.combat import explore
+from game.explore import explore
 
 def main_loop(player):
     where = input("\nDo you want to [explore], or look for a [safe] room?: " )

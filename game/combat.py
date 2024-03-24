@@ -1,18 +1,21 @@
 import random
 from game.mob import Mob
 
-
-def explore(player):
+def fight(player):
     
     monster = Mob()
 
-    num = random.randint(0,3)
+    txt = "You've run into a {}!"
+    print(txt.format(monster.name))
 
-    if (num <= 2):
-        txt = "You found a {}!"
-        print(txt.format(monster.name))
-    
-    else:
-        print("You found some loot!")
-    
+    input = input("What would you like to do? [attack], [run], use [item]: ")
 
+    while (input != "attack" & input != "run" & input != "item"):
+        input = input("Please enter [attack], [run], or [item]: ")
+
+    match input:
+        case "attack":
+            hit = random.randint(6)
+
+        # case "run":
+            
