@@ -1,21 +1,24 @@
 import random
-from game.mob import Mob
+from game.characters.mob import Mob
 
 def fight(player):
     
     monster = Mob()
+    
 
     txt = "You've run into a {}!"
     print(txt.format(monster.name))
 
-    input = input("What would you like to do? [attack], [run], use [item]: ")
+    userin = input("What would you like to do? [attack], [run], use [item]: ")
 
-    while (input != "attack" & input != "run" & input != "item"):
-        input = input("Please enter [attack], [run], or [item]: ")
+    while (userin != "attack") & (userin != "run") & (userin != "item"):
+        userin = input("Please enter [attack], [run], or [item]: ")
 
-    match input:
+    match userin:
         case "attack":
             hit = random.randint(6)
 
         # case "run":
+            
+        # case "item": 
             

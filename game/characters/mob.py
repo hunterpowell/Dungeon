@@ -9,18 +9,18 @@ class Mob:
                 self.name = "rat"
                 self.health = 10
                 self.atk = 2
+                self.ac = 1
             case 1: 
                 self.name = "goblin"
                 self.health = 30
                 self.atk = 5
+                self.ac = 5
             case 2:
                 self.name = "slime"
                 self.health = 50
                 self.atk = 1
-            case 3: 
-                self.name = "BOSS: The Juicer!"
-                self.health = 200
-                self.atk= 10
+                self.ac = 10
+
 
     def display_mob(self):
         print("\n    STATS")
@@ -28,4 +28,5 @@ class Mob:
         print("Name:    ", self.name)
         print("Health:  ", self.health)
         print("Attack:  ", self.atk)
+        print("Armor:   ", self.ac)
 

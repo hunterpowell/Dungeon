@@ -1,5 +1,4 @@
 import random
-from game.mob import Mob
 from game.combat import fight
 
 
