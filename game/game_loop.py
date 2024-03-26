@@ -7,8 +7,8 @@ def main_loop(player):
 
     while day < 5:    
         
-        print(f"\n\tDay {day + 1}\n---------------------")
-        where = input("\nDo you want to [explore], or end the day and look for a [safe] room?: " )
+        print(f"\n\t\t\tDay: {day + 1}\n\t\t----------------------")
+        where = input("Do you want to [explore], or end the day and look for a [safe] room?: " )
         while (where != "explore") & (where != "safe"):
             where = input("Enter [explore] or [safe]: ")
 
