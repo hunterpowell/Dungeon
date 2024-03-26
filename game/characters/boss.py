@@ -3,6 +3,7 @@ class Boss:
         self.name = "THE JUICER"
         self.health = 200
         self.atk = 10
+        self.dmg = 10
         self.ac = 15
 
     def display_mob(self):

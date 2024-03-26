@@ -8,17 +8,20 @@ class Mob:
             case 0:
                 self.name = "rat"
                 self.health = 10
-                self.atk = 2
+                self.atk = 2        # bonus to attack roll (determines hit/miss)
+                self.dmg = 0        # damage added to the dmg roll
                 self.ac = 1
             case 1: 
                 self.name = "goblin"
                 self.health = 30
                 self.atk = 5
+                self.dmg = 3
                 self.ac = 5
             case 2:
                 self.name = "slime"
                 self.health = 50
                 self.atk = 1
+                self.dmg = 0
                 self.ac = 10
 
 
