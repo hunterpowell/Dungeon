@@ -1,6 +1,7 @@
 import random
 from game.characters.mob import Mob
 from game.characters.boss import Boss
+from game.death import Dead
 
 def fight(player):
     
@@ -20,6 +21,7 @@ def fight(player):
         while (userin != "attack") & (userin != "run") & (userin != "item"):
             userin = input("Please enter [attack], [run], or [item]: ")
 
+        # TODO make the mob fight back, even if u miss
         match userin:
             case "attack":
                 
@@ -38,10 +40,13 @@ def fight(player):
                 elif (hit + player.atk < monster.ac):
                     print("Miss!")
 
-
-
-
         # case "run":
             
         # case "item": 
+
+        if monster.health < 0:
+            print(f"You beat the {monster.name}!")
+
+        if player.health < 0:
+            Dead(player)
             

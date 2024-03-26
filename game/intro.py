@@ -9,7 +9,8 @@ Do you want to hear some lore or do you want to go in blind? [lore] or [blind]: 
     
     if (print_intro == "lore"):
         print("\nYou are on the first level of the World Dungeon. Everyone on the surface of your planet is either dead, or down here with you.\n\
-You woke up at the bottom of the stairs, in a dark hallway with nothing but the clothes on your back and whatever is in your pockets.\n")
+You woke up at the bottom of the stairs, in a dark hallway with nothing but the clothes on your back and whatever is in your pockets.\n\
+You have 5 days before this floor collapses, going to a safe room will end the day.\n")
         
     name = input("What is your name? ")
     return name
