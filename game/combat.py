@@ -36,6 +36,7 @@ def fight(player):
                     print("You missed!")
 
                 if monster.health <= 0:
+                    print(f"You beat the {monster.name}!")
                     break
                 
                 # enemy attacks
@@ -54,8 +55,8 @@ def fight(player):
             
         # case "item": 
 
-        if monster.health <= 0:
-            print(f"You beat the {monster.name}!")
+        # if monster.health <= 0:
+        #     print(f"You beat the {monster.name}!")
 
         if player.health <= 0:
             player.death()
