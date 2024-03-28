@@ -13,7 +13,7 @@ def main_loop(player):
             where = input("Enter [explore] or [safe]: ")
 
         if (where == "safe"):
-            safe(player)
+            safe(player, day)
             day += 1
         if (where == "explore"):
             explore(player)

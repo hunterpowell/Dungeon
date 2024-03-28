@@ -1,5 +1,5 @@
 from game.characters.player import Player
-from game.intro import introduction
+from game.lore import introduction
 from game.game_loop import main_loop
 
 if __name__ == "__main__":

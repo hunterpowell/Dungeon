@@ -1,35 +1,20 @@
 import random
+from game.characters.character import Character
 
-class Mob:
-    def __init__(self):
-        
-        num = random.randint(0,3)
-        match num:
-            case 0:
-                self.name = "rat"
-                self.health = 10
-                self.atk = 2        # bonus to attack roll (determines hit/miss)
-                self.dmg = 0        # damage added to the dmg roll
-                self.ac = 1
-            case 1: 
-                self.name = "goblin"
-                self.health = 30
-                self.atk = 5
-                self.dmg = 3
-                self.ac = 5
-            case 2:
-                self.name = "slime"
-                self.health = 50
-                self.atk = 1
-                self.dmg = 0
-                self.ac = 10
+class Mob(Character):
+    def __init__(self, name, health, atk, dmg, ac):
+        super().__init__(name, health, atk, dmg, ac)
 
+    # GOATED WAY TO HANDLE THIS SHIT, INHERITANCE BABY
+    @classmethod
+    def random_enemy(cls):
+        enemies = [
+            ("Rat", 10, 2, 0, 1),
+            ("Goblin", 30, 5, 3, 5),
+            ("Slime", 50, 1, 0, 10)
+        ]
 
-    def display_mob(self):
-        print("\n    STATS")
-        print("=============")
-        print("Name:    ", self.name)
-        print("Health:  ", self.health)
-        print("Attack:  ", self.atk)
-        print("Armor:   ", self.ac)
+        name, health, atk, dmg, ac = random.choice(enemies)
+        return cls(name, health, atk, dmg, ac)
+
 

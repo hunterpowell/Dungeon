@@ -16,4 +16,3 @@ You have 5 days before this floor collapses, going to a safe room will end the d
     return name
 
 
-# introduction()

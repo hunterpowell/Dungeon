@@ -1,18 +1,28 @@
-class Player:
-    def __init__(self, name):
-        self.name = name   
-        self.health = 100           # default health is 100
-        self.atk = 3                # default atk bonus is 5 (determines hit/miss)
-        self.dmg = 5                # default dmg bonus is 5 (determines damage)
-        self.ac = 15                # default ac is 15, will iterate per level
-        self.scrolls = 0
+# import random
+from game.characters.character import Character
 
-    def display_player(self):
-        print("\n    STATS")
-        print("=============")
-        print("Name:    ", self.name)
-        print("Health:  ", self.health)
-        print("Attack:  ", self.atk)
-        print("Damage:  ", self.dmg)
-        print("Armor:   ", self.ac)
+class Player(Character):
+    def __init__(self, name):
+        super().__init__(name, health = 100, atk = 3, dmg = 5, ac = 15)
+        self.scrolls = 0
+        self.gold = 20
+        self.lvl = 1
+        # self.weapon = ADD WEAPONS, USE DICT TO DETERMINE BONUS DAMAGE 
+        # self.class = ADD CLASSES, DIFF SPECIAL ABILITY BASED ON CLASS, DIFF CLASSES available BASED ON WEAPON
+
+
+
+    def inventory(self):
+        print("\n    INVENTORY")
+        print("=================")
         print("Scrolls: ", self.scrolls)
+        print("Gold:    ", self.gold)
+
+
+    def death(self):
+        print(f"Nice try {self.name}, you made it further than any of us thought you would. Have fun in hell!\n")
+        self.display
+        input()                    # requires enter to be pressed before program closes
+        exit()
+
+        
