@@ -30,11 +30,11 @@ def safe(player, day):
 
             case "heal":
                 heal = input("\nHow many heal scrolls do you want? 20 gold each: ")
+                # FIX THIS, input sanitization isn't working right
                 while not heal.isdigit():
                     heal = input("please enter a number: ")
-                heal_num = int(heal)
+                    heal_num = int(heal)
                 while (player.gold < (heal_num*20)):
-                    print(heal_num*20)
                     heal = input("You can't afford that many. Try again: ")
                     heal_num = int(heal)
                 else:

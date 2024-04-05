@@ -7,4 +7,3 @@ if __name__ == "__main__":
     p1 = Player(introduction())
     print("hi ", p1.name)
     main_loop(p1)
-
