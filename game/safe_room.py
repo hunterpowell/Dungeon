@@ -11,7 +11,7 @@ def safe(player, day):
                         "see [stats]\n"
                         "buy [heal] scrolls\n"
                         "see [inventory]\n"
-                        "[leave] the room, and descend\n"
+                        "[leave] the room, and descend the stairs\n"
                         "Enter here: ")
         else:
             tmp = input("\nWhat would you like to do?\n"
@@ -21,7 +21,7 @@ def safe(player, day):
                         "[leave] the room\n"
                         "Enter here: ")
             
-        if (tmp != "stats") & (tmp != "heal") & (tmp != "leave") & (tmp != "inventory"):
+        if (tmp != "stats") and (tmp != "heal") and (tmp != "leave") and (tmp != "inventory"):
             tmp = input("Please enter something valid: ")
 
         match tmp:

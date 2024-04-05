@@ -1,6 +1,7 @@
 import random
 from game.characters.mob import Mob
 from game.characters.boss import Boss
+from game.lore import juicer_desc, hoarder_desc, ball_desc
 
 def fight(player):
     
@@ -8,6 +9,13 @@ def fight(player):
 
     if rand == 10:
         monster = Boss.random_boss()
+        if monster.name == "THE JUICER":
+            juicer_desc()
+        elif monster.name == "THE HOARDER":
+            hoarder_desc()
+        else:
+            ball_desc()
+            
     else:
         monster = Mob.random_enemy()
 
@@ -15,10 +23,10 @@ def fight(player):
     print(f"{monster.name} has {monster.health}hp")
     monster.display
 
-    while (monster.health > 0) & (player.health > 0):
+    while (monster.health > 0) and (player.health > 0):
         userin = input("\nWhat would you like to do? [attack], [run], use [item]: ")
 
-        while (userin != "attack") & (userin != "run") & (userin != "item"):
+        while (userin != "attack") and (userin != "run") and (userin != "item"):
             userin = input("Please enter [attack], [run], or [item]: ")
 
         match userin:
@@ -33,10 +41,15 @@ def fight(player):
                     print(f"{monster.name} has {monster.health}hp remaining")
                 
                 elif (hit + player.atk < monster.ac):
-                    print("You missed!")
+                    print("\nYou missed!")
 
+                # if mob dies, heals player by overkill amount
                 if monster.health <= 0:
                     print(f"You beat the {monster.name}!")
+                    overkill = 0 - monster.health
+                    player.health += overkill
+                    if overkill > 0:
+                        print(f"You healed for {overkill}hp!\n")
                     break
                 
                 # enemy attacks
@@ -48,15 +61,22 @@ def fight(player):
                 else:
                     print("Enemy missed!")
                 
-                # if player.health <= 0:
-                #     player.death()
-
-        # case "run":
+            case "run":
+                loss = random.randint(5, 15)
+                print(f"You ran away! You dropped {loss} gold on the way out.                (bitch)\n")
+                player.gold -= loss
+                break
             
-        # case "item": 
+            case "item": 
+                player.inventory()
+                use = input("What would you like to use?")
+                while use != "scroll":
+                    use = input("Please enter [scroll]")
 
-        # if monster.health <= 0:
-        #     print(f"You beat the {monster.name}!")
+                if use == "scroll":
+                    player.scrolls -= 1
+                    player.health += 25
+                    print("25hp restored. HP remaining: ", player.health)
 
         if player.health <= 0:
             player.death()

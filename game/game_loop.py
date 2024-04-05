@@ -9,7 +9,7 @@ def main_loop(player):
         
         print(f"\n\t\t\tDay: {day + 1}\n\t\t----------------------")
         where = input("Do you want to [explore], or end the day and look for a [safe] room?: " )
-        while (where != "explore") & (where != "safe"):
+        while (where != "explore") and (where != "safe"):
             where = input("Enter [explore] or [safe]: ")
 
         if (where == "safe"):
