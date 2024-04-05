@@ -21,7 +21,7 @@ class Player(Character):
 
     def death(self):
         print(f"Nice try {self.name}, you made it further than any of us thought you would. Have fun in hell!\n")
-        self.display
+        self.display()
         input()                    # requires enter to be pressed before program closes
         exit()
 
