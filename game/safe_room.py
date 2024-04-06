@@ -7,7 +7,7 @@ def safe(player, day):
     player.health = 100
 
     while True:
-        if day == 5:
+        if day == 4:
             tmp = input("\nFinal moment before descending the stairs to floor 2\n"
                         "What Would you like to do?\n"
                         "see [stats]\n"

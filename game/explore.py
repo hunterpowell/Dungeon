@@ -1,5 +1,5 @@
 import random
-import os
+import time
 from game.combat import fight
 
 
@@ -15,5 +15,4 @@ def explore(player):
         money = random.randint(10,50)
         player.gold += money
         print(f"{money} gold acquired!")
-
-    os.system('cls')
+        time.sleep(3)

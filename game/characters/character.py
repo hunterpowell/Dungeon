@@ -12,7 +12,7 @@ class Character:
         self.health -= damage
 
     def display(self):
-        print("\n    STATS")
+        print("    STATS")
         print("=============")
         print("Name:    ", self.name)
         print("Health:  ", self.health)

@@ -1,4 +1,5 @@
 import random
+import time
 import os
 from game.characters.mob import Mob
 from game.characters.boss import Boss
@@ -38,10 +39,13 @@ def fight(player):
                 hit = random.randint(1, 20)
                 if (hit + player.atk >= monster.ac):
                     print("You hit!")                    
-                    # monster gets hit 
                     monster.defend(player.attack())
-                    print(f"{monster.name} has {monster.health}hp remaining")
-                
+                    if monster.health > 0:
+                        print(f"{monster.name} has {monster.health}hp remaining")
+                    else:
+                        print(f"{monster.name} has 0hp remaining!")
+
+
                 elif (hit + player.atk < monster.ac):
                     print("You missed!")
 
@@ -52,7 +56,9 @@ def fight(player):
                     player.health += overkill
                     if overkill > 0:
                         print(f"You healed for {overkill}hp!\n")
-                    input()
+                    
+                    # small delay before we break out of loop and screen clears
+                    time.sleep(3)
                     break
                 
                 # enemy attacks
@@ -62,7 +68,7 @@ def fight(player):
                     player.defend(monster.attack())
                     print(f"You have {player.health}hp remaining!")
                 else:
-                    print("Enemy missed!")
+                    print("\nEnemy missed!")
                 
             case "run":
                 os.system('cls')
