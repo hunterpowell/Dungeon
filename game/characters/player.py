@@ -13,7 +13,7 @@ class Player(Character):
 
 
     def inventory(self):
-        print("\n    INVENTORY")
+        print("    INVENTORY")
         print("=================")
         print("Scrolls: ", self.scrolls)
         print("Gold:    ", self.gold)

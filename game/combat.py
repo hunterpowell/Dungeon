@@ -1,6 +1,9 @@
 import random
+import time
+import os
 from game.characters.mob import Mob
 from game.characters.boss import Boss
+from game.lore import juicer_desc, hoarder_desc, ball_desc
 
 def fight(player):
     
@@ -8,6 +11,13 @@ def fight(player):
 
     if rand == 10:
         monster = Boss.random_boss()
+        if monster.name == "THE JUICER":
+            juicer_desc()
+        elif monster.name == "THE HOARDER":
+            hoarder_desc()
+        else:
+            ball_desc()
+            
     else:
         monster = Mob.random_enemy()
 
@@ -15,28 +25,40 @@ def fight(player):
     print(f"{monster.name} has {monster.health}hp")
     monster.display
 
-    while (monster.health > 0) & (player.health > 0):
+    while (monster.health > 0) and (player.health > 0):
         userin = input("\nWhat would you like to do? [attack], [run], use [item]: ")
 
-        while (userin != "attack") & (userin != "run") & (userin != "item"):
+        while (userin != "attack") and (userin != "run") and (userin != "item"):
             userin = input("Please enter [attack], [run], or [item]: ")
 
         match userin:
             case "attack":
                 
+                os.system('cls')
                 # attack roll to determine hit/miss
                 hit = random.randint(1, 20)
                 if (hit + player.atk >= monster.ac):
-                    print("\nYou hit!")                    
-                    # monster gets hit 
+                    print("You hit!")                    
                     monster.defend(player.attack())
-                    print(f"{monster.name} has {monster.health}hp remaining")
-                
+                    if monster.health > 0:
+                        print(f"{monster.name} has {monster.health}hp remaining")
+                    else:
+                        print(f"{monster.name} has 0hp remaining!")
+
+
                 elif (hit + player.atk < monster.ac):
                     print("You missed!")
 
+                # if mob dies, heals player by overkill amount
                 if monster.health <= 0:
                     print(f"You beat the {monster.name}!")
+                    overkill = 0 - monster.health
+                    player.health += overkill
+                    if overkill > 0:
+                        print(f"You healed for {overkill}hp!\n")
+                    
+                    # small delay before we break out of loop and screen clears
+                    time.sleep(3)
                     break
                 
                 # enemy attacks
@@ -46,17 +68,28 @@ def fight(player):
                     player.defend(monster.attack())
                     print(f"You have {player.health}hp remaining!")
                 else:
-                    print("Enemy missed!")
+                    print("\nEnemy missed!")
                 
-                # if player.health <= 0:
-                #     player.death()
-
-        # case "run":
+            case "run":
+                os.system('cls')
+                loss = random.randint(5, 15)
+                print(f"You ran away! You dropped {loss} gold on the way out.                (bitch)\n")
+                player.gold -= loss
+                break
             
-        # case "item": 
+            case "item": 
+                os.system('cls')
+                player.inventory()
+                use = input("What would you like to use?")
+                while use != "scroll":
+                    use = input("Please enter [scroll]")
 
-        # if monster.health <= 0:
-        #     print(f"You beat the {monster.name}!")
+                if use == "scroll":
+                    player.scrolls -= 1
+                    player.health += 25
+                    print("25hp restored. HP remaining: ", player.health)
+
+
 
         if player.health <= 0:
             player.death()
