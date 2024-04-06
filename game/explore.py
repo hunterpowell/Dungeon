@@ -15,4 +15,4 @@ def explore(player):
         money = random.randint(10,50)
         player.gold += money
         print(f"{money} gold acquired!")
-        time.sleep(3)
+        input("Press enter to continue.")

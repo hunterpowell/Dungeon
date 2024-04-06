@@ -45,7 +45,6 @@ def fight(player):
                     else:
                         print(f"{monster.name} has 0hp remaining!")
 
-
                 elif (hit + player.atk < monster.ac):
                     print("You missed!")
 
@@ -57,8 +56,8 @@ def fight(player):
                     if overkill > 0:
                         print(f"You healed for {overkill}hp!\n")
                     
-                    # small delay before we break out of loop and screen clears
-                    time.sleep(3)
+                    # requires input before we break out of loop and screen clears
+                    input("Press enter to continue.")
                     break
                 
                 # enemy attacks

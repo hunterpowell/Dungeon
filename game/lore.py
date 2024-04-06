@@ -1,7 +1,7 @@
 import os
 def introduction():
    
-    print_intro = input("You have awoken at the bottom of the stairs in a bizarre place. \
+    print_intro = input("You have awoken at the bottom of the stairs in a bizarre place.\n\
 Do you want to hear some lore or do you want to go in blind? [lore] or [blind]: ")
     
     while (print_intro != "lore") and (print_intro != "blind"):
