@@ -32,6 +32,7 @@ def combat_rules():
             "A mob will die if you deplete their health.\n"
             "Overkilling a mob will heal you by the amount you overkill by (if you reduce the mob to -5hp, you will heal by 5hp).\n"
             "A boss will be denoted by a long description, and a much tougher fight.\n"
+            "Experience points receieved is a one-to-one ratio of damage done in a (won) fight.\n"
             )
         input("Press enter to continue.")
     

@@ -1,5 +1,4 @@
 import random
-import time
 import os
 from game.characters.mob import Mob
 from game.characters.boss import Boss
@@ -20,6 +19,8 @@ def fight(player):
             
     else:
         monster = Mob.random_enemy()
+
+    max_hp = monster.health                                     # this is here for XP purposes later
 
     print(f"You've run into a {monster.name}!")
     print(f"{monster.name} has {monster.health}hp")
@@ -55,6 +56,8 @@ def fight(player):
                     player.health += overkill
                     if overkill > 0:
                         print(f"You healed for {overkill}hp!\n")
+                    player.xp += max_hp
+                    print(f"You have earned {max_hp}hp!\n")
                     
                     # requires input before we break out of loop and screen clears
                     input("Press enter to continue.")
