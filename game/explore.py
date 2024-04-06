@@ -1,4 +1,5 @@
 import random
+import os
 from game.combat import fight
 
 
@@ -15,3 +16,4 @@ def explore(player):
         player.gold += money
         print(f"{money} gold acquired!")
 
+    os.system('cls')

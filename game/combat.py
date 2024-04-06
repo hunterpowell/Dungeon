@@ -1,4 +1,5 @@
 import random
+import os
 from game.characters.mob import Mob
 from game.characters.boss import Boss
 from game.lore import juicer_desc, hoarder_desc, ball_desc
@@ -32,16 +33,17 @@ def fight(player):
         match userin:
             case "attack":
                 
+                os.system('cls')
                 # attack roll to determine hit/miss
                 hit = random.randint(1, 20)
                 if (hit + player.atk >= monster.ac):
-                    print("\nYou hit!")                    
+                    print("You hit!")                    
                     # monster gets hit 
                     monster.defend(player.attack())
                     print(f"{monster.name} has {monster.health}hp remaining")
                 
                 elif (hit + player.atk < monster.ac):
-                    print("\nYou missed!")
+                    print("You missed!")
 
                 # if mob dies, heals player by overkill amount
                 if monster.health <= 0:
@@ -50,6 +52,7 @@ def fight(player):
                     player.health += overkill
                     if overkill > 0:
                         print(f"You healed for {overkill}hp!\n")
+                    input()
                     break
                 
                 # enemy attacks
@@ -62,12 +65,14 @@ def fight(player):
                     print("Enemy missed!")
                 
             case "run":
+                os.system('cls')
                 loss = random.randint(5, 15)
                 print(f"You ran away! You dropped {loss} gold on the way out.                (bitch)\n")
                 player.gold -= loss
                 break
             
             case "item": 
+                os.system('cls')
                 player.inventory()
                 use = input("What would you like to use?")
                 while use != "scroll":
@@ -77,6 +82,8 @@ def fight(player):
                     player.scrolls -= 1
                     player.health += 25
                     print("25hp restored. HP remaining: ", player.health)
+
+
 
         if player.health <= 0:
             player.death()

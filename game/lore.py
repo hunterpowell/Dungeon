@@ -1,27 +1,31 @@
-
+import os
 def introduction():
    
-    print_intro = input("\n\nYou have awoken at the bottom of the stairs in a bizarre place. \
+    print_intro = input("You have awoken at the bottom of the stairs in a bizarre place. \
 Do you want to hear some lore or do you want to go in blind? [lore] or [blind]: ")
     
     while (print_intro != "lore") and (print_intro != "blind"):
         print_intro = input("Please enter [lore] or [blind]: ")
     
+    os.system('cls')
+    
     if (print_intro == "lore"):
-        print("\nYou are on the first level of the World Dungeon. Everyone on the surface of your planet is either dead, or down here with you.\n\
+        print("You are on the first level of the World Dungeon. Everyone on the surface of your planet is either dead, or down here with you.\n\
 You woke up at the bottom of the stairs, in a dark hallway with nothing but the clothes on your back and whatever is in your pockets.\n\
 You have 5 days before this floor collapses, going to a safe room will end the day.\n")
         
     name = input("What is your name? ")
     return name
 
+
 def combat_rules():
 
-    display_rules = input("\nDo you want to hear the rules of combat? [y] or [n]: ")
+    display_rules = input("Do you want to hear the rules of combat? [y] or [n]: ")
     while (display_rules != "y") and (display_rules != "n"):
         display_rules = input("Please enter [y] or [n]: ")
 
     if display_rules == "y":
+        os.system('cls')
         print(
             "_________________________RULES______________________________\n"
             "You will survive as long as your health remains above 0.\n"
@@ -29,6 +33,8 @@ def combat_rules():
             "Overkilling a mob will heal you by the amount you overkill by (if you reduce the mob to -5hp, you will heal by 5hp).\n"
             "A boss will be denoted by a long description, and a much tougher fight.\n"
             )
+        input("Press enter to continue.")
+    
 
 def juicer_desc():
     print("With a body enhanced by the finest anabolic steroids the dark web has to offer, the Juicer spends his days pushing iron, \n\
@@ -39,7 +45,7 @@ All he ever wanted was to gain, but right now he'll settle on bringing out……
 def hoarder_desc():
     print("Trapped in her pile of rubbish, abandoned by society, the war inside her head has seeped out of her mind and infected both her body and her surroundings.\n\
 Now nothing more than a garbage troll, the Hoarder is a horrific reminder of what can happen to those who fall out of the light!\n")
-    print("\nThe Hoarder is a comically large woman drowning in garbage, who has also adopted an almost cockroach like appearance.\n")
+    print("\nThe Hoarder is a comically large woman drowning in garbage, who has adopted an almost cockroach like appearance.\n")
 
 def ball_desc():
     print("Also known as the Porkchop Express, the Ball of Swine is one of the rarest, most deadly battle formations of the Tuskling.\n\
