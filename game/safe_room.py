@@ -8,7 +8,7 @@ def safe(player, day):
 
     while True:
         if day == 4:
-            tmp = input("\nFinal moment before descending the stairs to floor 2\n"
+            tmp = input("\nFinal moments before descending the stairs to floor 2.\n\n"
                         "What Would you like to do?\n"
                         "see [stats]\n"
                         "buy [heal] scrolls\n"
@@ -30,9 +30,10 @@ def safe(player, day):
 
         match tmp:
             case "stats":
-                player.display()
+                player.display_player()
 
             case "heal":
+                print(f"Current gold: {player.gold}")
                 heal = input("\nHow many heal scrolls do you want? 20 gold each: ")
                 heal_num = int(heal)
                 while (player.gold < (heal_num*20)):
