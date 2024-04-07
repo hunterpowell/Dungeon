@@ -3,7 +3,7 @@ from game.characters.character import Character
 
 class Player(Character):
     def __init__(self, name):
-        super().__init__(name, health = 100, atk = 3, dmg = 5, ac = 15)
+        super().__init__(name, health = 100, atk = 3, dmg = 5, ac = 10)
         self.scrolls = 0
         self.gold = 20
         self.lvl = 1
@@ -29,6 +29,12 @@ class Player(Character):
         while self.xp > (self.lvl/0.3)**2:
             print("Level up!!")
             self.lvl += 1
+            # +1 atk, dmg, ac per 5 levels
+            if self.lvl % 5 == 0:
+                self.atk += 1
+                self.dmg += 1
+                self.ac += 1
+            
 
     def display_player(self):
         super().display()

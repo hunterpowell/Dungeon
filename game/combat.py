@@ -10,25 +10,28 @@ def fight(player):
 
     if rand == 10:
         monster = Boss.random_boss()
-        if monster.name == "THE JUICER":
-            juicer_desc()
-            input("Press enter to continue.")
-            os.system('cls')
-        elif monster.name == "THE HOARDER":
-            hoarder_desc()
-            input("Press enter to continue.")
-            os.system('cls')
-        elif monster.name == "BALL OF SWINE":
-            ball_desc()
-            input("Press enter to continue.")
-            os.system('cls')
-        else:
-            demon_desc()
-            input("Press enter to continue.")
-            os.system('cls')
+        money = random.randint(100, 200)
+        match monster.name:
+            case "THE JUICER":
+                juicer_desc()
+                input("Press enter to continue.")
+                os.system('cls')
+            case "THE HOARDER":
+                hoarder_desc()
+                input("Press enter to continue.")
+                os.system('cls')
+            case "BALL OF SWINE":
+                ball_desc()
+                input("Press enter to continue.")
+                os.system('cls')
+            case "ASYLUM DEMON":
+                demon_desc()
+                input("Press enter to continue.")
+                os.system('cls')
             
     else:
         monster = Mob.random_enemy()
+        money = random.randint(10, 30)
 
     max_hp = monster.health                                     # this is here for XP purposes later
 
@@ -63,19 +66,22 @@ def fight(player):
                     print("You missed!")
                     print(f"{monster.name} has {monster.health}hp remaining")
 
-                # do stuff if monster dies, heal by overkill, add xp, check for level up
+                # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
                 if monster.health <= 0:
-                    print(f"\nYou beat the {monster.name}!")
+                    print(f"\nYou beat the {monster.name}!\n")
                     overkill = 0 - monster.health
                     player.health += overkill
                     if overkill > 0:
-                        print(f"You healed for {overkill}hp!\n")
+                        print(f"You healed for {overkill}hp!")
                     player.xp += max_hp
-                    print(f"You have earned {max_hp}xp!\n")
+                    print(f"You picked up {money} off the corpse!")
+                    player.gold += money
+                    print(f"You have earned {max_hp}xp!")
                     player.level_up()
+                    print(f"Player level: {player.lvl}")
                     
                     # requires input before we break out of loop and screen clears
-                    input("Press enter to continue.")
+                    input("\nPress enter to continue.")
                     break
                 
                 # enemy attacks
