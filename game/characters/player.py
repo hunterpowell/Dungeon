@@ -24,6 +24,11 @@ class Player(Character):
         if self.xp > (self.lvl/0.3)^2:
             print("Level up!!")
 
+    def display_player(self):
+        super().display()
+        print("Level:      ", self.lvl)
+        print("Experience: ", self.xp)
+
 
     def death(self):
         print(f"Nice try {self.name}, you made it further than any of us thought you would. Have fun in hell!\n")

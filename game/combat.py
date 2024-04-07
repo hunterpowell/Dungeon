@@ -22,6 +22,7 @@ def fight(player):
 
     max_hp = monster.health                                     # this is here for XP purposes later
 
+    print("\t\t\tCOMBAT\n\t\t----------------------")
     print(f"You've run into a {monster.name}!")
     print(f"{monster.name} has {monster.health}hp")
     monster.display
@@ -36,6 +37,8 @@ def fight(player):
             case "attack":
                 
                 os.system('cls')
+                
+                print("\t\t\tCOMBAT\n\t\t----------------------")
                 # attack roll to determine hit/miss
                 hit = random.randint(1, 20)
                 if (hit + player.atk >= monster.ac):
@@ -57,7 +60,7 @@ def fight(player):
                     if overkill > 0:
                         print(f"You healed for {overkill}hp!\n")
                     player.xp += max_hp
-                    print(f"You have earned {max_hp}hp!\n")
+                    print(f"You have earned {max_hp}xp!\n")
                     
                     # requires input before we break out of loop and screen clears
                     input("Press enter to continue.")

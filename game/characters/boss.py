@@ -10,7 +10,7 @@ class Boss(Character):
         bosses = [
             ("THE JUICER", 200, 10, 10, 10),
             ("THE HOARDER", 300, 0, 5, 10),
-            ("BALL OF SWINE", 100, 20, 15, 15)
+            ("BALL OF SWINE", 100, 20, 15, 15),
             ("ASYLUM DEMON", 150, 15, 10, 10)
         ]
 

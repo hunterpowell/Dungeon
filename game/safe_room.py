@@ -30,7 +30,7 @@ def safe(player, day):
 
         match tmp:
             case "stats":
-                player.display()
+                player.display_player()
 
             case "heal":
                 heal = input("\nHow many heal scrolls do you want? 20 gold each: ")
