@@ -18,11 +18,17 @@ class Player(Character):
         print("=================")
         print("Scrolls: ", self.scrolls)
         print("Gold:    ", self.gold)
+    
+    def usable_items(self):
+        print("    INVENTORY")
+        print("=================")
+        print("Scrolls: ", self.scrolls)
 
     # TODO finish this, equation is lvl = 0.3 * sqrt(xp). solved for xp it is xp = (lvl/0.3)^2
     def level_up(self):
-        if self.xp > (self.lvl/0.3)^2:
+        while self.xp > (self.lvl/0.3)**2:
             print("Level up!!")
+            self.lvl += 1
 
     def display_player(self):
         super().display()
@@ -31,6 +37,7 @@ class Player(Character):
 
 
     def death(self):
+        print("\nYOU DIED")
         print(f"Nice try {self.name}, you made it further than any of us thought you would. Have fun in hell!\n")
         self.display
         input()                    # requires enter to be pressed before program closes

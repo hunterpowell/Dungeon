@@ -2,7 +2,7 @@ import random
 import os
 from game.characters.mob import Mob
 from game.characters.boss import Boss
-from game.lore import juicer_desc, hoarder_desc, ball_desc
+from game.lore import juicer_desc, hoarder_desc, ball_desc, demon_desc
 
 def fight(player):
     
@@ -12,10 +12,20 @@ def fight(player):
         monster = Boss.random_boss()
         if monster.name == "THE JUICER":
             juicer_desc()
+            input("Press enter to continue.")
+            os.system('cls')
         elif monster.name == "THE HOARDER":
             hoarder_desc()
-        else:
+            input("Press enter to continue.")
+            os.system('cls')
+        elif monster.name == "BALL OF SWINE":
             ball_desc()
+            input("Press enter to continue.")
+            os.system('cls')
+        else:
+            demon_desc()
+            input("Press enter to continue.")
+            os.system('cls')
             
     else:
         monster = Mob.random_enemy()
@@ -51,16 +61,18 @@ def fight(player):
 
                 elif (hit + player.atk < monster.ac):
                     print("You missed!")
+                    print(f"{monster.name} has {monster.health}hp remaining")
 
-                # if mob dies, heals player by overkill amount
+                # do stuff if monster dies, heal by overkill, add xp, check for level up
                 if monster.health <= 0:
-                    print(f"You beat the {monster.name}!")
+                    print(f"\nYou beat the {monster.name}!")
                     overkill = 0 - monster.health
                     player.health += overkill
                     if overkill > 0:
                         print(f"You healed for {overkill}hp!\n")
                     player.xp += max_hp
                     print(f"You have earned {max_hp}xp!\n")
+                    player.level_up()
                     
                     # requires input before we break out of loop and screen clears
                     input("Press enter to continue.")
@@ -74,27 +86,29 @@ def fight(player):
                     print(f"You have {player.health}hp remaining!")
                 else:
                     print("\nEnemy missed!")
+                    print(f"You have {player.health}hp remaining!")
                 
             case "run":
                 os.system('cls')
                 loss = random.randint(5, 15)
                 print(f"You ran away! You dropped {loss} gold on the way out.                (bitch)\n")
                 player.gold -= loss
+                input("Press enter to continue.")
                 break
             
             case "item": 
                 os.system('cls')
-                player.inventory()
-                use = input("What would you like to use?")
+                player.usable_items()
+                use = input("What would you like to use?: ")
                 while use != "scroll":
                     use = input("Please enter [scroll]")
 
-                if use == "scroll":
+                if use == "scroll" and player.scrolls > 0:
                     player.scrolls -= 1
                     player.health += 25
                     print("25hp restored. HP remaining: ", player.health)
-
-
+                else:
+                    print("You are out of healing scrolls")
 
         if player.health <= 0:
             player.death()

@@ -33,6 +33,7 @@ def safe(player, day):
                 player.display_player()
 
             case "heal":
+                print(f"Current gold: {player.gold}")
                 heal = input("\nHow many heal scrolls do you want? 20 gold each: ")
                 heal_num = int(heal)
                 while (player.gold < (heal_num*20)):

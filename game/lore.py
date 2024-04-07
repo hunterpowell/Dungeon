@@ -38,21 +38,40 @@ def combat_rules():
     
 
 def juicer_desc():
-    print("With a body enhanced by the finest anabolic steroids the dark web has to offer, the Juicer spends his days pushing iron, \n\
-snapping necks, and crying that his pimple-infested sac is a third the size it once was. Having reached a plateau, rage now fills his enlarged heart.\n\
-All he ever wanted was to gain, but right now he'll settle on bringing out……the paaaaain!\n")
-    print("\nThe Juicer looks like a humanoid competition body builder with a lizard head and scaley body.\n")
+    print(
+        "\t\t\tYOU'VE ENCOUTNERED THE JUICER!\n"
+        "\nWith a body enhanced by the finest anabolic steroids the dark web has to offer, the Juicer spends his days pushing iron,\n"
+        "snapping necks, and crying that his pimple-infested sac is a third the size it once was. Having reached a plateau, rage now fills his enlarged heart\n"
+        "All he ever wanted was to gain, but right now he'll settle on bringing out……the paaaaain!\n"
+        "\nThe Juicer looks like a humanoid competition body builder with a lizard head and scaley body.\n"
+        )
 
 def hoarder_desc():
-    print("Trapped in her pile of rubbish, abandoned by society, the war inside her head has seeped out of her mind and infected both her body and her surroundings.\n\
-Now nothing more than a garbage troll, the Hoarder is a horrific reminder of what can happen to those who fall out of the light!\n")
-    print("\nThe Hoarder is a comically large woman drowning in garbage, who has adopted an almost cockroach like appearance.\n")
+    print(
+        "\t\t\tYOU'VE ENCOUNTERED THE HOARDER!\n"
+        "Trapped in her pile of rubbish, abandoned by society, the war inside her head has seeped out of her mind and infected both her body and her surroundings.\n"
+        "Now nothing more than a garbage troll, the Hoarder is a horrific reminder of what can happen to those who fall out of the light!\n"
+        "\nThe Hoarder is a comically large woman drowning in garbage, who has adopted an almost cockroach like appearance.\n"
+        )
 
 def ball_desc():
-    print("Also known as the Porkchop Express, the Ball of Swine is one of the rarest, most deadly battle formations of the Tuskling.\n\
-Encompassing at least 30 Tuskling knights and their lady loves, a Ball formation requires a specific set of circumstances to create. Combine a gathering of \n\
-Tuskling aristocracy, add an alcohol-fueled, sexually-charged orgy of war lust, and sometimes, just sometimes, the wild, ancient battle magic that permeates their war-torn world \n\
-casts the spell, forming the ball. The Tusklings, the ruling class of the Orcish Supremacy, shape into an inseparable sphere that rolls onto the countryside. The ball of pork\n\
-won't stop its night of terror until it has crushed the poor, the weak, and the lesser citizens under its unstoppable weight.\n")
-    print("\nThe Ball of Swine is  massive ball of pink, rippling flesh embedded with eyes, tusks, and scraps of tuxedos and red sequined dresses. It rolls shockingly fast, relying on \n\
-its momentum to do very high damage.\n")
+    print(
+        "\t\t\tYOU'VE ENCOUNTERED THE BALL OF SWINE!\n"
+        "Also known as the Porkchop Express, the Ball of Swine is one of the rarest, most deadly battle formations of the Tuskling.\n"
+        "Encompassing at least 30 Tuskling knights and their lady loves, a Ball formation requires a specific set of circumstances to create. Combine a gathering of \n"
+        "Tuskling aristocracy, add an alcohol-fueled, sexually-charged orgy of war lust, and sometimes, just sometimes, the wild, ancient battle magic that permeates their war-torn world \n"
+        "casts the spell, forming the ball. The Tusklings, the ruling class of the Orcish Supremacy, shape into an inseparable sphere that rolls onto the countryside. The ball of pork\n"
+        "won't stop its night of terror until it has crushed the poor, the weak, and the lesser citizens under its unstoppable weight.\n"
+        "\nThe Ball of Swine is  massive ball of pink, rippling flesh embedded with eyes, tusks, and scraps of tuxedos and red sequined dresses. It rolls shockingly fast,\n"
+        "relying on its momentum to do very high damage.\n"
+        )
+    
+def demon_desc():
+    print(
+        "\t\t\tYOU'VE ENCOUNTERED AN ASYLUM DEMON\n"
+        "Within the gloomy confines of the asylum, the Asylum Demon, a grotesque fusion of muscle and misery, lumbers about. Its makeshift armor hangs \n"
+        "off its bulging frame like a poorly tailored suit, while its frenzied attacks send victims scrambling in slapstick panic. With eyes that only a mother could love,\n"
+        "it stands guard over the asylum's secrets, a tragicomic figure of relentless destruction.\n"
+
+        "\nThe Asylum Demon has an almost draconic appearance, with spotted blue-green scales all over its body and a pair of stubby wings on its back.\n"
+        )
