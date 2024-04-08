@@ -33,6 +33,7 @@ def combat_rules():
             "Overkilling a mob will heal you by the amount you overkill by (if you reduce the mob to -5hp, you will heal by 5hp).\n"
             "A boss will be denoted by a long description, and a much tougher fight.\n"
             "Experience points receieved is a one-to-one ratio of damage done in a (won) fight.\n"
+            "You MUST kill at least one boss per floor to acquire a staircase key. Without a key you cannot descend.\n"
             )
         input("Press enter to continue.")
     

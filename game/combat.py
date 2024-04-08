@@ -11,6 +11,7 @@ def fight(player):
     if rand == 10:
         monster = Boss.random_boss()
         money = random.randint(100, 200)
+        key = 1
         match monster.name:
             case "THE JUICER":
                 juicer_desc()
@@ -32,6 +33,7 @@ def fight(player):
     else:
         monster = Mob.random_enemy()
         money = random.randint(10, 30)
+        key = 0
 
     max_hp = monster.health                                     # this is here for XP purposes later
 
@@ -79,6 +81,9 @@ def fight(player):
                     print(f"You have earned {max_hp}xp!")
                     player.level_up()
                     print(f"Player level: {player.lvl}")
+                    if key > 0:
+                        print("You found a key! You can now descend the stairs when the floor ends.")
+                        player.key += key
                     
                     # requires input before we break out of loop and screen clears
                     input("\nPress enter to continue.")

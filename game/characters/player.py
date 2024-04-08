@@ -8,10 +8,9 @@ class Player(Character):
         self.gold = 20
         self.lvl = 1
         self.xp = 0
+        self.key = 0
         # self.weapon = ADD WEAPONS, USE DICT TO DETERMINE BONUS DAMAGE 
         # self.class = ADD CLASSES, DIFF SPECIAL ABILITY BASED ON CLASS, DIFF CLASSES available BASED ON WEAPON
-
-
 
     def inventory(self):
         print("    INVENTORY")
@@ -24,7 +23,6 @@ class Player(Character):
         print("=================")
         print("Scrolls: ", self.scrolls)
 
-    # TODO finish this, equation is lvl = 0.3 * sqrt(xp). solved for xp it is xp = (lvl/0.3)^2
     def level_up(self):
         while self.xp > (self.lvl/0.3)**2:
             print("Level up!!")
@@ -35,12 +33,10 @@ class Player(Character):
                 self.dmg += 1
                 self.ac += 1
             
-
     def display_player(self):
         super().display()
         print("Level:      ", self.lvl)
         print("Experience: ", self.xp)
-
 
     def death(self):
         print("\nYOU DIED")
