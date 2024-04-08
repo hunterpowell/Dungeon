@@ -109,9 +109,10 @@ def fight(player):
             case "item": 
                 os.system('cls')
                 player.usable_items()
-                use = input("What would you like to use?: ")
+                use = input("What would you like to use?\n"
+                            "[scroll], or [none]: ")
                 while use != "scroll":
-                    use = input("Please enter [scroll]")
+                    use = input("Please enter [scroll]: ")
 
                 if use == "scroll" and player.scrolls > 0:
                     player.scrolls -= 1

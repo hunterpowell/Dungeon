@@ -11,7 +11,9 @@ class Mob(Character):
         enemies = [
             ("Rat", 10, 2, 2, 1),
             ("Goblin", 30, 5, 5, 5),
-            ("Slime", 50, 1, 1, 10)
+            ("Slime", 50, 1, 1, 10),
+            ("Scatterer", 20, 3, 3, 3),
+            ("Rot Sticker", 25, 5, 1, 5),
         ]
 
         name, health, atk, dmg, ac = random.choice(enemies)

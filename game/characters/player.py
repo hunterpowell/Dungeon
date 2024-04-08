@@ -15,14 +15,14 @@ class Player(Character):
     def inventory(self):
         print("    INVENTORY")
         print("=================")
-        print("Scrolls: ", self.scrolls)
-        print("Gold:    ", self.gold)
-        print("Key:     ", self.key)
+        print("Scrolls:  ", self.scrolls)
+        print("Gold:     ", self.gold)
+        print("Key:      ", self.key)
     
     def usable_items(self):
         print("    INVENTORY")
         print("=================")
-        print("Scrolls: ", self.scrolls)
+        print("Scrolls:  ", self.scrolls)
 
     def level_up(self):
         while self.xp > (self.lvl/0.3)**2:
@@ -36,8 +36,8 @@ class Player(Character):
             
     def display_player(self):
         super().display()
-        print("Level:      ", self.lvl)
-        print("Experience: ", self.xp)
+        print("Level:       ", self.lvl)
+        print("Experience:  ", self.xp)
 
     def death(self):
         print("\nYOU DIED")
