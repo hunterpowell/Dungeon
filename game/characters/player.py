@@ -8,8 +8,8 @@ class Player(Character):
         self.gold = 20
         self.lvl = 1
         self.xp = 0
-        self.key = 0
-        # self.weapon = ADD WEAPONS, USE DICT TO DETERMINE BONUS DAMAGE 
+        self.key = False
+        # self.weapon = ADD WEAPONS, USE DICT TO DETERMINE BONUS DAMAGE. ADD UNIQUE ATTACKS PER WEAPON?
         # self.class = ADD CLASSES, DIFF SPECIAL ABILITY BASED ON CLASS, DIFF CLASSES available BASED ON WEAPON
 
     def inventory(self):
@@ -17,6 +17,7 @@ class Player(Character):
         print("=================")
         print("Scrolls: ", self.scrolls)
         print("Gold:    ", self.gold)
+        print("Key:     ", self.key)
     
     def usable_items(self):
         print("    INVENTORY")
@@ -25,7 +26,7 @@ class Player(Character):
 
     def level_up(self):
         while self.xp > (self.lvl/0.3)**2:
-            print("Level up!!")
+            print("Leveled up to %d!!" % (self.lvl + 1))
             self.lvl += 1
             # +1 atk, dmg, ac per 5 levels
             if self.lvl % 5 == 0:
@@ -41,7 +42,7 @@ class Player(Character):
     def death(self):
         print("\nYOU DIED")
         print(f"Nice try {self.name}, you made it further than any of us thought you would. Have fun in hell!\n")
-        self.display
+        self.display_player()
         input()                    # requires enter to be pressed before program closes
         exit()
 

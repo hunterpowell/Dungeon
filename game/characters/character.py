@@ -16,8 +16,8 @@ class Character:
         print("=================")
         print("Name:       ", self.name)
         print("Health:     ", self.health)
-        print("Attack:     ", self.atk)
-        print("Damage:     ", self.dmg)
+        print("Atk bonus:  ", self.atk)
+        print("Dmg bonus:  ", self.dmg)
         print("Armor:      ", self.ac)
 
     def attack(self):

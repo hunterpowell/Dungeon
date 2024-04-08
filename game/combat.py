@@ -11,7 +11,7 @@ def fight(player):
     if rand == 10:
         monster = Boss.random_boss()
         money = random.randint(100, 200)
-        key = 1
+        key = True
         match monster.name:
             case "THE JUICER":
                 juicer_desc()
@@ -33,7 +33,7 @@ def fight(player):
     else:
         monster = Mob.random_enemy()
         money = random.randint(10, 30)
-        key = 0
+        key = False
 
     max_hp = monster.health                                     # this is here for XP purposes later
 
@@ -72,16 +72,15 @@ def fight(player):
                 if monster.health <= 0:
                     print(f"\nYou beat the {monster.name}!\n")
                     overkill = 0 - monster.health
-                    player.health += overkill
+                    player.health += int(overkill/2)
                     if overkill > 0:
-                        print(f"You healed for {overkill}hp!")
+                        print(f"You healed for {(int(overkill/2))}hp!")
                     player.xp += max_hp
-                    print(f"You picked up {money} off the corpse!")
+                    print(f"You picked up {money} gold off the corpse!")
                     player.gold += money
                     print(f"You have earned {max_hp}xp!")
                     player.level_up()
-                    print(f"Player level: {player.lvl}")
-                    if key > 0:
+                    if key == True and player.key == False:
                         print("You found a key! You can now descend the stairs when the floor ends.")
                         player.key += key
                     
