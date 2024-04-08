@@ -30,9 +30,10 @@ def combat_rules():
             "_________________________RULES______________________________\n"
             "You will survive as long as your health remains above 0.\n"
             "A mob will die if you deplete their health.\n"
-            "Overkilling a mob will heal you by the amount you overkill by (if you reduce the mob to -5hp, you will heal by 5hp).\n"
+            "Overkilling a mob will heal you by half the amount you overkill by (if you reduce the mob to -4hp, you will heal by 2hp).\n"
             "A boss will be denoted by a long description, and a much tougher fight.\n"
             "Experience points receieved is a one-to-one ratio of damage done in a (won) fight.\n"
+            "You MUST kill at least one boss per floor to acquire a staircase key. Without a key you cannot descend.\n"
             )
         input("Press enter to continue.")
     
@@ -70,8 +71,8 @@ def demon_desc():
     print(
         "\t\t\tYOU'VE ENCOUNTERED AN ASYLUM DEMON\n"
         "Within the gloomy confines of the asylum, the Asylum Demon, a grotesque fusion of muscle and misery, lumbers about. Its makeshift armor hangs \n"
-        "off its bulging frame like a poorly tailored suit, while its frenzied attacks send victims scrambling in slapstick panic. With eyes that only a mother could love,\n"
-        "it stands guard over the asylum's secrets, a tragicomic figure of relentless destruction.\n"
+        "off its bulging frame like a poorly tailored suit, while its frenzied attacks turn victims to paste. With eyes that only a mother could love,\n"
+        "it stands guard over the asylum's secrets, a figure of relentless destruction.\n"
 
         "\nThe Asylum Demon has an almost draconic appearance, with spotted blue-green scales all over its body and a pair of stubby wings on its back.\n"
         )

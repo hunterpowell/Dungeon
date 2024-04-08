@@ -12,13 +12,13 @@ class Character:
         self.health -= damage
 
     def display(self):
-        print("    STATS")
+        print("      STATS")
         print("=================")
-        print("Name:       ", self.name)
-        print("Health:     ", self.health)
-        print("Attack:     ", self.atk)
-        print("Damage:     ", self.dmg)
-        print("Armor:      ", self.ac)
+        print("Name:        ", self.name)
+        print("Health:      ", self.health)
+        print("Atk bonus:   ", self.atk)
+        print("Dmg bonus:   ", self.dmg)
+        print("Armor:       ", self.ac)
 
     def attack(self):
         tmp = random.randint(1, 6)

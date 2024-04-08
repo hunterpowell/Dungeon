@@ -7,7 +7,7 @@ def safe(player, day):
     player.health = 100
 
     while True:
-        if day == 4:
+        if day == 4 and player.key > 0:
             tmp = input("\nFinal moments before descending the stairs to floor 2.\n\n"
                         "What Would you like to do?\n"
                         "see [stats]\n"
@@ -15,6 +15,9 @@ def safe(player, day):
                         "see [inventory]\n"
                         "[leave] the room, and descend the stairs\n"
                         "Enter here: ")
+        elif day == 4 and player.key == 0:
+            print("You didn't find a key in time. The stairway remains locked to you, and the floor is about to collapse. Goodbye!")
+            player.death()
         else:
             tmp = input("\nWhat would you like to do?\n"
                         "see [stats]\n"
