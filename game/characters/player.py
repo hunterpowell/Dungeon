@@ -1,4 +1,4 @@
-import math
+import random
 from game.characters.character import Character
 
 class Player(Character):
@@ -9,8 +9,31 @@ class Player(Character):
         self.lvl = 1
         self.xp = 0
         self.key = False
-        # self.weapon = ADD WEAPONS, USE DICT TO DETERMINE BONUS DAMAGE. ADD UNIQUE ATTACKS PER WEAPON?
+        self.weapon = "fists"
         # self.class = ADD CLASSES, DIFF SPECIAL ABILITY BASED ON CLASS, DIFF CLASSES available BASED ON WEAPON
+
+    def special_atk(self, mob):
+        match self.weapon:
+            case "fists":
+                print("Flurry of blows!")
+                damage = (super().attack() * 2)
+                print(f"You did {damage} damage!")
+                mob.health -= damage
+            case "shotgun":
+                print("Bullet rain!")
+                damage = (super().attack() * 5)
+                print(f"You did {damage} damage!")
+                mob.health -= damage
+            case "war gauntlet":
+                print("Iron fist!")
+                damage = (super().attack() + 40)
+                print(f"You did {damage} damage!")
+                mob.health -= damage
+            case "cleric's chime":
+                print("Healing word!")
+                healing = (random.randint(1,12) + 60)
+                print(f"You healed for {healing}hp!")
+                self.health += healing
 
     def inventory(self):
         print("    INVENTORY")
@@ -24,9 +47,17 @@ class Player(Character):
         print("=================")
         print("Scrolls:  ", self.scrolls)
 
+    def heal(self):
+        if (self.scrolls > 0):    
+            self.scrolls -= 1
+            self.health += 50
+            print("50hp restored. HP remaining: ", self.health)
+        else:
+            print("You are out of healing scrolls")
+
     def level_up(self):
         while self.xp > (self.lvl/0.3)**2:
-            print("Leveled up to %d!!" % (self.lvl + 1))
+            print(f"Leveled up to {self.lvl + 1}!!")
             self.lvl += 1
             # +1 atk, dmg, ac per 5 levels
             if self.lvl % 5 == 0:

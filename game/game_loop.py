@@ -22,3 +22,6 @@ def main_loop(player):
             os.system('cls')
             explore(player)
 
+    else: 
+        print("You've descended the stairs! Congrats!                           (still a bitch tho)")
+    

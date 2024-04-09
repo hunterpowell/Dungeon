@@ -37,13 +37,13 @@ def safe(player, day):
 
             case "heal":
                 print(f"Current gold: {player.gold}")
-                heal = input("\nHow many heal scrolls do you want? 20 gold each: ")
+                heal = input("\nHow many heal scrolls do you want? 75 gold each: ")
                 heal_num = int(heal)
-                while (player.gold < (heal_num*20)):
+                while (player.gold < (heal_num*75)):
                     heal = input("You can't afford that many. Try again: ")
                     heal_num = int(heal)
                 else:
-                    player.gold -= (heal_num*20)
+                    player.gold -= (heal_num*75)
                     player.scrolls += heal_num
                     print(f"You now have {player.scrolls} scrolls")
 

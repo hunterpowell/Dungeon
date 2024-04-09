@@ -1,4 +1,5 @@
 import os
+
 def introduction():
    
     print_intro = input("You have awoken at the bottom of the stairs in a bizarre place.\n\
@@ -32,7 +33,7 @@ def combat_rules():
             "A mob will die if you deplete their health.\n"
             "Overkilling a mob will heal you by half the amount you overkill by (if you reduce the mob to -4hp, you will heal by 2hp).\n"
             "A boss will be denoted by a long description, and a much tougher fight.\n"
-            "Experience points receieved is a one-to-one ratio of damage done in a (won) fight.\n"
+            "Your stats will automatically increase every 5 levels.\n"
             "You MUST kill at least one boss per floor to acquire a staircase key. Without a key you cannot descend.\n"
             )
         input("Press enter to continue.")
@@ -42,7 +43,7 @@ def juicer_desc():
     print(
         "\t\t\tYOU'VE ENCOUTNERED THE JUICER!\n"
         "\nWith a body enhanced by the finest anabolic steroids the dark web has to offer, the Juicer spends his days pushing iron,\n"
-        "snapping necks, and crying that his pimple-infested sac is a third the size it once was. Having reached a plateau, rage now fills his enlarged heart\n"
+        "snapping necks, and crying that his pimple-infested sac is a third the size it once was. Having reached a plateau, rage now fills his enlarged heart.\n"
         "All he ever wanted was to gain, but right now he'll settle on bringing out……the paaaaain!\n"
         "\nThe Juicer looks like a humanoid competition body builder with a lizard head and scaley body.\n"
         )
