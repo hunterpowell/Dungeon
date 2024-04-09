@@ -34,6 +34,7 @@ def combat_rules():
             "Overkilling a mob will heal you by half the amount you overkill by (if you reduce the mob to -4hp, you will heal by 2hp).\n"
             "A boss will be denoted by a long description, and a much tougher fight.\n"
             "Your stats will automatically increase every 5 levels.\n"
+            "Your special attack is weapon dependant, strengthens with levels, and can only be used once a day.\n"
             "You MUST kill at least one boss per floor to acquire a staircase key. Without a key you cannot descend.\n"
             )
         input("Press enter to continue.")

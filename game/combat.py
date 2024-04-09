@@ -43,15 +43,16 @@ def fight(player):
     monster.display
 
     while (monster.health > 0) and (player.health > 0):
-        userin = int(input("\nWhat would you like to do?\n"
+        userin = input("\nWhat would you like to do?\n"
                        "1. Basic attack\n"
                        "2. Special Attack\n"
                        "3. Use item\n"
                        "4. Run away\n"
-                       "Enter here: "))
+                       "Enter here: ")
 
-        while (userin != 1) and (userin != 2) and (userin != 3):
+        while (userin != "1") and (userin != "2") and (userin != "3") and (userin != "4"):
             userin = input("Please enter a valid number: ")
+        userin = int(userin)
 
         match userin:
             case 1:
@@ -107,12 +108,29 @@ def fight(player):
             case 2:
                 os.system('cls')
                 print("\t\t\tCOMBAT\n\t\t----------------------")
-                player.special_atk(monster)
+                # ult
+                if player.weapon_charge == True:
+                    player.special_atk(monster)
+                    player.weapon_charge = False
+                else:
+                    print("You wasted you turn dumbass! You don't have any weapon charges left.")
+                    print(f"Enemy has {monster.health}hp remaining.")
+
+                # enemy claps back
+                enemy_attack = random.randint(1, 20)
+                if (enemy_attack + monster.atk >= player.ac):
+                    damage = monster.attack()
+                    player.defend(damage)
+                    print(f"\nEnemy hit for {damage} damage!")
+                    print(f"You have {player.health}hp remaining!")
+                else:
+                    print("\nEnemy missed!")
+                    print(f"You have {player.health}hp remaining!")
                 
-            
+
             case 3: 
-                os.system('cls')
                 while True:
+                    os.system('cls')
                     player.usable_items()
                     use = input("\nWhat would you like to do\n"
                                 "1. Use healing scroll\n"
@@ -120,8 +138,9 @@ def fight(player):
                                 "3. Go back to combat\n"
                                 "Enter here: "
                                 )
-                    while use != 1 or 2:
-                        use = int(input("Please enter a valid number: "))
+                    while use != "1" and use != "2" and use != "3":
+                        use = input("Please enter a valid number: ")
+                    use = int(use)
 
                     match use:
                         case 1:
@@ -137,13 +156,12 @@ def fight(player):
                             else:
                                 print("\nEnemy missed!")
                                 print(f"You have {player.health}hp remaining!")
+                                input()
                         
                         # case 2:
-
-
-
                         case 3:
                             break
+
 
             case 4:
                 os.system('cls')

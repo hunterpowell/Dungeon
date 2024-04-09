@@ -5,6 +5,7 @@ def safe(player, day):
     print("-----------------------------------------------------------------------------------------")
     print("Welcome to the safe room. You got a good night's sleep and your health has been restored.")
     player.health = 100
+    player.weapon_charge = True
 
     while True:
         if day == 4 and player.key > 0:

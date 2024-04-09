@@ -9,37 +9,47 @@ class Player(Character):
         self.lvl = 1
         self.xp = 0
         self.key = False
-        self.weapon = "fists"
-        # self.class = ADD CLASSES, DIFF SPECIAL ABILITY BASED ON CLASS, DIFF CLASSES available BASED ON WEAPON
+        self.weapon = "Fists"
+        self.weapon_charge = True
+        # self.class = ADD CLASSES, DIFF SPECIAL ABILITY BASED ON CLASS, DIFF CLASSES available BASED ON current WEAPON
 
     def special_atk(self, mob):
         match self.weapon:
-            case "fists":
+            case "Fists":
                 print("Flurry of blows!")
-                damage = (super().attack() * 2)
+                damage = (super().attack() * 2 + self.lvl)
                 print(f"You did {damage} damage!")
                 mob.health -= damage
-            case "shotgun":
+            case "Sentient Shotgun":
                 print("Bullet rain!")
-                damage = (super().attack() * 5)
+                damage = (super().attack() * 5 + self.lvl)
                 print(f"You did {damage} damage!")
                 mob.health -= damage
-            case "war gauntlet":
+            case "War Gauntlet":
                 print("Iron fist!")
-                damage = (super().attack() + 40)
+                damage = (super().attack() + 40 + self.lvl)
                 print(f"You did {damage} damage!")
                 mob.health -= damage
-            case "cleric's chime":
+            case "Cleric's Chime":
                 print("Healing word!")
-                healing = (random.randint(1,12) + 60)
+                healing = (random.randint(1,12) + 60 + self.lvl)
                 print(f"You healed for {healing}hp!")
                 self.health += healing
+
+    def weapons(self):
+        weapon_list = [
+                    "Sentient Shotgun",
+                    "War Gauntlet",
+                    "Cleric's Chime"
+        ]
+        return random.choice(weapon_list)
 
     def inventory(self):
         print("    INVENTORY")
         print("=================")
         print("Scrolls:  ", self.scrolls)
         print("Gold:     ", self.gold)
+        print("Weapon:   ", self.weapon)
         print("Key:      ", self.key)
     
     def usable_items(self):
@@ -69,6 +79,7 @@ class Player(Character):
         super().display()
         print("Level:       ", self.lvl)
         print("Experience:  ", self.xp)
+        print("Weapon:      ", self.weapon)
 
     def death(self):
         print("\nYOU DIED")
