@@ -46,7 +46,7 @@ def fight(player):
         userin = input("\nWhat would you like to do?\n"
                        "1. Basic attack\n"
                        "2. Special Attack\n"
-                       "3. Use item\n"
+                       "3. Use healing scroll\n"
                        "4. Run away\n"
                        "Enter here: ")
 
