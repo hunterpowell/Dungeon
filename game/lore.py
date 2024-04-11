@@ -1,4 +1,4 @@
-import os
+from game.utils import clear_screen, press_enter
 
 def introduction():
    
@@ -8,7 +8,7 @@ Do you want to hear some lore or do you want to go in blind? [lore] or [blind]: 
     while (print_intro != "lore") and (print_intro != "blind"):
         print_intro = input("Please enter [lore] or [blind]: ")
     
-    os.system('cls')
+    clear_screen()
     
     if (print_intro == "lore"):
         print("You are on the first level of the World Dungeon. Everyone on the surface of your planet is either dead, or down here with you.\n\
@@ -26,7 +26,7 @@ def combat_rules():
         display_rules = input("Please enter [y] or [n]: ")
 
     if display_rules == "y":
-        os.system('cls')
+        clear_screen()
         print(
             "_________________________RULES______________________________\n"
             "You will survive as long as your health remains above 0.\n"
@@ -35,9 +35,9 @@ def combat_rules():
             "A boss will be denoted by a long description, and a much tougher fight.\n"
             "Your stats will automatically increase every 5 levels.\n"
             "Your special attack is weapon dependant, strengthens with levels, and can only be used once a day.\n"
-            "You MUST kill at least one boss per floor to acquire a staircase key. Without a key you cannot descend.\n"
+            "You MUST kill at least one boss per floor to acquire a staircase key. Without a key you cannot descend."
             )
-        input("Press enter to continue.")
+        press_enter()
     
 
 def juicer_desc():

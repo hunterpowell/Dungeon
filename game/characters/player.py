@@ -1,5 +1,6 @@
 import random
 from game.characters.character import Character
+from game.utils import clear_screen, press_enter 
 
 class Player(Character):
     def __init__(self, name):
@@ -61,9 +62,11 @@ class Player(Character):
         if (self.scrolls > 0):    
             self.scrolls -= 1
             self.health += 50
-            print("50hp restored. HP remaining: ", self.health)
+            print("50hp restored!\n"
+                  f"You have {self.health}hp remaining")
         else:
-            print("You are out of healing scrolls")
+            print("You are out of healing scrolls! (dumbass)\n"
+                  f"You have {self.health}hp remaining")
 
     def level_up(self):
         while self.xp > (self.lvl/0.3)**2:
@@ -80,12 +83,13 @@ class Player(Character):
         print("Level:       ", self.lvl)
         print("Experience:  ", self.xp)
         print("Weapon:      ", self.weapon)
+        press_enter()
+        clear_screen()
 
     def death(self):
         print("\nYOU DIED")
         print(f"Nice try {self.name}, you made it further than any of us thought you would. Have fun in hell!\n")
         self.display_player()
-        input()                    # requires enter to be pressed before program closes
         exit()
 
     

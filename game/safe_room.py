@@ -1,4 +1,4 @@
-import os
+from game.utils import clear_screen, press_enter
 
 def safe(player, day):
 
@@ -11,32 +11,35 @@ def safe(player, day):
         if day == 4 and player.key > 0:
             tmp = input("\nFinal moments before descending the stairs to floor 2.\n\n"
                         "What Would you like to do?\n"
-                        "see [stats]\n"
-                        "buy [heal] scrolls\n"
-                        "see [inventory]\n"
-                        "[leave] the room, and descend the stairs\n"
-                        "Enter here: ")
-        elif day == 4 and player.key == 0:
-            print("You didn't find a key in time. The stairway remains locked to you, and the floor is about to collapse. Goodbye!")
-            player.death()
-        else:
-            tmp = input("\nWhat would you like to do?\n"
-                        "see [stats]\n"
-                        "buy [heal] scrolls\n"
-                        "see [inventory]\n"
-                        "[leave] the room\n"
+                        "1. see stats\n"
+                        "2. buy heal scrolls\n"
+                        "3. see inventory\n"
+                        "4. leave the room, and descend the stairs\n"
                         "Enter here: ")
             
-        if (tmp != "stats") and (tmp != "heal") and (tmp != "leave") and (tmp != "inventory"):
-            tmp = input("Please enter something valid: ")
+        elif day == 4 and player.key == 0:
+            print("You didn't find a key in time. The stairway remains locked to you, and the floor is about to collapse around you. Goodbye!")
+            player.death()
 
-        os.system('cls')
+        else:
+            tmp = input("\nWhat would you like to do?\n"
+                        "1. see stats\n"
+                        "2. buy heal scrolls\n"
+                        "3. see inventory\n"
+                        "4. leave the room\n"
+                        "Enter here: ")
+            
+        if (tmp != "1") and (tmp != "2") and (tmp != "3") and (tmp != "4"):
+            tmp = input("Please a valid number: ")
+        tmp = int(tmp)
+
+        clear_screen()
 
         match tmp:
-            case "stats":
+            case 1:
                 player.display_player()
 
-            case "heal":
+            case 2:
                 print(f"Current gold: {player.gold}")
                 heal = input("\nHow many heal scrolls do you want? 75 gold each: ")
                 heal_num = int(heal)
@@ -47,10 +50,12 @@ def safe(player, day):
                     player.gold -= (heal_num*75)
                     player.scrolls += heal_num
                     print(f"You now have {player.scrolls} scrolls")
+                press_enter()
+                clear_screen()
 
-            case "inventory":
+            case 3:
                 player.inventory()
 
-            case "leave":
+            case 4:
                 break
                 

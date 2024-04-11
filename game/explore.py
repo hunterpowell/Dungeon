@@ -1,4 +1,5 @@
 import random
+from game.utils import press_enter
 from game.combat import fight
 
 
@@ -18,7 +19,7 @@ def explore(player):
                   "Equipping will remove any other weapon you have.\n"
                   "Would you like to equip it? [y] or [n]: ")
             if pickup == "y":
-                print(f"{weapon} equipped!\n")
+                print(f"{weapon} equipped!")
                 player.weapon = weapon
             else:
                 print(f"{weapon} discarded. I sure hope you don't regret that in the near future!\n")
@@ -30,4 +31,4 @@ def explore(player):
             print(f"{money} gold acquired!\n")
 
             
-        input("Press enter to continue.")
+        press_enter()
