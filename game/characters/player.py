@@ -52,8 +52,8 @@ class Player(Character):
         print("Gold:     ", self.gold)
         print("Weapon:   ", self.weapon)
         print("Key:      ", self.key)
-
         press_enter()
+        clear_screen()
     
     def usable_items(self):
         print("    INVENTORY")

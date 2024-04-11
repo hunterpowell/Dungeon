@@ -100,8 +100,9 @@ def fight(player):
                     print(f"Enemy has {monster.health}hp remaining.")
 
                 # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
-                player.monster_death(monster, key, money, max_hp)
-                break
+                if monster.health <= 0:
+                    player.monster_death(monster, key, money, max_hp)
+                    break
                 
             case 3: 
                 clear_screen()

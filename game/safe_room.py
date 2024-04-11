@@ -9,6 +9,8 @@ def safe(player, day):
     player.weapon_charge = True
 
     while True:
+        print("SAFE ROOM".center(90))
+        print("------------------------------------------------------------------------------------------")
         if day == 4 and player.key > 0:
             tmp = input("\nFinal moments before descending the stairs to floor 2.\n\n"
                         "What Would you like to do?\n"
