@@ -28,7 +28,6 @@ def explore(player):
             print("You found some loot!")
             money = random.randint(20,50)
             player.gold += money
-            print(f"{money} gold acquired!\n")
-
-            
+            print(f"{money} gold acquired!")
+  
         press_enter()

@@ -14,9 +14,10 @@ def main_loop(player):
                       "1. Explore\n"
                       "2. Use healing scroll\n"
                       "3. Show stats\n"
-                      "4. End the day and go to a safe room\n"
+                      "4. Check inventory\n"
+                      "5. End the day and go to a safe room\n"
                       "Enter here: ")
-        while (where != "1") and (where != "2") and (where != "3") and (where != "4"):
+        while (where != "1") and (where != "2") and (where != "3") and (where != "4") and (where != "5"):
             where = input("Enter a valid number: ")
         where = int(where)
 
@@ -37,8 +38,12 @@ def main_loop(player):
                 clear_screen()
                 player.display_player()
 
-            # safe room
             case 4:
+                clear_screen()
+                player.inventory()
+
+            # safe room
+            case 5:
                 clear_screen()
                 safe(player, day)
                 day += 1

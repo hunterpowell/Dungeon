@@ -2,7 +2,8 @@ from game.utils import clear_screen, press_enter
 
 def safe(player, day):
 
-    print("-----------------------------------------------------------------------------------------")
+    print("SAFE ROOM".center(90))
+    print("------------------------------------------------------------------------------------------")
     print("Welcome to the safe room. You got a good night's sleep and your health has been restored.")
     player.health = 100
     player.weapon_charge = True

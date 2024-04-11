@@ -65,11 +65,17 @@ def fight(player):
                 # attack roll to determine hit/miss
                 hit = random.randint(1, 20)
                 if (hit + player.atk >= monster.ac):
-                    damage = player.attack()
+                    # crit if nat 20
+                    if (hit == 20):
+                        damage = player.crit()
+                        print(f"You crititcally hit for {damage} damage!")
+                    else:
+                        damage = player.attack()
+                        print(f"You hit for {damage} damage!")                    
                     monster.defend(damage)
-                    print(f"You hit for {damage} damage!")                    
                     if monster.health > 0:
                         print(f"{monster.name} has {monster.health}hp remaining")
+                    # prevents monster from displaying negative hp
                     else:
                         print(f"{monster.name} has 0hp remaining!")
 
@@ -79,24 +85,7 @@ def fight(player):
 
                 # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
                 if monster.health <= 0:
-                    print(f"\nYou beat the {monster.name}!")
-                    print(f"You have {player.health}hp remaining!\n")
-                    # heal by half of overkill
-                    overkill = (0 - monster.health)/2
-                    player.health += int(overkill)
-                    if overkill > 0:
-                        print(f"You healed for {(int(overkill))}hp!")
-                    player.xp += max_hp
-                    print(f"You picked up {money} gold off the corpse!")
-                    player.gold += money
-                    print(f"You have earned {max_hp}xp!")
-                    player.level_up()
-                    if key == True and player.key == False:
-                        print("You found a key! You can now descend the stairs when the floor ends.")
-                        player.key = key
-                    
-                    # requires input before we break out of loop and screen clears
-                    press_enter()
+                    player.monster_death(monster, key, money, max_hp)
                     break
                 
             case 2:
@@ -109,6 +98,10 @@ def fight(player):
                 else:
                     print("You wasted you turn dumbass! You don't have any weapon charges left.")
                     print(f"Enemy has {monster.health}hp remaining.")
+
+                # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
+                player.monster_death(monster, key, money, max_hp)
+                break
                 
             case 3: 
                 clear_screen()

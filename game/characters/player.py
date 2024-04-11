@@ -27,7 +27,7 @@ class Player(Character):
                 print(f"You did {damage} damage!")
                 mob.health -= damage
             case "War Gauntlet":
-                print("Iron fist!")
+                print("Seismic Toss!")
                 damage = (super().attack() + 40 + self.lvl)
                 print(f"You did {damage} damage!")
                 mob.health -= damage
@@ -52,6 +52,8 @@ class Player(Character):
         print("Gold:     ", self.gold)
         print("Weapon:   ", self.weapon)
         print("Key:      ", self.key)
+
+        press_enter()
     
     def usable_items(self):
         print("    INVENTORY")
@@ -77,6 +79,24 @@ class Player(Character):
                 self.atk += 1
                 self.dmg += 1
                 self.ac += 1
+
+    def monster_death(self, monster, key, money, max_hp):
+        print(f"\nYou beat the {monster.name}!")
+        print(f"You have {self.health}hp remaining!\n")
+        # heal by half of overkill
+        overkill = (0 - monster.health)/2
+        self.health += int(overkill)
+        if overkill > 0:
+            print(f"You healed for {(int(overkill))}hp!")
+        self.xp += max_hp
+        print(f"You picked up {money} gold off the corpse!")
+        self.gold += money
+        print(f"You have earned {max_hp}xp!")
+        self.level_up()
+        if key == True and self.key == False:
+            print("You found a key! You can now descend the stairs when the floor ends.")
+            self.key = key
+        press_enter()
             
     def display_player(self):
         super().display()
