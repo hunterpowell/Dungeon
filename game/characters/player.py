@@ -17,25 +17,25 @@ class Player(Character):
     def special_atk(self, mob):
         match self.weapon:
             case "Fists":
-                print("Flurry of blows!")
                 damage = (super().attack() * 2 + self.lvl)
-                print(f"You did {damage} damage!")
+                print(f"Flurry of blows! You did {damage} damage!")
                 mob.health -= damage
+                print(f"{mob.name} has {mob.health}hp remaining")
             case "Sentient Shotgun":
-                print("Bullet rain!")
                 damage = (super().attack() * 5 + self.lvl)
-                print(f"You did {damage} damage!")
+                print(f"Bullet rain! You did {damage} damage!")
                 mob.health -= damage
+                print(f"{mob.name} has {mob.health}hp remaining")
             case "War Gauntlet":
-                print("Seismic Toss!")
                 damage = (super().attack() + 40 + self.lvl)
-                print(f"You did {damage} damage!")
+                print(f"Seismic Toss! You did {damage} damage!")
                 mob.health -= damage
+                print(f"{mob.name} has {mob.health}hp remaining")
             case "Cleric's Chime":
-                print("Healing word!")
                 healing = (random.randint(1,12) + 60 + self.lvl)
-                print(f"You healed for {healing}hp!")
+                print(f"Healing word! You healed for {healing}hp!")
                 self.health += healing
+                print(f"{mob.name} has {mob.health}hp remaining")
 
     def weapons(self):
         weapon_list = [
