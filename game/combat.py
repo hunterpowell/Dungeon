@@ -1,41 +1,44 @@
 import random
-import os
+from game.utils import clear_screen, press_enter
 from game.characters.mob import Mob
 from game.characters.boss import Boss
 from game.lore import juicer_desc, hoarder_desc, ball_desc, demon_desc
 
 def fight(player):
     
-    rand = random.randint(1, 10)
+    rand = random.randint(1, 5)
 
-    if rand == 10:
+    # 20% chance for boss, this chooses random boss and displays description, gives key if defeated
+    if rand == 5:
         monster = Boss.random_boss()
         money = random.randint(100, 200)
         key = True
         match monster.name:
             case "THE JUICER":
                 juicer_desc()
-                input("Press enter to continue.")
-                os.system('cls')
+                press_enter()
+                clear_screen()
             case "THE HOARDER":
                 hoarder_desc()
-                input("Press enter to continue.")
-                os.system('cls')
+                press_enter()
+                clear_screen()
             case "BALL OF SWINE":
                 ball_desc()
-                input("Press enter to continue.")
-                os.system('cls')
+                press_enter()
+                clear_screen()
             case "ASYLUM DEMON":
                 demon_desc()
-                input("Press enter to continue.")
-                os.system('cls')
-            
+                press_enter()
+                clear_screen()
+
+    # 80% chance for random mob, no key!
     else:
         monster = Mob.random_enemy()
         money = random.randint(10, 30)
         key = False
 
-    max_hp = monster.health                                     # this is here for XP purposes later
+    # this is here for XP purposes later
+    max_hp = monster.health
 
     print("\t\t\tCOMBAT\n\t\t----------------------")
     print(f"You've run into a {monster.name}!")
@@ -43,24 +46,36 @@ def fight(player):
     monster.display
 
     while (monster.health > 0) and (player.health > 0):
-        userin = input("\nWhat would you like to do? [attack], [run], use [item]: ")
+        userin = input("\nWhat would you like to do?\n"
+                       "1. Basic attack\n"
+                       "2. Special Attack\n"
+                       "3. Use healing scroll\n"
+                       "4. Run away\n"
+                       "Enter here: ")
 
-        while (userin != "attack") and (userin != "run") and (userin != "item"):
-            userin = input("Please enter [attack], [run], or [item]: ")
+        while (userin != "1") and (userin != "2") and (userin != "3") and (userin != "4"):
+            userin = input("Please enter a valid number: ")
+        userin = int(userin)
 
         match userin:
-            case "attack":
+            case 1:
                 
-                os.system('cls')
-                
+                clear_screen()
                 print("\t\t\tCOMBAT\n\t\t----------------------")
                 # attack roll to determine hit/miss
                 hit = random.randint(1, 20)
                 if (hit + player.atk >= monster.ac):
-                    print("You hit!")                    
-                    monster.defend(player.attack())
+                    # crit if nat 20
+                    if (hit == 20):
+                        damage = player.crit()
+                        print(f"You crititcally hit for {damage} damage!")
+                    else:
+                        damage = player.attack()
+                        print(f"You hit for {damage} damage!")                    
+                    monster.defend(damage)
                     if monster.health > 0:
                         print(f"{monster.name} has {monster.health}hp remaining")
+                    # prevents monster from displaying negative hp
                     else:
                         print(f"{monster.name} has 0hp remaining!")
 
@@ -70,57 +85,50 @@ def fight(player):
 
                 # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
                 if monster.health <= 0:
-                    print(f"\nYou beat the {monster.name}!\n")
-                    overkill = 0 - monster.health
-                    player.health += int(overkill/2)
-                    if overkill > 0:
-                        print(f"You healed for {(int(overkill/2))}hp!")
-                    player.xp += max_hp
-                    print(f"You picked up {money} gold off the corpse!")
-                    player.gold += money
-                    print(f"You have earned {max_hp}xp!")
-                    player.level_up()
-                    if key == True and player.key == False:
-                        print("You found a key! You can now descend the stairs when the floor ends.")
-                        player.key += key
-                    
-                    # requires input before we break out of loop and screen clears
-                    input("\nPress enter to continue.")
+                    player.monster_death(monster, key, money, max_hp)
                     break
                 
-                # enemy attacks
-                enemy_attack = random.randint(1, 20)
-                if (enemy_attack + monster.atk >= player.ac):
-                    print("\nEnemy hit!")
-                    player.defend(monster.attack())
-                    print(f"You have {player.health}hp remaining!")
+            case 2:
+                clear_screen()
+                print("\t\t\tCOMBAT\n\t\t----------------------")
+                # ult
+                if player.weapon_charge == True:
+                    player.special_atk(monster)
+                    player.weapon_charge = False
                 else:
-                    print("\nEnemy missed!")
-                    print(f"You have {player.health}hp remaining!")
+                    print("You wasted you turn dumbass! You don't have any weapon charges left.")
+                    print(f"Enemy has {monster.health}hp remaining.")
+
+                # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
+                if monster.health <= 0:
+                    player.monster_death(monster, key, money, max_hp)
+                    break
                 
-            case "run":
-                os.system('cls')
+            case 3: 
+                clear_screen()
+                print("\t\t\tCOMBAT\n\t\t----------------------")
+                player.heal()
+
+            case 4:
+                clear_screen()
                 loss = random.randint(5, 15)
                 print(f"You ran away! You dropped {loss} gold on the way out.                (bitch)\n")
                 player.gold -= loss
-                input("Press enter to continue.")
+                press_enter()
                 break
-            
-            case "item": 
-                os.system('cls')
-                player.usable_items()
-                use = input("What would you like to use?\n"
-                            "[scroll], or [none]: ")
-                while use != "scroll":
-                    use = input("Please enter [scroll]: ")
 
-                if use == "scroll" and player.scrolls > 0:
-                    player.scrolls -= 1
-                    player.health += 25
-                    print("25hp restored. HP remaining: ", player.health)
-                else:
-                    print("You are out of healing scrolls")
+        # enemy attacks
+        enemy_attack = random.randint(1, 20)
+        if (enemy_attack + monster.atk >= player.ac):
+            damage = monster.attack()
+            player.defend(damage)
+            print(f"\nEnemy hit for {damage} damage!")
+            print(f"You have {player.health}hp remaining!")
+        else:
+            print("\nEnemy missed!")
+            print(f"You have {player.health}hp remaining!")
 
-        if player.health <= 0:
-            player.death()
+
+    if player.health <= 0:
+        player.death()
             

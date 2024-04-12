@@ -1,4 +1,4 @@
-import os
+from game.utils import clear_screen, press_enter
 from game.safe_room import safe
 from game.explore import explore
 
@@ -8,17 +8,45 @@ def main_loop(player):
 
     while day < 5:    
         
-        os.system('cls')
+        clear_screen()
         print(f"\t\t\tDay: {day + 1}\n\t\t----------------------")
-        where = input("Do you want to [explore], or end the day and look for a [safe] room?: " )
-        while (where != "explore") and (where != "safe"):
-            where = input("Enter [explore] or [safe]: ")
+        where = input("What would you like to do?\n"
+                      "1. Explore\n"
+                      "2. Use healing scroll\n"
+                      "3. Show stats\n"
+                      "4. Check inventory\n"
+                      "5. End the day and go to a safe room\n"
+                      "Enter here: ")
+        while (where != "1") and (where != "2") and (where != "3") and (where != "4") and (where != "5"):
+            where = input("Enter a valid number: ")
+        where = int(where)
 
-        if (where == "safe"):
-            os.system('cls')
-            safe(player, day)
-            day += 1
-        if (where == "explore"):
-            os.system('cls')
-            explore(player)
+        match where:
+            # explore
+            case 1:
+                clear_screen()
+                explore(player)
+            
+            # heal
+            case 2:
+                clear_screen()
+                player.heal()
+                press_enter()
 
+            # stats
+            case 3:
+                clear_screen()
+                player.display_player()
+
+            case 4:
+                clear_screen()
+                player.inventory()
+
+            # safe room
+            case 5:
+                clear_screen()
+                safe(player, day)
+                day += 1
+    else: 
+        print("You've descended the stairs! Congrats!                           (still a bitch tho)")
+    

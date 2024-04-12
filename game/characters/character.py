@@ -7,6 +7,7 @@ class Character:
         self.atk = atk
         self.dmg = dmg
         self.ac = ac
+        self.die_type = 6
     
     def defend(self, damage):
         self.health -= damage
@@ -20,7 +21,24 @@ class Character:
         print("Dmg bonus:   ", self.dmg)
         print("Armor:       ", self.ac)
 
+    # normal attack
     def attack(self):
-        tmp = random.randint(1, 6)
-        tmp2 = random.randint(1, 6)
-        return(tmp + tmp2 + self.dmg)
+        if self.die_type == 6:
+            tmp = random.randint(1, 6)
+            tmp2 = random.randint(1, 6)
+            return(tmp + tmp2 + self.dmg)
+        elif self.die_type == 12:
+            tmp = random.randint(1, 12)
+            return(tmp + self.dmg)
+    
+    # atk roll crit 
+    def crit(self):
+        if self.die_type == 6:
+            tmp = random.randint(1,6)
+            tmp2 = random.randint(1,6)
+            tmp3 = random.randint(1,6)
+            return(tmp + tmp2 + tmp3 + self.dmg)
+        elif self.die_type == 12:
+            tmp = random.randint(1, 12)
+            tmp2 = random.randint(1, 12)
+            return(tmp + tmp2 + self.dmg)
