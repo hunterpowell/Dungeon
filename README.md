@@ -1,5 +1,4 @@
-World Dungeon
-Description
+The World Dungeon
 
 World Dungeon is a dungeon-crawling adventure inspired by Dungeon Crawler Carl and various fantasy universes. Dive into a world filled with magic, monsters, and mysteries as you explore dungeons, battle enemies, and uncover hidden treasures.
 Features
