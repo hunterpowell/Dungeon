@@ -11,6 +11,7 @@ def safe(player, day):
     while True:
         print("SAFE ROOM".center(90))
         print("------------------------------------------------------------------------------------------")
+        print("Welcome to the safe room. You got a good night's sleep and your health has been restored.")
         if day == 4 and player.key > 0:
             tmp = input("\nFinal moments before descending the stairs to floor 2.\n\n"
                         "What Would you like to do?\n"
