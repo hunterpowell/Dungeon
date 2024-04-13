@@ -1,4 +1,4 @@
-from game.utils import clear_screen, press_enter
+from utils import clear_screen, press_enter
 
 def introduction():
    

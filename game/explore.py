@@ -1,6 +1,6 @@
 import random
-from game.utils import press_enter
-from game.combat import fight
+from utils import press_enter
+from combat import fight
 
 
 def explore(player):

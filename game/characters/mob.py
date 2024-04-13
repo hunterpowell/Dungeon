@@ -1,5 +1,5 @@
 import random
-from game.characters.character import Character
+from characters.character import Character
 
 class Mob(Character):
     def __init__(self, name, health, atk, dmg, ac):
