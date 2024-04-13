@@ -1,8 +1,8 @@
 import random
-from game.utils import clear_screen, press_enter
-from game.characters.mob import Mob
-from game.characters.boss import Boss
-from game.lore import juicer_desc, hoarder_desc, ball_desc, demon_desc
+from utils import clear_screen, press_enter
+from characters.mob import Mob
+from characters.boss import Boss
+from lore import juicer_desc, hoarder_desc, ball_desc, demon_desc
 
 def fight(player):
     

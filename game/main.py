@@ -1,7 +1,7 @@
-from game.characters.player import Player
-from game.utils import clear_screen
-from game.lore import introduction, combat_rules
-from game.game_loop import main_loop
+from characters.player import Player
+from utils import clear_screen
+from lore import introduction, combat_rules
+from game_loop import main_loop
 
 if __name__ == "__main__":
 

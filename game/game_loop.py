@@ -1,6 +1,6 @@
-from game.utils import clear_screen, press_enter
-from game.safe_room import safe
-from game.explore import explore
+from utils import clear_screen, press_enter
+from safe_room import safe
+from explore import explore
 
 def main_loop(player):
     

@@ -1,6 +1,6 @@
 import random
-from game.characters.character import Character
-from game.utils import clear_screen, press_enter 
+from characters.character import Character
+from utils import clear_screen, press_enter 
 
 class Player(Character):
     def __init__(self, name):
