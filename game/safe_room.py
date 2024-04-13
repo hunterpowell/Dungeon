@@ -15,10 +15,10 @@ def safe(player, day):
         if day == 4 and player.key > 0:
             tmp = input("\nFinal moments before descending the stairs to floor 2.\n\n"
                         "What Would you like to do?\n"
-                        "1. see stats\n"
-                        "2. buy heal scrolls\n"
-                        "3. see inventory\n"
-                        "4. leave the room, and descend the stairs\n"
+                        "  1. see stats\n"
+                        "  2. buy heal scrolls\n"
+                        "  3. see inventory\n"
+                        "  4. leave the room, and descend the stairs\n"
                         "Enter here: ")
             
         elif day == 4 and player.key == 0:
@@ -27,10 +27,10 @@ def safe(player, day):
 
         else:
             tmp = input("\nWhat would you like to do?\n"
-                        "1. see stats\n"
-                        "2. buy heal scrolls\n"
-                        "3. see inventory\n"
-                        "4. leave the room\n"
+                        "  1. see stats\n"
+                        "  2. buy heal scrolls\n"
+                        "  3. see inventory\n"
+                        "  4. leave the room\n"
                         "Enter here: ")
             
         if (tmp != "1") and (tmp != "2") and (tmp != "3") and (tmp != "4"):
