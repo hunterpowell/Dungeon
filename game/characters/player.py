@@ -42,7 +42,7 @@ class Player(Character):
                 print(f"{mob.name} has {mob.health}hp remaining")
             case "War Gauntlet":
                 damage = (super().attack() + 20 + self.dmg + self.lvl)
-                print(f"Seismic Toss! You did {damage} damage!")
+                print(f"Rending Strike! You did {damage} damage!")
                 mob.health -= damage
                 print(f"{mob.name} has {mob.health}hp remaining")
             case "Cleric's Chime":

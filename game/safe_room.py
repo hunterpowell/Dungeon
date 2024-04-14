@@ -58,7 +58,7 @@ def safe(player, day):
                 else:
                     player.gold -= (heal_num*100)
                     player.scrolls += heal_num
-                    max_heals -= 1
+                    max_heals -= heal_num
                     print(f"You now have {player.scrolls} scrolls")
                 press_enter()
                 clear_screen()

@@ -52,6 +52,7 @@ def main_loop(player):
         else: 
             if player.health > 0:
                 print("You've descended the stairs! Congrats!                           (still a bitch tho)")
+                player.display_player()
             else:
                 player.death()
 

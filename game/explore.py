@@ -55,7 +55,7 @@ def explore(player):
                     clear_screen()
 
                 case 3:
-                    print(f"\n{weapon} discarded. I sure hope you don't regret that in the near future!\n")
+                    print(f"\n{weapon} discarded. I sure hope you don't regret that in the near future!")
                     break
 
         else:
