@@ -1,4 +1,5 @@
 import random
+import math
 from characters.character import Character
 from utils import clear_screen, press_enter 
 
@@ -14,26 +15,46 @@ class Player(Character):
         self.weapon_charge = True
         # self.class = ADD CLASSES, DIFF SPECIAL ABILITY BASED ON CLASS, DIFF CLASSES available BASED ON current WEAPON
 
+    def weapon_atk(self):
+        match self.weapon:
+            case "Fists":
+                return(super().attack())
+            case "Sentient Shotgun":
+                return(super().attack() + 1)
+            case "War Gauntlet":
+                return(super().attack() + 2)
+            case "Cleric's Chime":
+                return(super().attack())
+            case "Lifehunt Scythe":
+                return(super().attack() + 1)
+    
     def special_atk(self, mob):
         match self.weapon:
             case "Fists":
-                damage = (super().attack() * 2 + self.lvl)
+                damage = (super().attack() * 2 + self.dmg + self.lvl)
                 print(f"Flurry of blows! You did {damage} damage!")
                 mob.health -= damage
                 print(f"{mob.name} has {mob.health}hp remaining")
             case "Sentient Shotgun":
-                damage = (super().attack() * 5 + self.lvl)
+                damage = (super().attack() * 5 + self.dmg + self.lvl)
                 print(f"Bullet rain! You did {damage} damage!")
                 mob.health -= damage
                 print(f"{mob.name} has {mob.health}hp remaining")
             case "War Gauntlet":
-                damage = (super().attack() + 40 + self.lvl)
+                damage = (super().attack() + 20 + self.dmg + self.lvl)
                 print(f"Seismic Toss! You did {damage} damage!")
                 mob.health -= damage
                 print(f"{mob.name} has {mob.health}hp remaining")
             case "Cleric's Chime":
-                healing = (random.randint(1,12) + 60 + self.lvl)
+                healing = (random.randint(1,12) + 60 + self.lvl*2)
                 print(f"Healing word! You healed for {healing}hp!")
+                self.health += healing
+                print(f"{mob.name} has {mob.health}hp remaining")
+            case "Lifehunt Scythe":
+                damage = (super().attack() * 4 + self.dmg + self.lvl)
+                healing = math.ceil(damage/0.3)
+                print(f"Sanguine Flare! You did {damage} damage, and healed for {healing}hp!")
+                mob.health -= damage
                 self.health += healing
                 print(f"{mob.name} has {mob.health}hp remaining")
 
@@ -41,7 +62,8 @@ class Player(Character):
         weapon_list = [
                     "Sentient Shotgun",
                     "War Gauntlet",
-                    "Cleric's Chime"
+                    "Cleric's Chime",
+                    "Lifehunt Scythe"
         ]
         return random.choice(weapon_list)
 
@@ -84,10 +106,10 @@ class Player(Character):
         print(f"\nYou beat the {monster.name}!")
         print(f"You have {self.health}hp remaining!\n")
         # heal by half of overkill
-        overkill = (0 - monster.health)/2
-        self.health += int(overkill)
+        overkill = (0 - monster.health)//2
+        self.health += overkill
         if overkill > 0:
-            print(f"You healed for {(int(overkill))}hp!")
+            print(f"You healed for {overkill}hp!")
         self.xp += max_hp
         print(f"You picked up {money} gold off the corpse!")
         self.gold += money
@@ -110,6 +132,5 @@ class Player(Character):
         print("\nYOU DIED")
         print(f"Nice try {self.name}, you made it further than any of us thought you would. Have fun in hell!\n")
         self.display_player()
-        exit()
 
     

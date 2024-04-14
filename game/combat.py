@@ -67,10 +67,10 @@ def fight(player):
                 if (hit + player.atk >= monster.ac):
                     # crit if nat 20
                     if (hit == 20):
-                        damage = player.crit()
+                        damage = player.crit() + player.dmg
                         print(f"You crititcally hit for {damage} damage!")
                     else:
-                        damage = player.attack()
+                        damage = player.weapon_atk() + player.dmg
                         print(f"You hit for {damage} damage!")                    
                     monster.defend(damage)
                     if monster.health > 0:
@@ -96,7 +96,7 @@ def fight(player):
                     player.special_atk(monster)
                     player.weapon_charge = False
                 else:
-                    print("You wasted you turn dumbass! You don't have any weapon charges left.")
+                    print("You wasted your turn dumbass! You don't have any weapon charges left.")
                     print(f"Enemy has {monster.health}hp remaining.")
 
                 # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
@@ -111,7 +111,7 @@ def fight(player):
 
             case 4:
                 clear_screen()
-                loss = random.randint(5, 15)
+                loss = random.randint(25, 50)
                 print(f"You ran away! You dropped {loss} gold on the way out.                (bitch)\n")
                 player.gold -= loss
                 press_enter()
@@ -120,7 +120,7 @@ def fight(player):
         # enemy attacks
         enemy_attack = random.randint(1, 20)
         if (enemy_attack + monster.atk >= player.ac):
-            damage = monster.attack()
+            damage = monster.attack() + monster.dmg
             player.defend(damage)
             print(f"\nEnemy hit for {damage} damage!")
             print(f"You have {player.health}hp remaining!")
@@ -129,6 +129,4 @@ def fight(player):
             print(f"You have {player.health}hp remaining!")
 
 
-    if player.health <= 0:
-        player.death()
             

@@ -4,6 +4,7 @@ def safe(player, day):
 
     player.health = 100
     player.weapon_charge = True
+    max_heals = 5                   # limits amount of available scrolls per day
 
     while True:
         print("SAFE ROOM".center(90))
@@ -42,14 +43,22 @@ def safe(player, day):
 
             case 2:
                 print(f"Current gold: {player.gold}")
-                heal = input("\nHow many heal scrolls do you want? 75 gold each: ")
+                print(f"Potions in stock: {max_heals}")
+                heal = input("\nHow many heal scrolls do you want? 100 gold each: ")
+                while heal.isdigit() == False:
+                    heal = input("Please enter a valid number: ")
+                #putting heal into a new variable as it's cast because of inconsistent behavior when trying heal = int(heal)
                 heal_num = int(heal)
-                while (player.gold < (heal_num*75)):
+                while heal_num > max_heals:
+                    heal = input(f"There are only {max_heals} left for purchase today.\nTry again:")
+                    heal_num = int(heal)
+                while (player.gold < (heal_num*100)):
                     heal = input("You can't afford that many. Try again: ")
                     heal_num = int(heal)
                 else:
-                    player.gold -= (heal_num*75)
+                    player.gold -= (heal_num*100)
                     player.scrolls += heal_num
+                    max_heals -= 1
                     print(f"You now have {player.scrolls} scrolls")
                 press_enter()
                 clear_screen()
