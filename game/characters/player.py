@@ -132,6 +132,5 @@ class Player(Character):
         print("\nYOU DIED")
         print(f"Nice try {self.name}, you made it further than any of us thought you would. Have fun in hell!\n")
         self.display_player()
-        exit()
 
     

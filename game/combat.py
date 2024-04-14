@@ -129,6 +129,4 @@ def fight(player):
             print(f"You have {player.health}hp remaining!")
 
 
-    if player.health <= 0:
-        player.death()
             

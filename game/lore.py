@@ -2,18 +2,24 @@ from utils import clear_screen, press_enter
 
 def introduction():
    
-    print_intro = input("You have awoken at the bottom of the stairs in a bizarre place.\n\
-Do you want to hear some lore or do you want to go in blind? [lore] or [blind]: ")
+    print_intro = input(
+        "You have awoken at the bottom of the stairs in a bizarre place.\n"
+        "Do you want to hear some lore or do you want to go in blind?\n"
+        "  1. Lore\n"
+        "  2. Blind\n"
+        "Enter here: ")
     
-    while (print_intro != "lore") and (print_intro != "blind"):
-        print_intro = input("Please enter [lore] or [blind]: ")
+    while (print_intro != "1") and (print_intro != "2"):
+        print_intro = input("Please enter a valid number: ")
     
     clear_screen()
     
-    if (print_intro == "lore"):
-        print("You are on the first level of the World Dungeon. Everyone on the surface of your planet is either dead, or down here with you.\n\
-You woke up at the bottom of the stairs, in a dark hallway with nothing but the clothes on your back and whatever is in your pockets.\n\
-You have 5 days before this floor collapses, going to a safe room will end the day.\n")
+    if (print_intro == "1"):
+        print(
+            "You are on the first level of the World Dungeon. Everyone on the surface of your planet is either dead, or down here with you.\n"
+            "You woke up at the bottom of the stairs, in a dark hallway with nothing but the clothes on your back and whatever is in your pockets.\n"
+            "You have 5 days before this floor collapses, going to a safe room will end the day.\n"
+        )
         
     name = input("What is your name? ")
     return name
@@ -89,7 +95,7 @@ def fist_desc():
 
 def shotgun_desc():
     print(
-        "Sentient Shotgun. It appears to be a full-auto shotgun with an infinite ammo enchantment. + 1 damage on-hit\n"
+        "Sentient Shotgun. It appears to be a full-auto shotgun with an infinite ammo enchantment. +1 damage on-hit\n"
         "Special Attack: Bullet Rain. Sends a frankly comical amount of lead towards the enemy doing massive damage.\n"
         "Special attack damage roll: 10d6 + dmg bonus + level\n"
         "You swear you hear something speaking to you every shot, surely it's just your imagination."
@@ -112,6 +118,6 @@ def chime_desc():
 def scythe_desc():
     print(
         "Lifehunt Scythe. Ethereal scythe with a shimmering red aura.\n"
-        "Special Attack: Sanguine Flare. Sweeping attack that heals the attacker for 30% of damage done"
+        "Special Attack: Sanguine Flare. Sweeping attack that heals the attacker for 30% of damage done\n"
         "Damage roll: 8d6 + dmg bonus + level"
     )
