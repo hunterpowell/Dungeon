@@ -8,8 +8,7 @@ def explore(player):
     
     num = random.randint(0,3)
 
-    #MAKE THIS 2 AGAIN TO FIX
-    if (num <= 0):
+    if (num <= 2):
         fight(player)
     
     else:
