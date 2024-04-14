@@ -36,18 +36,18 @@ def combat_rules():
             "Your stats will automatically increase every 5 levels.\n"
             "Your special attack is weapon dependant, strengthens with levels, and can only be used once a day.\n"
             "You MUST kill at least one boss per floor to acquire a staircase key. Without a key you cannot descend."
-            )
+        )
         press_enter()
     
 
 def juicer_desc():
     print(
-        "\t\t\tYOU'VE ENCOUTNERED THE JUICER!\n"
+        "\t\t\tYOU'VE ENCOUNTERED THE JUICER!\n"
         "\nWith a body enhanced by the finest anabolic steroids the dark web has to offer, the Juicer spends his days pushing iron,\n"
         "snapping necks, and crying that his pimple-infested sac is a third the size it once was. Having reached a plateau, rage now fills his enlarged heart.\n"
         "All he ever wanted was to gain, but right now he'll settle on bringing out……the paaaaain!\n"
         "\nThe Juicer looks like a humanoid competition body builder with a lizard head and scaley body.\n"
-        )
+    )
 
 def hoarder_desc():
     print(
@@ -55,7 +55,7 @@ def hoarder_desc():
         "Trapped in her pile of rubbish, abandoned by society, the war inside her head has seeped out of her mind and infected both her body and her surroundings.\n"
         "Now nothing more than a garbage troll, the Hoarder is a horrific reminder of what can happen to those who fall out of the light!\n"
         "\nThe Hoarder is a comically large woman drowning in garbage, who has adopted an almost cockroach like appearance.\n"
-        )
+    )
 
 def ball_desc():
     print(
@@ -67,7 +67,7 @@ def ball_desc():
         "won't stop its night of terror until it has crushed the poor, the weak, and the lesser citizens under its unstoppable weight.\n"
         "\nThe Ball of Swine is  massive ball of pink, rippling flesh embedded with eyes, tusks, and scraps of tuxedos and red sequined dresses. It rolls shockingly fast,\n"
         "relying on its momentum to do very high damage.\n"
-        )
+    )
     
 def demon_desc():
     print(
@@ -77,4 +77,41 @@ def demon_desc():
         "it stands guard over the asylum's secrets, a figure of relentless destruction.\n"
 
         "\nThe Asylum Demon has an almost draconic appearance, with spotted blue-green scales all over its body and a pair of stubby wings on its back.\n"
-        )
+    )
+    
+
+def fist_desc():
+    print(
+        "Bare fists. Not very impressive as far as weapons go.\n"
+        "Special Attack: Flurry of Blows. Two rapid punches that cannot miss.\n"
+        "Damage roll: 4d6 + dmg bonus + level"
+    )
+
+def shotgun_desc():
+    print(
+        "Sentient Shotgun. It appears to be a full-auto shotgun with an infinite ammo enchantment. + 1 damage on-hit\n"
+        "Special Attack: Bullet Rain. Sends a frankly comical amount of lead towards the enemy doing massive damage.\n"
+        "Special attack damage roll: 10d6 + dmg bonus + level\n"
+        "You swear you hear something speaking to you every shot, surely it's just your imagination."
+    )
+    
+def gauntlet_desc():
+    print(
+        "War Gauntlet. A wrist bracer that transforms into a spiked war gauntlet when the hand is shaped into a fist. +2 damage on-hit\n"
+        "Special Attack: Rending Strike. A punch that the monster's grandchildren will feel.\n"
+        "Damage roll: 2d6 + 20 + dmg bonus + level"
+    )
+
+def chime_desc():
+    print(
+        "Cleric's Chime. A small chime impbued with divine energy.\n"
+        "Special Attack: Healing Word. Massive spell that heals the caster for a significant amount.\n"
+        "Heal roll: 1d12 + 60 + (2 * level)"
+    )
+    
+def scythe_desc():
+    print(
+        "Lifehunt Scythe. Ethereal scythe with a shimmering red aura.\n"
+        "Special Attack: Sanguine Flare. Sweeping attack that heals the attacker for 30% of damage done"
+        "Damage roll: 8d6 + dmg bonus + level"
+    )

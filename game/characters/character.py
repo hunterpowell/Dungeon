@@ -26,10 +26,10 @@ class Character:
         if self.die_type == 6:
             tmp = random.randint(1, 6)
             tmp2 = random.randint(1, 6)
-            return(tmp + tmp2 + self.dmg)
+            return(tmp + tmp2)
         elif self.die_type == 12:
             tmp = random.randint(1, 12)
-            return(tmp + self.dmg)
+            return(tmp)
     
     # atk roll crit 
     def crit(self):
@@ -37,8 +37,8 @@ class Character:
             tmp = random.randint(1,6)
             tmp2 = random.randint(1,6)
             tmp3 = random.randint(1,6)
-            return(tmp + tmp2 + tmp3 + self.dmg)
+            return(tmp + tmp2 + tmp3)
         elif self.die_type == 12:
             tmp = random.randint(1, 12)
             tmp2 = random.randint(1, 12)
-            return(tmp + tmp2 + self.dmg)
+            return(tmp + tmp2)
