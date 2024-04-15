@@ -5,7 +5,6 @@ from game_loop import main_loop
 
 if __name__ == "__main__":
 
-    clear_screen()
     p1 = Player(introduction())
     combat_rules()
     main_loop(p1)

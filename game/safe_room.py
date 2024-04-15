@@ -2,7 +2,9 @@ from utils import clear_screen, press_enter
 
 def safe(player, day):
 
-    player.health = 100
+    # heals to 100hp if less than that, but doesn't erase overhealth
+    if player.health < 100:
+        player.health = 100
     player.weapon_charge = True
     max_heals = 5                   # limits amount of available scrolls per day
 
@@ -20,8 +22,10 @@ def safe(player, day):
                         "Enter here: ")
             
         elif day == 4 and player.key == 0:
+            clear_screen()
             print("You didn't find a key in time. The stairway remains locked to you, and the floor is about to collapse around you. Goodbye!")
-            player.death()
+            player.health = 0
+            break
 
         else:
             tmp = input("\nWhat would you like to do?\n"

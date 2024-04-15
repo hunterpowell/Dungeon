@@ -3,6 +3,7 @@ from utils import clear_screen, press_enter
 
 def introduction():
    
+    clear_screen()
     print_intro = input(
         "You have awoken at the bottom of the stairs in a bizarre place.\n"
         "Do you want to hear some lore or do you want to go in blind?\n"

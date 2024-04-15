@@ -47,10 +47,10 @@ def fight(player):
 
     while (monster.health > 0) and (player.health > 0):
         userin = input("\nWhat would you like to do?\n"
-                       "1. Basic attack\n"
-                       "2. Special Attack\n"
-                       "3. Use healing scroll\n"
-                       "4. Run away\n"
+                       "  1. Basic attack\n"
+                       "  2. Special Attack\n"
+                       "  3. Use healing scroll\n"
+                       "  4. Run away\n"
                        "Enter here: ")
 
         while (userin != "1") and (userin != "2") and (userin != "3") and (userin != "4"):
