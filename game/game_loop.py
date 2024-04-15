@@ -6,6 +6,10 @@ from explore import explore
 def main_loop(player):
     
     while True:
+        # psuedo-godmode if player name is Admin
+        if player.name == "Admin":
+            player.health = 99999
+            player.gold = 99999
         day = 0
         while day < 5 and player.health > 0:    
             

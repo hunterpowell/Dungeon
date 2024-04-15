@@ -16,7 +16,7 @@ def safe(player, day):
             tmp = input("\nFinal moments before descending the stairs to floor 2.\n\n"
                         "What Would you like to do?\n"
                         "  1. see stats\n"
-                        "  2. buy heal scrolls\n"
+                        "  2. check item shop\n"
                         "  3. see inventory\n"
                         "  4. leave the room, and descend the stairs\n"
                         "Enter here: ")
@@ -29,10 +29,10 @@ def safe(player, day):
 
         else:
             tmp = input("\nWhat would you like to do?\n"
-                        "  1. see stats\n"
-                        "  2. buy heal scrolls\n"
-                        "  3. see inventory\n"
-                        "  4. leave the room\n"
+                        "  1. See stats\n"
+                        "  2. Check item shop\n"
+                        "  3. See inventory\n"
+                        "  4. Leave the room\n"
                         "Enter here: ")
             
         if (tmp != "1") and (tmp != "2") and (tmp != "3") and (tmp != "4"):
@@ -42,30 +42,45 @@ def safe(player, day):
         clear_screen()
 
         match tmp:
+            # see stats
             case 1:
                 player.display_player()
 
+            # item shop
             case 2:
-                print(f"Current gold: {player.gold}")
-                print(f"Potions in stock: {max_heals}")
-                heal = input("\nHow many heal scrolls do you want? 100 gold each: ")
-                while heal.isdigit() == False:
-                    heal = input("Please enter a valid number: ")
-                #putting heal into a new variable as it's cast because of inconsistent behavior when trying heal = int(heal)
-                heal_num = int(heal)
-                while heal_num > max_heals:
-                    heal = input(f"There are only {max_heals} left for purchase today.\nTry again:")
-                    heal_num = int(heal)
-                while (player.gold < (heal_num*100)):
-                    heal = input("You can't afford that many. Try again: ")
-                    heal_num = int(heal)
-                else:
-                    player.gold -= (heal_num*100)
-                    player.scrolls += heal_num
-                    max_heals -= heal_num
-                    print(f"You now have {player.scrolls} scrolls")
-                press_enter()
-                clear_screen()
+                weapon1 = player.weapons()
+                weapon2 = player.weapons()
+                while True:
+                    clear_screen()
+                    print("ITEM SHOP".center(40))
+                    print("----------------------------------------")
+                    print("Current gold: ", player.gold)
+                    shop = input("  1. Healing scrolls\n"
+                                f"  2. {weapon1} - 500 gold\n"
+                                f"  3. {weapon2} - 500 gold\n"
+                                "  4. Leave shop\n"
+                                "Enter here: "
+                                )
+                    
+                    while shop != "1" and shop != "2" and shop != "3" and shop != "4":
+                        shop = input("Enter a valid number: ")
+                    shop = int(shop)
+                    
+                    match shop:
+                        case 1:
+                            player.buy_heals(max_heals)
+
+                        case 2:
+                            player.buy_weapon(weapon1)
+                        
+                        case 3:
+                            player.buy_weapon(weapon2)
+
+                        case 4:
+                            clear_screen()
+                            break
+
+                    
 
             case 3:
                 player.inventory()

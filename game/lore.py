@@ -45,6 +45,7 @@ def combat_rules():
             "Your stats will automatically increase every 5 levels.\n"
             "Your special attack is weapon dependant and strengthens with levels.\n"
             "Special attacks can be used once per day\n"
+            "Special attack resets upon picking up a new weapon\n"
             "You MUST kill at least one boss per floor to acquire a staircase key.\n"
             "Without a key, you cannot descend and you will die."
         )

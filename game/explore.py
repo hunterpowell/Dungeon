@@ -33,9 +33,11 @@ def explore(player):
             
             pickup = int(pickup)
             match pickup:
+                # equips new weapon and resets special attack
                 case 1:
                     print(f"\n{weapon} equipped!")
                     player.weapon = weapon
+                    player.weapon_charge = 1
                     break
                 
                 case 2:

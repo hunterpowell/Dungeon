@@ -2,6 +2,7 @@ import random
 import math
 from characters.character import Character
 from utils import clear_screen, press_enter 
+from lore import fist_desc, shotgun_desc, gauntlet_desc, chime_desc, scythe_desc
 
 class Player(Character):
     def __init__(self, name):
@@ -14,6 +15,15 @@ class Player(Character):
         self.weapon = "Fists"
         self.weapon_charge = True
         # self.class = ADD CLASSES, DIFF SPECIAL ABILITY BASED ON CLASS, DIFF CLASSES available BASED ON current WEAPON
+
+    def weapons(self):
+        weapon_list = [
+                    "Sentient Shotgun",
+                    "War Gauntlet",
+                    "Cleric's Chime",
+                    "Lifehunt Scythe"
+                    ]
+        return random.choice(weapon_list)
 
     def weapon_atk(self):
         match self.weapon:
@@ -52,20 +62,61 @@ class Player(Character):
                 print(f"{mob.name} has {mob.health}hp remaining")
             case "Lifehunt Scythe":
                 damage = (super().attack() * 4 + self.dmg + self.lvl)
-                healing = math.ceil(damage/0.3)
+                healing = math.ceil(damage*0.3)
                 print(f"Sanguine Flare! You did {damage} damage, and healed for {healing}hp!")
                 mob.health -= damage
                 self.health += healing
                 print(f"{mob.name} has {mob.health}hp remaining")
 
-    def weapons(self):
-        weapon_list = [
-                    "Sentient Shotgun",
-                    "War Gauntlet",
-                    "Cleric's Chime",
-                    "Lifehunt Scythe"
-        ]
-        return random.choice(weapon_list)
+    def buy_weapon(self, weapon):
+        clear_screen()
+        while True:
+            pickup = input(f"You selected {weapon}\n"
+                "What would you like to do??\n"
+                "  1. Buy and equip weapon (this will discard current weapon)\n"
+                "  2. See weapon description\n"
+                "  3. Return to shop\n"
+                "Enter here: "
+                )
+            while pickup.isdigit() == False:
+                pickup = input("Please enter a number: ")
+            
+            while pickup != "1" and pickup != "2" and pickup != "3":
+                pickup = input("Please enter a valid number: ")
+            
+            pickup = int(pickup)
+            match pickup:
+                case 1:
+                    if self.gold >= 500:    
+                        print(f"\n{weapon} equipped!")
+                        self.weapon = weapon
+                        self.gold -= 500
+                        press_enter()
+                        break
+                    else:
+                        print("You can't afford this weapon! Skill issue.")
+                        press_enter()
+                        break
+                    
+                case 2:
+                    clear_screen()
+                    match weapon:
+                        case "Fists":
+                            fist_desc()
+                        case "Sentient Shotgun":
+                            shotgun_desc()
+                        case "War Gauntlet":
+                            gauntlet_desc()
+                        case "Cleric's Chime":
+                            chime_desc()
+                        case "Lifehunt Scythe":
+                            scythe_desc()
+                    press_enter()
+                    clear_screen()
+
+                case 3:
+                    break
+
 
     def inventory(self):
         print("    INVENTORY")
@@ -90,7 +141,29 @@ class Player(Character):
                   f"You have {self.health}hp remaining")
         else:
             print("You are out of healing scrolls! (dumbass)\n"
-                  f"You have {self.health}hp remaining")
+                  f"You have {self.health}hp remaining")     
+    
+    def buy_health(self, max):
+        print(f"Current gold: {self.gold}")
+        print(f"Scrolls in stock: {max}")
+        heal = input("\nHow many heal scrolls do you want? 100 gold each: ")
+        while heal.isdigit() == False:
+            heal = input("Please enter a valid number: ")
+        #putting heal into a new variable as it's cast because of inconsistent behavior when trying heal = int(heal)
+        heal_num = int(heal)
+        while heal_num > max:
+            heal = input(f"There are only {max} left for purchase today.\nTry again:")
+            heal_num = int(heal)
+        while (self.gold < (heal_num*100)):
+            heal = input("You can't afford that many. Try again: ")
+            heal_num = int(heal)
+        else:
+            self.gold -= (heal_num*100)
+            self.scrolls += heal_num
+            max -= heal_num
+            print(f"You now have {self.scrolls} scrolls")
+        press_enter()
+        clear_screen()
 
     def level_up(self):
         while self.xp > (self.lvl/0.3)**2:
