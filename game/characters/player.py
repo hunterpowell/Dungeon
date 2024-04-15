@@ -13,6 +13,8 @@ class Player(Character):
         self.xp = 0
         self.key = False
         self.weapon = "Fists"
+        self.ring1 = "None"
+        self.ring2 = "None"
         self.weapon_charge = True
         # self.class = ADD CLASSES, DIFF SPECIAL ABILITY BASED ON CLASS, DIFF CLASSES available BASED ON current WEAPON
 
@@ -21,9 +23,20 @@ class Player(Character):
                     "Sentient Shotgun",
                     "War Gauntlet",
                     "Cleric's Chime",
-                    "Lifehunt Scythe"
+                    "Lifehunt Scythe",
+                    "Gambler's "
                     ]
         return random.choice(weapon_list)
+    
+    def rings(self):
+        ring_list = [
+            "Life ring",
+            "Havel's ring",
+            "Knight's ring",
+            "Red tearstone ring",
+            "Gambler's ",
+            "Ring of divine suffering"
+        ]
 
     def weapon_atk(self):
         match self.weapon:
@@ -197,7 +210,6 @@ class Player(Character):
         super().display()
         print("Level:       ", self.lvl)
         print("Experience:  ", self.xp)
-        print("Weapon:      ", self.weapon)
         press_enter()
         clear_screen()
 

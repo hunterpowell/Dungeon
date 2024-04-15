@@ -70,7 +70,7 @@ def hoarder_desc():
 
 def ball_desc():
     print("YOU'VE ENCOUNTERED THE BALL OF SWINE!\n".center(80))
-    ball = ("Also known as the Porkchop Express, the Ball of Swine is one of the rarest, most deadly battle formations of the Tuskling."
+    ball = ("Also known as the Porkchop Express, the Ball of Swine is one of the rarest, most deadly battle formations of the Tuskling. "
             "Encompassing at least 30 Tuskling knights and their lady loves, a Ball formation requires a specific set of circumstances to create. Combine a gathering of "
             "Tuskling aristocracy, add an alcohol-fueled, sexually-charged orgy of war lust, and sometimes, just sometimes, the wild, ancient battle magic that permeates their war-torn world "
             "casts the spell, forming the ball. The Tusklings, the ruling class of the Orcish Supremacy, shape into an inseparable sphere that rolls onto the countryside. The ball of pork "
@@ -78,7 +78,6 @@ def ball_desc():
     ball2 = ("The Ball of Swine is  massive ball of pink, rippling flesh embedded with eyes, tusks, and scraps of tuxedos and red sequined dresses. It rolls shockingly fast,\n"
             "relying on its momentum to do very high damage.")
     print(textwrap.fill(ball, 80))
-    print("\n")
     print(textwrap.fill(ball2, 80))
     
     
@@ -89,7 +88,6 @@ def demon_desc():
             "it stands guard over the asylum's secrets, a figure of relentless destruction.\n")
     demon2 = ("The Asylum Demon has an almost draconic appearance, with spotted blue-green scales all over its body and a pair of stubby wings on its back.")
     print(textwrap.fill(demon, 80))
-    print("\n")
     print(textwrap.fill(demon2, 80))
 
 
