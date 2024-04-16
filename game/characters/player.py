@@ -26,7 +26,8 @@ class Player(Character):
                     "Sentient Shotgun",
                     "War Gauntlet",
                     "Cleric's Chime",
-                    "Lifehunt Scythe"
+                    "Lifehunt Scythe",
+                    "Staff of Rot"          #STAFF INFECTION
                     ]
         return random.choice(weapon_list)
     
@@ -41,7 +42,7 @@ class Player(Character):
                 self.finesse = 1
                 self.arcana = 0
             case "War Gauntlet":
-                self.martial = 2
+                self.martial = 1
                 self.finesse = 2
                 self.arcana = 0
             case "Cleric's Chime":
@@ -52,6 +53,10 @@ class Player(Character):
                 self.martial = 1
                 self.finesse = 1
                 self.arcana = 1
+            case "Staff of Rot":
+                self.martial = 0
+                self.finesse = 1
+                self.arcana = 2
 
     def weapon_atk(self):
         return(super().attack() + self.atk + self.martial)
@@ -81,6 +86,9 @@ class Player(Character):
                 print(f"Sanguine Flare! You did {damage} damage, and healed for {healing}hp!")
                 mob.defend(damage)
                 self.health += healing
+            case "Staff of Rot":
+                damage = (super().attack())
+                print(f"Staff Infection!")
 
     def buy_weapon(self, weapon):
         clear_screen()
