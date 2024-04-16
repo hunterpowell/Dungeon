@@ -12,62 +12,64 @@ class Player(Character):
         self.lvl = 1
         self.xp = 0
         self.key = False
-        self.weapon = "Fists"
         self.ring1 = "None"
         self.ring2 = "None"
+        self.job = "<Unassigned>"
         self.weapon_charge = True
-        # self.class = ADD CLASSES, DIFF SPECIAL ABILITY BASED ON CLASS, DIFF CLASSES available BASED ON current WEAPON
+        self.weapon = "Fists"
+        self.martial = 0
+        self.finesse = 0
+        self.arcana = 0
 
     def weapons(self):
         weapon_list = [
                     "Sentient Shotgun",
                     "War Gauntlet",
                     "Cleric's Chime",
-                    "Lifehunt Scythe",
-                    "Gambler's "
+                    "Lifehunt Scythe"
                     ]
         return random.choice(weapon_list)
     
-    def rings(self):
-        ring_list = [
-            "Life ring",
-            "Havel's ring",
-            "Knight's ring",
-            "Red tearstone ring",
-            "Gambler's ",
-            "Ring of divine suffering"
-        ]
-
-    def weapon_atk(self):
+    def initialize_weapon(self):
         match self.weapon:
             case "Fists":
-                return(super().attack())
+                self.martial = 0
+                self.finesse = 0
+                self.arcana = 0
             case "Sentient Shotgun":
-                return(super().attack() + 1)
+                self.martial = 2
+                self.finesse = 1
+                self.arcana = 0
             case "War Gauntlet":
-                return(super().attack() + 2)
+                self.martial = 2
+                self.finesse = 2
+                self.arcana = 0
             case "Cleric's Chime":
-                return(super().attack())
+                self.martial = 0
+                self.finesse = 1
+                self.arcana = 2
             case "Lifehunt Scythe":
-                return(super().attack() + 1)
+                self.martial = 1
+                self.finesse = 1
+                self.arcana = 1
+
+    def weapon_atk(self):
+        return(super().attack() + self.atk + self.martial)
     
     def special_atk(self, mob):
         match self.weapon:
             case "Fists":
                 damage = (super().attack() * 2 + self.dmg + self.lvl)
                 print(f"Flurry of blows! You did {damage} damage!")
-                mob.health -= damage
-                print(f"{mob.name} has {mob.health}hp remaining")
+                mob.defend(damage)
             case "Sentient Shotgun":
                 damage = (super().attack() * 5 + self.dmg + self.lvl)
                 print(f"Bullet rain! You did {damage} damage!")
-                mob.health -= damage
-                print(f"{mob.name} has {mob.health}hp remaining")
+                mob.defend(damage)
             case "War Gauntlet":
                 damage = (super().attack() + 20 + self.dmg + self.lvl)
                 print(f"Rending Strike! You did {damage} damage!")
-                mob.health -= damage
-                print(f"{mob.name} has {mob.health}hp remaining")
+                mob.defend(damage)
             case "Cleric's Chime":
                 healing = (random.randint(1,12) + 60 + self.lvl*2)
                 print(f"Healing word! You healed for {healing}hp!")
@@ -77,9 +79,8 @@ class Player(Character):
                 damage = (super().attack() * 4 + self.dmg + self.lvl)
                 healing = math.ceil(damage*0.3)
                 print(f"Sanguine Flare! You did {damage} damage, and healed for {healing}hp!")
-                mob.health -= damage
+                mob.defend(damage)
                 self.health += healing
-                print(f"{mob.name} has {mob.health}hp remaining")
 
     def buy_weapon(self, weapon):
         clear_screen()
@@ -130,6 +131,15 @@ class Player(Character):
                 case 3:
                     break
 
+    def rings(self):
+        ring_list = [
+            "Life ring",
+            "Havel's ring",
+            "Knight's ring",
+            "Red tearstone ring",
+            "Gambler's ",
+            "Ring of divine suffering"
+        ]
 
     def inventory(self):
         print("    INVENTORY")
@@ -208,6 +218,9 @@ class Player(Character):
             
     def display_player(self):
         super().display()
+        print("Martial:     ", self.martial)
+        print("Finesse:     ", self.finesse)
+        print("Arcana:      ", self.arcana)
         print("Level:       ", self.lvl)
         print("Experience:  ", self.xp)
         press_enter()

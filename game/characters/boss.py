@@ -3,7 +3,7 @@ from characters.character import Character
 
 class Boss(Character):
     def __init__(self, name, health, atk, dmg, ac):
-        super().__init__(name, health, atk, dmg, ac)
+        super().__init__(name, health, atk, dmg,  ac)
 
     @classmethod
     def random_boss(cls):

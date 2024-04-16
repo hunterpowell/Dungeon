@@ -17,5 +17,3 @@ class Mob(Character):
 
         name, health, atk, dmg, ac = random.choice(enemies)
         return cls(name, health, atk, dmg, ac)
-
-

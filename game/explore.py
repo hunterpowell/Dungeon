@@ -37,6 +37,7 @@ def explore(player):
                 case 1:
                     print(f"\n{weapon} equipped!")
                     player.weapon = weapon
+                    player.initialize_weapon()
                     player.weapon_charge = 1
                     break
                 
