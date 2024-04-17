@@ -1,11 +1,11 @@
 import random
 
 class Character:
-    def __init__(self, name, health, atk, dmg, ac):
+    def __init__(self, name, health, accuracy, on_hit, ac):
         self.name = name
         self.health = health
-        self.atk = atk
-        self.dmg = dmg
+        self.accuracy = accuracy
+        self.on_hit = on_hit
         self.ac = ac
         self.die_type = 6
         self.poisoned = False
@@ -27,7 +27,7 @@ class Character:
             tmp = random.randint(1, 12)
             return(tmp)
     
-    # atk roll crit 
+    # accuracy roll crit 
     def crit(self):
         if self.die_type == 6:
             tmp = random.randint(1,6)
@@ -44,6 +44,6 @@ class Character:
         print("=================")
         print("Name:        ", self.name)
         print("Health:      ", self.health)
-        print("Atk bonus:   ", self.atk)
-        print("Dmg bonus:   ", self.dmg)
+        print("Accuracy:    ", self.accuracy)
+        print("On hit bonus:", self.on_hit)
         print("Armor:       ", self.ac)

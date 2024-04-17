@@ -48,17 +48,17 @@ def fight(player):
                 print("\t\t\tCOMBAT\n\t\t----------------------")
                 # attack roll to determine hit/miss
                 hit = random.randint(1, 20)
-                if (hit + player.atk + player.finesse >= monster.ac):
+                if (hit + player.accuracy + player.finesse >= monster.ac):
                     # crit if nat 20
                     if (hit == 20):
-                        damage = player.crit() + player.dmg + player.martial
+                        damage = player.crit() + player.on_hit + player.martial
                         print(f"You crititcally hit for {damage} damage!")
                     else:
                         damage = player.weapon_atk()
                         print(f"You hit for {damage} damage!")                    
                     monster.defend(damage)
 
-                elif (hit + player.atk < monster.ac):
+                elif (hit + player.accuracy < monster.ac):
                     print("You missed!")
                     print(f"{monster.name} has {monster.health}hp remaining")
 
@@ -113,8 +113,8 @@ def fight(player):
 
         # enemy attacks
         enemy_attack = random.randint(1, 20)
-        if (enemy_attack + monster.atk >= player.ac):
-            damage = monster.attack() + monster.dmg
+        if (enemy_attack + monster.accuracy >= player.ac):
+            damage = monster.attack() + monster.on_hit
             print(f"\nEnemy hit for {damage} damage!")
             player.defend(damage)
         else:

@@ -2,8 +2,8 @@ import random
 from characters.character import Character
 
 class Mob(Character):
-    def __init__(self, name, health, atk, dmg, ac):
-        super().__init__(name, health, atk, dmg, ac)
+    def __init__(self, name, health, accuracy, on_hit, ac):
+        super().__init__(name, health, accuracy, on_hit, ac)
 
     @classmethod
     def random_enemy(cls):
@@ -15,5 +15,5 @@ class Mob(Character):
             ("Rot Sticker", 25, 5, 3, 5),
         ]
 
-        name, health, atk, dmg, ac = random.choice(enemies)
-        return cls(name, health, atk, dmg, ac)
+        name, health, accuracy, on_hit, ac = random.choice(enemies)
+        return cls(name, health, accuracy, on_hit, ac)

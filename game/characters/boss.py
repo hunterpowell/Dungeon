@@ -2,8 +2,8 @@ import random
 from characters.character import Character
 
 class Boss(Character):
-    def __init__(self, name, health, atk, dmg, ac):
-        super().__init__(name, health, atk, dmg,  ac)
+    def __init__(self, name, health, accuracy, on_hit, ac):
+        super().__init__(name, health, accuracy, on_hit,  ac)
 
     @classmethod
     def random_boss(cls):
@@ -14,5 +14,5 @@ class Boss(Character):
             ("ASYLUM DEMON", 150, 15, 10, 10)
         ]
 
-        name, health, atk, dmg, ac = random.choice(bosses)
-        return cls(name, health, atk, dmg, ac)
+        name, health, accuracy, on_hit, ac = random.choice(bosses)
+        return cls(name, health, accuracy, on_hit, ac)

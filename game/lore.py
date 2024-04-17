@@ -114,14 +114,14 @@ def fist_desc():
     print(
         "Bare fists. Not very impressive as far as weapons go.\n"
         "Special Attack: Flurry of Blows. Two rapid punches that cannot miss.\n"
-        "Damage roll: 4d6 + dmg bonus + level"
+        "Damage roll: 4d6 + on_hit bonus + level"
     )
 
 def shotgun_desc():
     print(
         "Sentient Shotgun. It appears to be a full-auto shotgun with an infinite ammo enchantment.\n"
         "Special Attack: Bullet Rain. Sends a frankly comical amount of lead towards the enemy doing massive damage.\n"
-        "Special attack damage roll: 10d6 + dmg bonus + level\n"
+        "Special attack damage roll: 10d6 + on_hit bonus + level\n"
         "You swear you hear something speaking to you every shot, surely it's just your imagination."
     )
     
@@ -129,7 +129,7 @@ def gauntlet_desc():
     print(
         "War Gauntlet. A wrist bracer that turns into a spiked gauntlet when the hand is shaped into a fist.\n"
         "Special Attack: Rending Strike. A punch that the monster's grandchildren will feel.\n"
-        "Damage roll: 2d6 + 20 + dmg bonus + level"
+        "Damage roll: 2d6 + 20 + on_hit bonus + level"
     )
 
 def chime_desc():
@@ -143,7 +143,7 @@ def scythe_desc():
     print(
         "Lifehunt Scythe. Ethereal scythe with a shimmering red aura.\n"
         "Special Attack: Sanguine Flare. Sweeping attack that heals the attacker for 30% of damage done.\n"
-        "Damage roll: 8d6 + dmg bonus + level"
+        "Damage roll: 8d6 + on_hit bonus + level"
     )
 
 def staff_desc():

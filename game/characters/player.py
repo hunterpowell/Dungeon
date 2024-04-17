@@ -6,7 +6,7 @@ from lore import weapon_lore
 
 class Player(Character):
     def __init__(self, name):
-        super().__init__(name, health = 100, atk = 3, dmg = 5, ac = 10)
+        super().__init__(name, health = 100, accuracy = 3, on_hit = 5, ac = 10)
         self.scrolls = 0
         self.gold = 20
         self.lvl = 1
@@ -64,20 +64,20 @@ class Player(Character):
         self.resolve -= resolve
 
     def weapon_atk(self):
-        return(super().attack() + self.dmg + self.martial)
+        return(super().attack() + self.on_hit + self.martial)
     
     def special_atk(self, mob):
         match self.weapon:
             case "Fists":
-                damage = (super().attack() * 2 + self.dmg + self.martial + self.lvl)
+                damage = (super().attack() * 2 + self.on_hit + self.martial + self.lvl)
                 print(f"Flurry of blows! You did {damage} damage!")
                 mob.defend(damage)
             case "Sentient Shotgun":
-                damage = (super().attack() * 5 + self.dmg + self.martial + self.lvl)
+                damage = (super().attack() * 5 + self.on_hit + self.martial + self.lvl)
                 print(f"Bullet rain! You did {damage} damage!")
                 mob.defend(damage)
             case "War Gauntlet":
-                damage = (super().attack() + 20 + self.dmg + self.martial + self.lvl)
+                damage = (super().attack() + 20 + self.on_hit + self.martial + self.lvl)
                 print(f"Rending Strike! You did {damage} damage!")
                 mob.defend(damage)
             case "Cleric's Chime":
@@ -86,7 +86,7 @@ class Player(Character):
                 self.health += healing
                 print(f"{mob.name} has {mob.health}hp remaining")
             case "Lifehunt Scythe":
-                damage = (super().attack() * 4 + self.dmg + self.lvl)
+                damage = (super().attack() * 4 + self.on_hit + self.lvl)
                 healing = math.ceil(damage*0.3)
                 print(f"Sanguine Flare! You did {damage} damage, and healed for {healing}hp!")
                 mob.defend(damage)
@@ -200,10 +200,10 @@ class Player(Character):
         while self.xp > (self.lvl/0.3)**2:
             print(f"Leveled up to {self.lvl + 1}!!")
             self.lvl += 1
-            # +1 atk, dmg, ac per 5 levels
+            # +1 accuracy, on_hit, ac per 5 levels
             if self.lvl % 5 == 0:
-                self.atk += 1
-                self.dmg += 1
+                self.accuracy += 1
+                self.on_hit += 1
                 self.ac += 1
 
     def monster_death(self, monster, key, money, max_hp):
