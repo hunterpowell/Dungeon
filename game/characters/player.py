@@ -93,7 +93,7 @@ class Player(Character):
                 self.health += healing
             case "Staff of Rot":
                 damage = (super().attack())
-                print(f"Staff Infection! You've poisoned the enemy! They'll take ")
+                print(f"Staff Infection! You've poisoned the enemy!")
                 mob.poisoned = True
                 print(f"{mob.name} has {mob.health}hp remaining")
 
@@ -170,7 +170,10 @@ class Player(Character):
             print("You are out of healing scrolls! (dumbass)\n"
                   f"You have {self.health}hp remaining")     
     
-    def buy_health(self, max):
+    def buy_heals(self, max):
+        clear_screen()
+        print("ITEM SHOP".center(40))
+        print("----------------------------------------")
         print(f"Current gold: {self.gold}")
         print(f"Scrolls in stock: {max}")
         heal = input("\nHow many heal scrolls do you want? 100 gold each: ")
@@ -191,6 +194,7 @@ class Player(Character):
             print(f"You now have {self.scrolls} scrolls")
         press_enter()
         clear_screen()
+        return max
 
     def level_up(self):
         while self.xp > (self.lvl/0.3)**2:

@@ -119,7 +119,7 @@ def fight(player):
             player.defend(damage)
         else:
             print("\nEnemy missed!")
-            print(f"{player.name} has {player.health}hp remaining!")
+            print(f"{player.name} has {player.health}hp remaining")
 
 
             

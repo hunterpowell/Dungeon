@@ -55,7 +55,7 @@ def safe(player, day):
                     print("ITEM SHOP".center(40))
                     print("----------------------------------------")
                     print("Current gold: ", player.gold)
-                    shop = input("  1. Healing scrolls\n"
+                    shop = input("  1. Healing scrolls - 100 gold\n"
                                 f"  2. {weapon1} - 500 gold\n"
                                 f"  3. {weapon2} - 500 gold\n"
                                 "  4. Leave shop\n"
@@ -68,7 +68,7 @@ def safe(player, day):
                     
                     match shop:
                         case 1:
-                            player.buy_heals(max_heals)
+                            max_heals = player.buy_heals(max_heals)
 
                         case 2:
                             player.buy_weapon(weapon1)
