@@ -1,7 +1,7 @@
 import random
 from utils import press_enter, clear_screen
 from combat import fight
-from lore import fist_desc, shotgun_desc, gauntlet_desc, chime_desc, scythe_desc
+from lore import weapon_lore
 
 
 def explore(player):
@@ -36,27 +36,14 @@ def explore(player):
                 # equips new weapon and resets special attack
                 case 1:
                     print(f"\n{weapon} equipped!")
-                    player.unequip_weapon(player.weapon_stats()[0], player.weapon_stats()[1], player.weapon_stats()[2], player.weapon_stats[3])
+                    player.unequip_weapon(player.weapon_stats()[0], player.weapon_stats()[1], player.weapon_stats()[2], player.weapon_stats()[3], player.weapon_stats()[4])
                     player.weapon = weapon
-                    player.equip_weapon(player.weapon_stats())
+                    player.equip_weapon(player.weapon_stats()[0], player.weapon_stats()[1], player.weapon_stats()[2], player.weapon_stats()[3], player.weapon_stats()[4])
                     player.weapon_charge = 1
                     break
                 
                 case 2:
-                    clear_screen()
-                    match weapon:
-                        case "Fists":
-                            fist_desc()
-                        case "Sentient Shotgun":
-                            shotgun_desc()
-                        case "War Gauntlet":
-                            gauntlet_desc()
-                        case "Cleric's Chime":
-                            chime_desc()
-                        case "Lifehunt Scythe":
-                            scythe_desc()
-                    press_enter()
-                    clear_screen()
+                    weapon_lore(weapon)
 
                 case 3:
                     print(f"\n{weapon} discarded. I sure hope you don't regret that in the near future!")

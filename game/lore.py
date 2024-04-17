@@ -90,6 +90,25 @@ def demon_desc():
     print(textwrap.fill(demon, 80))
     print(textwrap.fill(demon2, 80))
 
+def monster_lore(mob):
+    match mob.name:
+        case "THE JUICER":
+            juicer_desc()
+            press_enter()
+            clear_screen()
+        case "THE HOARDER":
+            hoarder_desc()
+            press_enter()
+            clear_screen()
+        case "BALL OF SWINE":
+            ball_desc()
+            press_enter()
+            clear_screen()
+        case "ASYLUM DEMON":
+            demon_desc()
+            press_enter()
+            clear_screen()
+
 
 def fist_desc():
     print(
@@ -100,7 +119,7 @@ def fist_desc():
 
 def shotgun_desc():
     print(
-        "Sentient Shotgun. It appears to be a full-auto shotgun with an infinite ammo enchantment. +1 damage on-hit\n"
+        "Sentient Shotgun. It appears to be a full-auto shotgun with an infinite ammo enchantment.\n"
         "Special Attack: Bullet Rain. Sends a frankly comical amount of lead towards the enemy doing massive damage.\n"
         "Special attack damage roll: 10d6 + dmg bonus + level\n"
         "You swear you hear something speaking to you every shot, surely it's just your imagination."
@@ -108,7 +127,7 @@ def shotgun_desc():
     
 def gauntlet_desc():
     print(
-        "War Gauntlet. A wrist bracer that turns into a spiked gauntlet when the hand is shaped into a fist. +2 damage on-hit\n"
+        "War Gauntlet. A wrist bracer that turns into a spiked gauntlet when the hand is shaped into a fist.\n"
         "Special Attack: Rending Strike. A punch that the monster's grandchildren will feel.\n"
         "Damage roll: 2d6 + 20 + dmg bonus + level"
     )
@@ -123,6 +142,31 @@ def chime_desc():
 def scythe_desc():
     print(
         "Lifehunt Scythe. Ethereal scythe with a shimmering red aura.\n"
-        "Special Attack: Sanguine Flare. Sweeping attack that heals the attacker for 30% of damage done\n"
+        "Special Attack: Sanguine Flare. Sweeping attack that heals the attacker for 30% of damage done.\n"
         "Damage roll: 8d6 + dmg bonus + level"
     )
+
+def staff_desc():
+    print(
+        "Staff of Rot. Large staff made of gnarled and twisted wood.\n"
+        "Special Attack: Staff Infection. Cloud attack that inflicts poison on the enemy.\n"
+        "Poison damage per turn: %5 enemy max health + attunment"
+    )
+
+def weapon_lore(weapon):
+    clear_screen()
+    match weapon:
+        case "Fists":
+            fist_desc()
+        case "Sentient Shotgun":
+            shotgun_desc()
+        case "War Gauntlet":
+            gauntlet_desc()
+        case "Cleric's Chime":
+            chime_desc()
+        case "Lifehunt Scythe":
+            scythe_desc()
+        case "Staff of Rot":
+            staff_desc()
+    press_enter()
+    clear_screen()

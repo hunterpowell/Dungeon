@@ -2,7 +2,7 @@ import random
 from utils import clear_screen, press_enter
 from characters.mob import Mob
 from characters.boss import Boss
-from lore import juicer_desc, hoarder_desc, ball_desc, demon_desc
+from lore import monster_lore
 
 def fight(player):
     
@@ -13,23 +13,7 @@ def fight(player):
         monster = Boss.random_boss()
         money = random.randint(100, 200)
         key = True
-        match monster.name:
-            case "THE JUICER":
-                juicer_desc()
-                press_enter()
-                clear_screen()
-            case "THE HOARDER":
-                hoarder_desc()
-                press_enter()
-                clear_screen()
-            case "BALL OF SWINE":
-                ball_desc()
-                press_enter()
-                clear_screen()
-            case "ASYLUM DEMON":
-                demon_desc()
-                press_enter()
-                clear_screen()
+        monster_lore(monster)
 
     # 80% chance for random mob, no key!
     else:
@@ -83,6 +67,12 @@ def fight(player):
                     player.monster_death(monster, key, money, max_hp)
                     break
                 
+                player.is_poisoned(monster)
+                if monster.health <= 0:
+                    player.monster_death(monster, key, money, max_hp)
+                    break
+
+
             case 2:
                 clear_screen()
                 print("\t\t\tCOMBAT\n\t\t----------------------")
@@ -99,10 +89,19 @@ def fight(player):
                     player.monster_death(monster, key, money, max_hp)
                     break
                 
+                player.is_poisoned(monster)
+                if monster.health <= 0:
+                    player.monster_death(monster, key, money, max_hp)
+                    break
+                
             case 3: 
                 clear_screen()
                 print("\t\t\tCOMBAT\n\t\t----------------------")
                 player.heal()
+                player.is_poisoned(monster)
+                if monster.health <= 0:
+                    player.monster_death(monster, key, money, max_hp)
+                    break
 
             case 4:
                 clear_screen()

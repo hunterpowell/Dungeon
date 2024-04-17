@@ -2,7 +2,7 @@ import random
 import math
 from characters.character import Character
 from utils import clear_screen, press_enter 
-from lore import fist_desc, shotgun_desc, gauntlet_desc, chime_desc, scythe_desc
+from lore import weapon_lore
 
 class Player(Character):
     def __init__(self, name):
@@ -20,6 +20,7 @@ class Player(Character):
         self.martial = 0
         self.finesse = 0
         self.arcana = 0
+        self.attunement = 0
         self.resolve = 0
 
     def weapons(self):
@@ -33,52 +34,54 @@ class Player(Character):
         return random.choice(weapon_list)
     
     def weapon_stats(self):
-        # balancing numbers- martial, finesse, arcana, resolve
+        # balancing numbers- martial, finesse, arcana, attunement, resolve
         match self.weapon:
             case "Fists":
-                return 0, 0, 0, 0
+                return 0, 0, 0, 0, 0
             case "Sentient Shotgun":
-                return 2, 1, 0, 0
+                return 2, 1, 0, 0, 0
             case "War Gauntlet":
-                return 1, 2, 0, 0
+                return 1, 2, 0, 0, 0
             case "Cleric's Chime":
-                return 0, 0, 2, 1
+                return 0, 0, 0, 2, 1
             case "Lifehunt Scythe":
-                return 1, 1, 1, 0
+                return 1, 1, 1, 0, 0
             case "Staff of Rot":
-                return 1, 0, 2, 0
+                return 1, 0, 0, 2, 0
     
-    def equip_weapon(self, martial, finesse, arcana, resolve):
+    def equip_weapon(self, martial, finesse, arcana, attunement, resolve):
         self.martial += martial
         self.finesse += finesse
         self.arcana += arcana
+        self.attunement += attunement
         self.resolve += resolve
 
-    def unequip_weapon(self, martial, finesse, arcana, resolve):
+    def unequip_weapon(self, martial, finesse, arcana, attunement, resolve):
         self.martial -= martial
         self.finesse -= finesse
         self.arcana -= arcana
+        self.attunement -= attunement
         self.resolve -= resolve
 
     def weapon_atk(self):
-        return(super().attack() + self.atk + self.martial)
+        return(super().attack() + self.dmg + self.martial)
     
     def special_atk(self, mob):
         match self.weapon:
             case "Fists":
-                damage = (super().attack() * 2 + self.dmg + self.lvl)
+                damage = (super().attack() * 2 + self.dmg + self.martial + self.lvl)
                 print(f"Flurry of blows! You did {damage} damage!")
                 mob.defend(damage)
             case "Sentient Shotgun":
-                damage = (super().attack() * 5 + self.dmg + self.lvl)
+                damage = (super().attack() * 5 + self.dmg + self.martial + self.lvl)
                 print(f"Bullet rain! You did {damage} damage!")
                 mob.defend(damage)
             case "War Gauntlet":
-                damage = (super().attack() + 20 + self.dmg + self.lvl)
+                damage = (super().attack() + 20 + self.dmg + self.martial + self.lvl)
                 print(f"Rending Strike! You did {damage} damage!")
                 mob.defend(damage)
             case "Cleric's Chime":
-                healing = (random.randint(1,12) + 60 + self.lvl*2)
+                healing = (random.randint(1,12) + 60 + self.lvl*self.attunement)
                 print(f"Healing word! You healed for {healing}hp!")
                 self.health += healing
                 print(f"{mob.name} has {mob.health}hp remaining")
@@ -90,7 +93,9 @@ class Player(Character):
                 self.health += healing
             case "Staff of Rot":
                 damage = (super().attack())
-                print(f"Staff Infection!")
+                print(f"Staff Infection! You've poisoned the enemy! They'll take ")
+                mob.poisoned = True
+                print(f"{mob.name} has {mob.health}hp remaining")
 
     def buy_weapon(self, weapon):
         clear_screen()
@@ -113,8 +118,9 @@ class Player(Character):
                 case 1:
                     if self.gold >= 500:    
                         print(f"\n{weapon} equipped!")
-                        self.unequip_weapon(self.weapon_stats()[0], self.weapon_stats()[1], self.weapon_stats()[2], self.weapon_stats[3])
+                        self.unequip_weapon(self.weapon_stats()[0], self.weapon_stats()[1], self.weapon_stats()[2], self.weapon_stats()[3], self.weapon_stats()[4])
                         self.weapon = weapon
+                        self.equip_weapon(self.weapon_stats()[0], self.weapon_stats()[1], self.weapon_stats()[2], self.weapon_stats()[3], self.weapon_stats()[4])
                         self.gold -= 500
                         press_enter()
                         break
@@ -124,20 +130,7 @@ class Player(Character):
                         break
                     
                 case 2:
-                    clear_screen()
-                    match weapon:
-                        case "Fists":
-                            fist_desc()
-                        case "Sentient Shotgun":
-                            shotgun_desc()
-                        case "War Gauntlet":
-                            gauntlet_desc()
-                        case "Cleric's Chime":
-                            chime_desc()
-                        case "Lifehunt Scythe":
-                            scythe_desc()
-                    press_enter()
-                    clear_screen()
+                    weapon_lore(weapon)
 
                 case 3:
                     break
@@ -226,14 +219,22 @@ class Player(Character):
             print("You found a key! You can now descend the stairs when the floor ends.")
             self.key = key
         press_enter()
-            
+
+    def is_poisoned(self, mob):
+        if mob.poisoned == True:
+            poison = (mob.health // 20) + self.attunement
+            print(f"{mob.name} is poisoned! It took {poison} damage!")
+            mob.health -= poison
+
     def display_player(self):
         super().display()
-        print("Martial:     ", self.martial)
-        print("Finesse:     ", self.finesse)
-        print("Arcana:      ", self.arcana)
         print("Level:       ", self.lvl)
         print("Experience:  ", self.xp)
+        print("Martial:     ", self.martial)
+        print("Finesse:     ", self.finesse)
+        print("Attunement:  ", self.attunement)
+        print("Arcana:      ", self.arcana)
+        print("Resolve:     ", self.resolve)
         press_enter()
         clear_screen()
 
