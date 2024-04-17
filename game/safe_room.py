@@ -72,11 +72,11 @@ def safe(player, day):
 
                         case 2:
                             player.buy_weapon(weapon1)
-                            player.initialize_weapon()
+                            player.equip_weapon(player.weapon_stats())
                         
                         case 3:
                             player.buy_weapon(weapon2)
-                            player.initialize_weapon()
+                            player.equip_weapon(player.weapon_stats())
 
                         case 4:
                             clear_screen()

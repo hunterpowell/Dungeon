@@ -36,8 +36,9 @@ def explore(player):
                 # equips new weapon and resets special attack
                 case 1:
                     print(f"\n{weapon} equipped!")
+                    player.unequip_weapon(player.weapon_stats()[0], player.weapon_stats()[1], player.weapon_stats()[2], player.weapon_stats[3])
                     player.weapon = weapon
-                    player.initialize_weapon()
+                    player.equip_weapon(player.weapon_stats())
                     player.weapon_charge = 1
                     break
                 

@@ -16,15 +16,6 @@ class Character:
         else:
             print(f"{self.name} has 0hp remaining!")
 
-    def display(self):
-        print("      STATS")
-        print("=================")
-        print("Name:        ", self.name)
-        print("Health:      ", self.health)
-        print("Atk bonus:   ", self.atk)
-        print("Dmg bonus:   ", self.dmg)
-        print("Armor:       ", self.ac)
-
     # normal attack
     def attack(self):
         if self.die_type == 6:
@@ -46,3 +37,12 @@ class Character:
             tmp = random.randint(1, 12)
             tmp2 = random.randint(1, 12)
             return(tmp + tmp2)
+    
+    def display(self):
+        print("      STATS")
+        print("=================")
+        print("Name:        ", self.name)
+        print("Health:      ", self.health)
+        print("Atk bonus:   ", self.atk)
+        print("Dmg bonus:   ", self.dmg)
+        print("Armor:       ", self.ac)

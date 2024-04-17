@@ -20,6 +20,7 @@ class Player(Character):
         self.martial = 0
         self.finesse = 0
         self.arcana = 0
+        self.resolve = 0
 
     def weapons(self):
         weapon_list = [
@@ -31,32 +32,33 @@ class Player(Character):
                     ]
         return random.choice(weapon_list)
     
-    def initialize_weapon(self):
+    def weapon_stats(self):
+        # balancing numbers- martial, finesse, arcana, resolve
         match self.weapon:
             case "Fists":
-                self.martial = 0
-                self.finesse = 0
-                self.arcana = 0
+                return 0, 0, 0, 0
             case "Sentient Shotgun":
-                self.martial = 2
-                self.finesse = 1
-                self.arcana = 0
+                return 2, 1, 0, 0
             case "War Gauntlet":
-                self.martial = 1
-                self.finesse = 2
-                self.arcana = 0
+                return 1, 2, 0, 0
             case "Cleric's Chime":
-                self.martial = 0
-                self.finesse = 1
-                self.arcana = 2
+                return 0, 0, 2, 1
             case "Lifehunt Scythe":
-                self.martial = 1
-                self.finesse = 1
-                self.arcana = 1
+                return 1, 1, 1, 0
             case "Staff of Rot":
-                self.martial = 0
-                self.finesse = 1
-                self.arcana = 2
+                return 1, 0, 2, 0
+    
+    def equip_weapon(self, martial, finesse, arcana, resolve):
+        self.martial += martial
+        self.finesse += finesse
+        self.arcana += arcana
+        self.resolve += resolve
+
+    def unequip_weapon(self, martial, finesse, arcana, resolve):
+        self.martial -= martial
+        self.finesse -= finesse
+        self.arcana -= arcana
+        self.resolve -= resolve
 
     def weapon_atk(self):
         return(super().attack() + self.atk + self.martial)
@@ -111,6 +113,7 @@ class Player(Character):
                 case 1:
                     if self.gold >= 500:    
                         print(f"\n{weapon} equipped!")
+                        self.unequip_weapon(self.weapon_stats()[0], self.weapon_stats()[1], self.weapon_stats()[2], self.weapon_stats[3])
                         self.weapon = weapon
                         self.gold -= 500
                         press_enter()
