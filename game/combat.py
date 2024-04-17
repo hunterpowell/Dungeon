@@ -115,12 +115,11 @@ def fight(player):
         enemy_attack = random.randint(1, 20)
         if (enemy_attack + monster.atk >= player.ac):
             damage = monster.attack() + monster.dmg
-            player.defend(damage)
             print(f"\nEnemy hit for {damage} damage!")
-            print(f"You have {player.health}hp remaining!")
+            player.defend(damage)
         else:
             print("\nEnemy missed!")
-            print(f"You have {player.health}hp remaining!")
+            print(f"{player.name} has {player.health}hp remaining!")
 
 
             
