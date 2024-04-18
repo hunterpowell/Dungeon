@@ -12,10 +12,6 @@ class Character:
     
     def defend(self, damage):
         self.health -= damage
-        if self.health > 0:
-            print(f"{self.name} has {self.health}hp remaining")
-        else:
-            print(f"{self.name} has 0hp remaining")
 
     # normal attack
     def attack(self):
@@ -45,5 +41,7 @@ class Character:
         print("Name:        ", self.name)
         print("Health:      ", self.health)
         print("Accuracy:    ", self.accuracy)
-        print("On hit bonus:", self.on_hit)
+        print("On-hit bonus:", self.on_hit)
         print("Armor:       ", self.ac)
+
+        

@@ -8,8 +8,8 @@ class Boss(Character):
     @classmethod
     def random_boss(cls):
         bosses = [
-            ("THE JUICER", 125, 10, 10, 10),
-            ("THE HOARDER", 200, 0, 5, 10),
+            ("JUICER", 125, 10, 10, 10),
+            ("HOARDER", 200, 0, 5, 10),
             ("BALL OF SWINE", 100, 20, 15, 10),
             ("ASYLUM DEMON", 150, 15, 10, 10)
         ]

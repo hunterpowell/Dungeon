@@ -84,7 +84,6 @@ class Player(Character):
                 healing = (random.randint(1,12) + 60 + self.lvl*self.attunement)
                 print(f"Healing word! You healed for {healing}hp!")
                 self.health += healing
-                print(f"{mob.name} has {mob.health}hp remaining")
             case "Lifehunt Scythe":
                 damage = (super().attack() * 4 + self.on_hit + self.lvl)
                 healing = math.ceil(damage*0.3)
@@ -95,7 +94,6 @@ class Player(Character):
                 damage = (super().attack())
                 print(f"Staff Infection! You've poisoned the enemy!")
                 mob.poisoned = True
-                print(f"{mob.name} has {mob.health}hp remaining")
 
     def buy_weapon(self, weapon):
         clear_screen()
@@ -164,11 +162,9 @@ class Player(Character):
         if (self.scrolls > 0):    
             self.scrolls -= 1
             self.health += 50
-            print("50hp restored!\n"
-                  f"You have {self.health}hp remaining")
+            print("50hp restored!")
         else:
-            print("You are out of healing scrolls! (dumbass)\n"
-                  f"You have {self.health}hp remaining")     
+            print("You are out of healing scrolls! (dumbass)")    
     
     def buy_heals(self, max):
         clear_screen()
@@ -208,16 +204,16 @@ class Player(Character):
 
     def monster_death(self, monster, key, money, max_hp):
         print(f"\nYou beat the {monster.name}!")
-        print(f"You have {self.health}hp remaining!\n")
         # heal by half of overkill
         overkill = (0 - monster.health)//2
         self.health += overkill
         if overkill > 0:
             print(f"You healed for {overkill}hp!")
         self.xp += max_hp
-        print(f"You picked up {money} gold off the corpse!")
+        print(f"You have {self.health}hp remaining.")
+        print(f"You picked up {money} gold off the corpse.")
         self.gold += money
-        print(f"You have earned {max_hp}xp!")
+        print(f"You have earned {max_hp}xp.")
         self.level_up()
         if key == True and self.key == False:
             print("You found a key! You can now descend the stairs when the floor ends.")

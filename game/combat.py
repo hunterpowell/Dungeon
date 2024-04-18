@@ -24,9 +24,11 @@ def fight(player):
     # this is here for XP purposes later
     max_hp = monster.health
 
-    print("\t\t\tCOMBAT\n\t\t----------------------")
+    print("COMBAT".center(40))
+    print("----------------------".center(40))
     print(f"You've run into a {monster.name}!")
     print(f"{monster.name} has {monster.health}hp")
+    print(f"You have {player.health}hp")
     monster.display
 
     while (monster.health > 0) and (player.health > 0):
@@ -45,7 +47,8 @@ def fight(player):
             case 1:
                 
                 clear_screen()
-                print("\t\t\tCOMBAT\n\t\t----------------------")
+                print("COMBAT".center(40))
+                print("----------------------".center(40))
                 # attack roll to determine hit/miss
                 hit = random.randint(1, 20)
                 if (hit + player.accuracy + player.finesse >= monster.ac):
@@ -60,7 +63,6 @@ def fight(player):
 
                 elif (hit + player.accuracy < monster.ac):
                     print("You missed!")
-                    print(f"{monster.name} has {monster.health}hp remaining")
 
                 # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
                 if monster.health <= 0:
@@ -75,14 +77,14 @@ def fight(player):
 
             case 2:
                 clear_screen()
-                print("\t\t\tCOMBAT\n\t\t----------------------")
+                print("COMBAT".center(40))
+                print("----------------------".center(40))
                 # ult
                 if player.weapon_charge == True:
                     player.special_atk(monster)
                     player.weapon_charge = False
                 else:
                     print("You wasted your turn dumbass! You don't have any weapon charges left.")
-                    print(f"Enemy has {monster.health}hp remaining.")
 
                 # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
                 if monster.health <= 0:
@@ -96,7 +98,8 @@ def fight(player):
                 
             case 3: 
                 clear_screen()
-                print("\t\t\tCOMBAT\n\t\t----------------------")
+                print("COMBAT".center(40))
+                print("----------------------".center(40))
                 player.heal()
                 player.is_poisoned(monster)
                 if monster.health <= 0:
@@ -115,11 +118,16 @@ def fight(player):
         enemy_attack = random.randint(1, 20)
         if (enemy_attack + monster.accuracy >= player.ac):
             damage = monster.attack() + monster.on_hit
-            print(f"\nEnemy hit for {damage} damage!")
+            print(f"Enemy hit you for {damage} damage!")
             player.defend(damage)
         else:
-            print("\nEnemy missed!")
-            print(f"{player.name} has {player.health}hp remaining")
+            print("Enemy missed!")
 
+        print("-" * 40)
+        print(f"{player.name} HP - {player.health}".center(40))
+        if monster.health >= 0:
+            print(f"{monster.name} health - {monster.health}".center(40))
+        else:
+            print(f"{monster.name} health - 0".center(40))
+        print("-" * 40)
 
-            

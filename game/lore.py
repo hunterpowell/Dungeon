@@ -92,11 +92,11 @@ def demon_desc():
 
 def monster_lore(mob):
     match mob.name:
-        case "THE JUICER":
+        case "JUICER":
             juicer_desc()
             press_enter()
             clear_screen()
-        case "THE HOARDER":
+        case "HOARDER":
             hoarder_desc()
             press_enter()
             clear_screen()
