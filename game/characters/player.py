@@ -138,10 +138,24 @@ class Player(Character):
             "Life ring",
             "Havel's ring",
             "Knight's ring",
-            "Red tearstone ring",
+            # "Red tearstone ring",
             "Gambler's ",
             "Ring of divine suffering"
         ]
+        return random.choice(ring_list)
+    
+    # def equip_ring(self):
+    #     match self.ring1:
+    #         case "Life ring":
+    #             self.max_hp += 25
+    #         case "Havel's ring":
+    #             self.resolve += 5
+    #         case "Knight's ring":
+    #             self.on_hit += 3
+    #         # case "Red tearstone ring":
+    #         #     do stuff
+    #         case "Gambler's "
+
 
     def inventory(self):
         print("    INVENTORY")

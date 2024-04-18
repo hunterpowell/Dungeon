@@ -10,14 +10,14 @@ def fight(player):
 
     # 20% chance for boss, this chooses random boss and displays description, gives key if defeated
     if rand == 5:
-        monster = Boss.random_boss()
+        monster = Boss.random_boss1()
         money = random.randint(100, 200)
         key = True
         monster_lore(monster)
 
     # 80% chance for random mob, no key!
     else:
-        monster = Mob.random_enemy()
+        monster = Mob.random_enemy1()
         money = random.randint(10, 30)
         key = False
 
@@ -124,7 +124,7 @@ def fight(player):
             print("Enemy missed!")
 
         print("-" * 40)
-        print(f"{player.name} HP - {player.health}".center(40))
+        print(f"{player.name} health - {player.health}".center(40))
         if monster.health >= 0:
             print(f"{monster.name} health - {monster.health}".center(40))
         else:

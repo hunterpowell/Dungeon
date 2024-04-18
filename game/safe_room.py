@@ -4,7 +4,7 @@ def safe(player, day):
 
     # heals to 100hp if less than that, but doesn't erase overhealth
     if player.health < 100:
-        player.health = 100
+        player.health = player.max_hp
     player.weapon_charge = True
     max_heals = 5                   # limits amount of available scrolls per day
 

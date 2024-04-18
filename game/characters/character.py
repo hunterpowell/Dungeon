@@ -4,6 +4,7 @@ class Character:
     def __init__(self, name, health, accuracy, on_hit, ac):
         self.name = name
         self.health = health
+        self.max_hp = health
         self.accuracy = accuracy
         self.on_hit = on_hit
         self.ac = ac
