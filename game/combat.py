@@ -124,9 +124,9 @@ def fight(player):
             print("Enemy missed!")
 
         print("-" * 40)
-        print(f"{player.name} health - {player.health}".center(40))
+        print(f"{player.name} health - {player.health}/{player.max_hp}".center(40))
         if monster.health >= 0:
-            print(f"{monster.name} health - {monster.health}".center(40))
+            print(f"{monster.name} health - {monster.health}/{max_hp}".center(40))
         else:
             print(f"{monster.name} health - 0".center(40))
         print("-" * 40)
