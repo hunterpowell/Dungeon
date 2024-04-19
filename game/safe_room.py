@@ -3,7 +3,7 @@ from utils import clear_screen, press_enter
 def safe(player, day):
 
     # heals to 100hp if less than that, but doesn't erase overhealth
-    if player.health < 100:
+    if player.health < player.max_hp:
         player.health = player.max_hp
     player.weapon_charge = True
     max_heals = 5                   # limits amount of available scrolls per day
@@ -75,6 +75,8 @@ def safe(player, day):
                         
                         case 3:
                             player.buy_ring(ring)
+                            if player.health < player.max_hp:
+                                player.health = player.max_hp
 
                         case 4:
                             clear_screen()

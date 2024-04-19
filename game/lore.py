@@ -177,7 +177,7 @@ def ring_desc(ring):
         case "Life ring":
             print(
                 "Red gem in a black metal band.\n"
-                "Grants +5 to max health."
+                "Grants +25 to max health."
                 )
         case "Havel's ring":
             print(
