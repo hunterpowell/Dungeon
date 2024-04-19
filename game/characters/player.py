@@ -2,16 +2,17 @@ import random
 import math
 from characters.character import Character
 from utils import clear_screen, press_enter 
-from lore import weapon_lore
+from lore import weapon_lore, ring_desc
 
 class Player(Character):
     def __init__(self, name):
         super().__init__(name, health = 100, accuracy = 3, on_hit = 5, ac = 10)
         self.scrolls = 0
-        self.gold = 20
+        self.gold = 50
         self.lvl = 1
         self.xp = 0
         self.key = False
+        self.can_heal = True
         self.ring1 = "None"
         self.ring2 = "None"
         self.job = "<Unassigned>"
@@ -86,8 +87,11 @@ class Player(Character):
                 self.health += healing
             case "Lifehunt Scythe":
                 damage = (super().attack() * 4 + self.on_hit + self.lvl)
-                healing = math.ceil(damage*0.3)
-                print(f"Sanguine Flare! You did {damage} damage, and healed for {healing}hp!")
+                if self.can_heal == True:
+                    healing = math.ceil(damage*0.3)
+                    print(f"Sanguine Flare! You did {damage} damage, and healed for {healing}hp!")
+                else:
+                    print(f"Sanguine Flare! You did {damage} damage")
                 mob.defend(damage)
                 self.health += healing
             case "Staff of Rot":
@@ -138,24 +142,103 @@ class Player(Character):
             "Life ring",
             "Havel's ring",
             "Knight's ring",
-            # "Red tearstone ring",
-            "Gambler's ",
+            "Gambler's token",
             "Ring of divine suffering"
         ]
         return random.choice(ring_list)
     
-    # def equip_ring(self):
-    #     match self.ring1:
-    #         case "Life ring":
-    #             self.max_hp += 25
-    #         case "Havel's ring":
-    #             self.resolve += 5
-    #         case "Knight's ring":
-    #             self.on_hit += 3
-    #         # case "Red tearstone ring":
-    #         #     do stuff
-    #         case "Gambler's "
+    def equip_ring(self, ring):
+        match ring:
+            case "Life ring":
+                self.max_hp += 25
+            case "Havel's ring":
+                self.resolve += 5
+            case "Knight's ring":
+                self.martial += 2
+            case "Gambler's token":
+                self.martial += 3
+                self.finesse -= 3
+            case "Ring of divine suffering":
+                self.can_heal = False
+                self.martial += 5
+                self.finesse += 5
+        
+    def unequip_ring(self, ring):
+        match ring:
+            case "Life ring":
+                self.max_hp -= 25
+            case "Havel's ring":
+                self.resolve -= 5
+            case "Knight's ring":
+                self.martial -= 2
+            case "Gambler's token":
+                self.martial -= 3
+                self.finesse += 3
+            case "Ring of divine suffering":
+                self.can_heal = False
+                self.martial -= 5
+                self.finesse -= 5
 
+    def buy_ring(self, ring):
+        clear_screen()
+        while True:
+            pickup = input(f"You selected {ring}\n"
+                "What would you like to do?\n"
+                "  1. Buy and equip ring\n"
+                "  2. See ring description\n"
+                "  3. Return to shop\n"
+                "Enter here: "
+                )
+            while pickup.isdigit() == False:
+                pickup = input("Please enter a number: ")
+            
+            while pickup != "1" and pickup != "2" and pickup != "3":
+                pickup = input("Please enter a valid number: ")
+            
+            pickup = int(pickup)
+            match pickup:
+                case 1:
+                    if self.gold >= 200:    
+                        if self.ring1 != "None" and self.ring2 != "None":
+                            clear_screen()
+                            print("Both of your ring slots are full. Which ring would you like to replace?")
+                            print(f"  1. {self.ring1}")
+                            print(f"  2. {self.ring2}")
+                            print("  3. Back to menu")
+                            which = input("Enter here: ")
+                            while which != "1" and which != "2" and which != "3" and which != "4":
+                                which = input("Please enter a valid number: ")
+
+                            if which == "1":
+                                self.unequip_ring(self.ring1)
+                                self.ring1 = "None"
+                            elif which == "2":
+                                self.unequip_ring(self.ring2)
+                                self.ring2 = "None"
+                            else:
+                                break
+                        
+                        if self.ring1 == "None":    
+                            self.ring1 = ring
+                            self.equip_ring(ring)
+                        elif self.ring2 == "None":
+                            self.ring2 = ring
+                            self.equip_ring(ring)
+
+                        print(f"{ring} equipped!")
+                        self.gold -= 200
+                        press_enter()
+                        break
+                    else:
+                        print("You can't afford this ring! Skill issue.")
+                        press_enter()
+                        break
+                    
+                case 2:
+                    ring_desc(ring)
+
+                case 3:
+                    break
 
     def inventory(self):
         print("    INVENTORY")
@@ -163,6 +246,8 @@ class Player(Character):
         print("Scrolls:  ", self.scrolls)
         print("Gold:     ", self.gold)
         print("Weapon:   ", self.weapon)
+        print("Ring 1:   ", self.ring1)
+        print("Ring 2:   ", self.ring2)
         print("Key:      ", self.key)
         press_enter()
         clear_screen()
@@ -173,12 +258,15 @@ class Player(Character):
         print("Scrolls:  ", self.scrolls)
 
     def heal(self):
-        if (self.scrolls > 0):    
-            self.scrolls -= 1
-            self.health += 50
-            print("50hp restored!")
+        if self.can_heal == True:
+            if (self.scrolls > 0):    
+                self.scrolls -= 1
+                self.health += 50
+                print("50hp restored!")
+            else:
+                print("You are out of healing scrolls! (dumbass)")
         else:
-            print("You are out of healing scrolls! (dumbass)")    
+            print("You cannot heal!")  
     
     def buy_heals(self, max):
         clear_screen()
@@ -186,7 +274,7 @@ class Player(Character):
         print("----------------------------------------")
         print(f"Current gold: {self.gold}")
         print(f"Scrolls in stock: {max}")
-        heal = input("\nHow many heal scrolls do you want? 100 gold each: ")
+        heal = input("\nHow many heal scrolls do you want? 50 gold each: ")
         while heal.isdigit() == False:
             heal = input("Please enter a valid number: ")
         #putting heal into a new variable as it's cast because of inconsistent behavior when trying heal = int(heal)
@@ -194,11 +282,11 @@ class Player(Character):
         while heal_num > max:
             heal = input(f"There are only {max} left for purchase today.\nTry again:")
             heal_num = int(heal)
-        while (self.gold < (heal_num*100)):
+        while (self.gold < (heal_num*50)):
             heal = input("You can't afford that many. Try again: ")
             heal_num = int(heal)
         else:
-            self.gold -= (heal_num*100)
+            self.gold -= (heal_num*50)
             self.scrolls += heal_num
             max -= heal_num
             print(f"You now have {self.scrolls} scrolls")
@@ -219,7 +307,8 @@ class Player(Character):
     def monster_death(self, monster, key, money, max_hp):
         print(f"\nYou beat the {monster.name}!")
         # heal by half of overkill
-        overkill = (0 - monster.health)//2
+        if self.can_heal == True:    
+            overkill = (0 - monster.health)//2
         self.health += overkill
         if overkill > 0:
             print(f"You healed for {overkill}hp!")

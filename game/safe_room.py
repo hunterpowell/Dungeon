@@ -15,10 +15,10 @@ def safe(player, day):
         if day == 4 and player.key > 0:
             tmp = input("\nFinal moments before descending the stairs to floor 2.\n\n"
                         "What Would you like to do?\n"
-                        "  1. see stats\n"
-                        "  2. check item shop\n"
-                        "  3. see inventory\n"
-                        "  4. leave the room, and descend the stairs\n"
+                        "  1. See stats\n"
+                        "  2. Check item shop\n"
+                        "  3. See inventory\n"
+                        "  4. Leave the room, and descend the stairs\n"
                         "Enter here: ")
             
         elif day == 4 and player.key == 0:
@@ -49,15 +49,15 @@ def safe(player, day):
             # item shop
             case 2:
                 weapon1 = player.weapons()
-                weapon2 = player.weapons()
+                ring = player.rings()
                 while True:
                     clear_screen()
                     print("ITEM SHOP".center(40))
                     print("----------------------------------------")
                     print("Current gold: ", player.gold)
-                    shop = input("  1. Healing scrolls - 100 gold\n"
+                    shop = input("  1. Healing scrolls - 50 gold\n"
                                 f"  2. {weapon1} - 500 gold\n"
-                                f"  3. {weapon2} - 500 gold\n"
+                                f"  3. {ring} - 200 gold\n"
                                 "  4. Leave shop\n"
                                 "Enter here: "
                                 )
@@ -74,7 +74,7 @@ def safe(player, day):
                             player.buy_weapon(weapon1)
                         
                         case 3:
-                            player.buy_weapon(weapon2)
+                            player.buy_ring(ring)
 
                         case 4:
                             clear_screen()

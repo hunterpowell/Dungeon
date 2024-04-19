@@ -60,6 +60,7 @@ def main_loop(player):
             else:
                 player.death()
 
+            #TODO fix this bestie
             tmp = input("Would you like to play again? [y] or [n]: ")
             if tmp == "y":
                 player = Player(player.name)

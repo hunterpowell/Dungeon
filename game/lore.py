@@ -170,3 +170,38 @@ def weapon_lore(weapon):
             staff_desc()
     press_enter()
     clear_screen()
+
+def ring_desc(ring):
+    clear_screen()
+    match ring:
+        case "Life ring":
+            print(
+                "Red gem in a black metal band.\n"
+                "Grants +5 to max health."
+                )
+        case "Havel's ring":
+            print(
+                "Dull grey ring that appears to be made of stone.\n"
+                "Grants +5 to resolve."
+            )
+        case "Knight's ring":
+            print(
+                "Gold ring with the likeness of a knight on it.\n"
+                "Grants +2 to martial ability."
+            )
+        case "Gambler's token":
+            print(
+                "Small poker chip with a grey band hastily attached.\n"
+                "Grants +3 to martial ability.\n"
+                "Grants -3 to finesse."
+            )
+        case "Ring of divine suffering":
+            print(
+                "Ornate ring with a red gem that glimmers with enchantment.\n"
+                "Grants +5 to martial ability.\n"
+                "Grants +5 to finesse.\n"
+                "Removes your ability to heal. (safe room still heals you)"
+            )
+
+    press_enter()
+    clear_screen()
