@@ -7,7 +7,8 @@ from lore import weapon_lore, ring_desc
 class Player(Character):
     def __init__(self, name):
         super().__init__(name, health = 100, accuracy = 3, on_hit = 5, ac = 10)
-        self.scrolls = 0
+        self.potions = 0
+        self.rotpot = 0
         self.gold = 50
         self.lvl = 1
         self.xp = 0
@@ -16,7 +17,8 @@ class Player(Character):
         self.ring1 = "None"
         self.ring2 = "None"
         self.job = "<Unassigned>"
-        self.weapon_charge = True
+        self.max_charges = 1
+        self.weapon_charge = 1
         self.weapon = "Fists"
         self.martial = 0
         self.finesse = 0
@@ -95,8 +97,9 @@ class Player(Character):
                 mob.defend(damage)
                 self.health += healing
             case "Staff of Rot":
-                damage = (super().attack())
-                print(f"Staff Infection! You've poisoned the enemy!")
+                damage = (super().attack() * 2 + self.on_hit + self.martial + self.lvl)
+                print(f"Staff Infection! You did {damage} damage and poisoned the enemy!")
+                mob.defend(damage)
                 mob.poisoned = True
 
     def buy_weapon(self, weapon):
@@ -143,7 +146,8 @@ class Player(Character):
             "Havel's ring",
             "Knight's ring",
             "Gambler's token",
-            "Ring of divine suffering"
+            "Ring of divine suffering",
+            "Duelist's secret"
         ]
         return random.choice(ring_list)
     
@@ -162,6 +166,8 @@ class Player(Character):
                 self.can_heal = False
                 self.martial += 5
                 self.finesse += 5
+            case "Duelist's secret":
+                self.max_charges += 1
         
     def unequip_ring(self, ring):
         match ring:
@@ -178,6 +184,8 @@ class Player(Character):
                 self.can_heal = False
                 self.martial -= 5
                 self.finesse -= 5
+            case "Duelist's secret":
+                self.max_charges -= 1
 
     def buy_ring(self, ring):
         clear_screen()
@@ -243,8 +251,9 @@ class Player(Character):
     def inventory(self):
         print("    INVENTORY")
         print("=================")
-        print("Scrolls:  ", self.scrolls)
         print("Gold:     ", self.gold)
+        print("Potions:  ", self.potions)
+        print("Rot pots: ", self.rotpot)
         print("Weapon:   ", self.weapon)
         print("Ring 1:   ", self.ring1)
         print("Ring 2:   ", self.ring2)
@@ -253,18 +262,17 @@ class Player(Character):
         clear_screen()
     
     def usable_items(self):
-        print("    INVENTORY")
-        print("=================")
-        print("Scrolls:  ", self.scrolls)
+        print("Potions:  ", self.potions)
+        print("Rot pots: ", self.rotpot)
 
     def heal(self):
         if self.can_heal == True:
-            if (self.scrolls > 0):    
-                self.scrolls -= 1
+            if (self.potions > 0):    
+                self.potions -= 1
                 self.health += 50
                 print("50hp restored!")
             else:
-                print("You are out of healing scrolls! (dumbass)")
+                print("You are out of healing potions! (dumbass)")
         else:
             print("You cannot heal!")  
     
@@ -273,8 +281,8 @@ class Player(Character):
         print("ITEM SHOP".center(40))
         print("----------------------------------------")
         print(f"Current gold: {self.gold}")
-        print(f"Scrolls in stock: {max}")
-        heal = input("\nHow many heal scrolls do you want? 50 gold each: ")
+        print(f"potions in stock: {max}")
+        heal = input("\nHow many heal potions do you want? 50 gold each: ")
         while heal.isdigit() == False:
             heal = input("Please enter a valid number: ")
         #putting heal into a new variable as it's cast because of inconsistent behavior when trying heal = int(heal)
@@ -287,9 +295,9 @@ class Player(Character):
             heal_num = int(heal)
         else:
             self.gold -= (heal_num*50)
-            self.scrolls += heal_num
+            self.potions += heal_num
             max -= heal_num
-            print(f"You now have {self.scrolls} scrolls")
+            print(f"You now have {self.potions} potions")
         press_enter()
         clear_screen()
         return max

@@ -150,6 +150,7 @@ def staff_desc():
     print(
         "Staff of Rot. Large staff made of gnarled and twisted wood.\n"
         "Special Attack: Staff Infection. Cloud attack that inflicts poison on the enemy.\n"
+        "Special attack also does 4d6 + on_hit bonus + level"
         "Poison damage per turn: %5 enemy max health + attunment"
     )
 
@@ -202,6 +203,5 @@ def ring_desc(ring):
                 "Grants +5 to finesse.\n"
                 "Removes your ability to heal. (safe room still heals you)"
             )
-
     press_enter()
     clear_screen()

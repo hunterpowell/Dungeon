@@ -17,7 +17,7 @@ def main_loop(player):
             print(f"\t\t\tDay: {day + 1}\n\t\t----------------------")
             where = input("What would you like to do?\n"
                         "  1. Explore\n"
-                        "  2. Use healing scroll\n"
+                        "  2. Use healing potion\n"
                         "  3. Show stats\n"
                         "  4. Check inventory\n"
                         "  5. End the day and go to a safe room\n"

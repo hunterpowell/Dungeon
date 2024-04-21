@@ -5,8 +5,8 @@ def safe(player, day):
     # heals to 100hp if less than that, but doesn't erase overhealth
     if player.health < player.max_hp:
         player.health = player.max_hp
-    player.weapon_charge = True
-    max_heals = 5                   # limits amount of available scrolls per day
+    player.weapon_charge = player.max_charge
+    max_heals = 5                   # limits amount of available potions per day
 
     while True:
         print("SAFE ROOM".center(90))
@@ -55,7 +55,7 @@ def safe(player, day):
                     print("ITEM SHOP".center(40))
                     print("----------------------------------------")
                     print("Current gold: ", player.gold)
-                    shop = input("  1. Healing scrolls - 50 gold\n"
+                    shop = input("  1. Healing potions - 50 gold\n"
                                 f"  2. {weapon1} - 500 gold\n"
                                 f"  3. {ring} - 200 gold\n"
                                 "  4. Leave shop\n"
@@ -81,8 +81,6 @@ def safe(player, day):
                         case 4:
                             clear_screen()
                             break
-
-                    
 
             case 3:
                 player.inventory()

@@ -35,7 +35,7 @@ def fight(player):
         userin = input("\nWhat would you like to do?\n"
                        "  1. Basic attack\n"
                        "  2. Special Attack\n"
-                       "  3. Use healing scroll\n"
+                       "  3. Use item\n"
                        "  4. Run away\n"
                        "Enter here: ")
 
@@ -44,6 +44,7 @@ def fight(player):
         userin = int(userin)
 
         match userin:
+            # basic attack
             case 1:
                 
                 clear_screen()
@@ -74,15 +75,15 @@ def fight(player):
                     player.monster_death(monster, key, money, max_hp)
                     break
 
-
+            # special attack
             case 2:
                 clear_screen()
                 print("COMBAT".center(40))
                 print("----------------------".center(40))
                 # ult
-                if player.weapon_charge == True:
+                if player.weapon_charge >= 1:
                     player.special_atk(monster)
-                    player.weapon_charge = False
+                    player.weapon_charge -= 1
                 else:
                     print("You wasted your turn dumbass! You don't have any weapon charges left.")
 
@@ -96,16 +97,29 @@ def fight(player):
                     player.monster_death(monster, key, money, max_hp)
                     break
                 
+            # use item    
             case 3: 
                 clear_screen()
                 print("COMBAT".center(40))
                 print("----------------------".center(40))
-                player.heal()
-                player.is_poisoned(monster)
-                if monster.health <= 0:
-                    player.monster_death(monster, key, money, max_hp)
-                    break
+                menu = input("What would you like to do?"
+                      f"  1. Drink healing potion ({player.potions} remaining)\n"
+                      f"  2. Throw rot pot ({player.rotpot} remaining)\n"
+                      "Enter here: ")
+                while menu != "1" and menu != "2":
+                    menu = input("Please enter a valid number: ")
 
+                if menu == "1":
+                    player.heal()
+                    player.is_poisoned(monster)
+                    if monster.health <= 0:
+                        player.monster_death(monster, key, money, max_hp)
+                        break
+
+                if menu == "2":
+                    monster.poisoned = True
+
+            # run
             case 4:
                 clear_screen()
                 loss = random.randint(25, 50)

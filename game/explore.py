@@ -1,5 +1,5 @@
 import random
-from utils import press_enter, clear_screen
+from utils import press_enter
 from combat import fight
 from lore import weapon_lore
 
@@ -39,7 +39,8 @@ def explore(player):
                     player.unequip_weapon(player.weapon_stats()[0], player.weapon_stats()[1], player.weapon_stats()[2], player.weapon_stats()[3], player.weapon_stats()[4])
                     player.weapon = weapon
                     player.equip_weapon(player.weapon_stats()[0], player.weapon_stats()[1], player.weapon_stats()[2], player.weapon_stats()[3], player.weapon_stats()[4])
-                    player.weapon_charge = 1
+                    if player.weapon_charge == 0:
+                        player.weapon_charge = 1
                     break
                 
                 case 2:
@@ -48,6 +49,11 @@ def explore(player):
                 case 3:
                     print(f"\n{weapon} discarded. I sure hope you don't regret that in the near future!")
                     break
+
+        while num2 == 3: 
+            print("You found a healing potion!")
+            player.potions += 1
+            print(f"You now have {player.potions} potions.")
 
         else:
             print("You found some loot!")
