@@ -5,12 +5,13 @@ def safe(player, day):
     # heals to 100hp if less than that, but doesn't erase overhealth
     if player.health < player.max_hp:
         player.health = player.max_hp
-    player.weapon_charge = player.max_charge
+    player.weapon_charge = player.max_charges
     max_heals = 5                   # limits amount of available potions per day
+    max_pots = 2
 
     while True:
         print("SAFE ROOM".center(90))
-        print("------------------------------------------------------------------------------------------")
+        print("-" * 90)
         print("Welcome to the safe room. You got a good night's sleep and your health has been restored.")
         if day == 4 and player.key > 0:
             tmp = input("\nFinal moments before descending the stairs to floor 2.\n\n"
@@ -56,13 +57,14 @@ def safe(player, day):
                     print("----------------------------------------")
                     print("Current gold: ", player.gold)
                     shop = input("  1. Healing potions - 50 gold\n"
-                                f"  2. {weapon1} - 500 gold\n"
-                                f"  3. {ring} - 200 gold\n"
-                                "  4. Leave shop\n"
+                                "  2. Rot Pot - 100\n"
+                                f"  3. {weapon1} - 500 gold\n"
+                                f"  4. {ring} - 200 gold\n"
+                                "  5. Leave shop\n"
                                 "Enter here: "
                                 )
                     
-                    while shop != "1" and shop != "2" and shop != "3" and shop != "4":
+                    while shop != "1" and shop != "2" and shop != "3" and shop != "4" and shop != "5":
                         shop = input("Enter a valid number: ")
                     shop = int(shop)
                     
@@ -70,15 +72,18 @@ def safe(player, day):
                         case 1:
                             max_heals = player.buy_heals(max_heals)
 
-                        case 2:
-                            player.buy_weapon(weapon1)
+                        case 2: 
+                            max_pots = player.buy_pot(max_pots)
                         
                         case 3:
+                            player.buy_weapon(weapon1)
+                        
+                        case 4:
                             player.buy_ring(ring)
                             if player.health < player.max_hp:
                                 player.health = player.max_hp
 
-                        case 4:
+                        case 5:
                             clear_screen()
                             break
 

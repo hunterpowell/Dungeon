@@ -18,7 +18,7 @@ class Player(Character):
         self.ring2 = "None"
         self.job = "<Unassigned>"
         self.max_charges = 1
-        self.weapon_charge = 1
+        self.weapon_charges = 1
         self.weapon = "Fists"
         self.martial = 0
         self.finesse = 0
@@ -32,7 +32,7 @@ class Player(Character):
                     "War Gauntlet",
                     "Cleric's Chime",
                     "Lifehunt Scythe",
-                    "Staff of Rot"          #STAFF INFECTION
+                    "Staff of Rot"                  #STAFF INFECTION
                     ]
         return random.choice(weapon_list)
     
@@ -84,7 +84,7 @@ class Player(Character):
                 print(f"Rending Strike! You did {damage} damage!")
                 mob.defend(damage)
             case "Cleric's Chime":
-                healing = (random.randint(1,12) + 60 + self.lvl*self.attunement)
+                healing = (random.randint(1,12) + 60 + self.lvl * self.attunement)
                 print(f"Healing word! You healed for {healing}hp!")
                 self.health += healing
             case "Lifehunt Scythe":
@@ -248,6 +248,31 @@ class Player(Character):
                 case 3:
                     break
 
+    def buy_pot(self, max):
+        clear_screen()
+        print("ITEM SHOP".center(40))
+        print("----------------------------------------")
+        print(f"Current gold: {self.gold}")
+        print(f"Pots in stock: {max}")
+        pot = input("\nHow many pots do you want? 100 gold each: ")
+        while pot.isdigit() == False:
+            pot = input("Please enter a valid number: ")
+        pot_num = int(pot)
+        while pot_num > max:
+            pot = input(f"There are only {max} left for purchase today.\nTry again: ")
+            pot_num = int(pot)
+        while (self.gold < (pot_num*100)):
+            pot = input("You can't afford that many. Try again: ")
+            pot_num = int(pot)
+        else:
+            self.gold -= (pot_num*100)
+            self.rotpot += pot_num
+            max -= pot_num
+            print(f"You now have {self.rotpot} rot pots")
+        press_enter()
+        clear_screen()
+        return max
+
     def inventory(self):
         print("    INVENTORY")
         print("=================")
@@ -288,7 +313,7 @@ class Player(Character):
         #putting heal into a new variable as it's cast because of inconsistent behavior when trying heal = int(heal)
         heal_num = int(heal)
         while heal_num > max:
-            heal = input(f"There are only {max} left for purchase today.\nTry again:")
+            heal = input(f"There are only {max} left for purchase today.\nTry again: ")
             heal_num = int(heal)
         while (self.gold < (heal_num*50)):
             heal = input("You can't afford that many. Try again: ")
@@ -333,7 +358,7 @@ class Player(Character):
 
     def is_poisoned(self, mob):
         if mob.poisoned == True:
-            poison = (mob.health // 20) + self.attunement
+            poison = math.ceil((mob.health / 20) + self.attunement)
             print(f"{mob.name} is poisoned! It took {poison} damage!")
             mob.health -= poison
 

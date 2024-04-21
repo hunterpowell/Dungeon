@@ -60,8 +60,10 @@ def main_loop(player):
             else:
                 player.death()
 
-            #TODO fix this bestie
             tmp = input("Would you like to play again? [y] or [n]: ")
+            tmp = tmp.lower()
+            while tmp != "y" and tmp != "n":
+                tmp = input("Please enter [y] or [n]")
             if tmp == "y":
                 player = Player(player.name)
             else: 

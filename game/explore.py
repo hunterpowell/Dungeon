@@ -50,12 +50,12 @@ def explore(player):
                     print(f"\n{weapon} discarded. I sure hope you don't regret that in the near future!")
                     break
 
-        while num2 == 3: 
+        if num2 == 3: 
             print("You found a healing potion!")
             player.potions += 1
             print(f"You now have {player.potions} potions.")
 
-        else:
+        if num2 == 0 or num2 == 1 or num2 == 2:
             print("You found some loot!")
             money = random.randint(20,50)
             player.gold += money

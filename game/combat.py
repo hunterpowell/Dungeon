@@ -102,7 +102,7 @@ def fight(player):
                 clear_screen()
                 print("COMBAT".center(40))
                 print("----------------------".center(40))
-                menu = input("What would you like to do?"
+                menu = input("What would you like to do?\n"
                       f"  1. Drink healing potion ({player.potions} remaining)\n"
                       f"  2. Throw rot pot ({player.rotpot} remaining)\n"
                       "Enter here: ")
@@ -110,6 +110,9 @@ def fight(player):
                     menu = input("Please enter a valid number: ")
 
                 if menu == "1":
+                    clear_screen()
+                    print("COMBAT".center(40))
+                    print("----------------------".center(40))
                     player.heal()
                     player.is_poisoned(monster)
                     if monster.health <= 0:
@@ -117,7 +120,15 @@ def fight(player):
                         break
 
                 if menu == "2":
-                    monster.poisoned = True
+                    clear_screen()
+                    print("COMBAT".center(40))
+                    print("----------------------".center(40))
+                    
+                    if player.rotpot > 0:
+                        monster.poisoned = True
+                        print(f"{monster.name} has been poisoned!")
+                    else:
+                        print("You are out of rot pots! Way to waste your turn dumbass")
 
             # run
             case 4:
