@@ -147,7 +147,8 @@ class Player(Character):
             "Knight's ring",
             "Gambler's token",
             "Ring of divine suffering",
-            "Duelist's secret"
+            "Duelist's secret",
+            "Arcanist's ring"
         ]
         return random.choice(ring_list)
     
@@ -168,6 +169,8 @@ class Player(Character):
                 self.finesse += 5
             case "Duelist's secret":
                 self.max_charges += 1
+            case "Arcanist's ring":
+                self.arcana += 2
         
     def unequip_ring(self, ring):
         match ring:

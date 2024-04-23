@@ -51,6 +51,7 @@ def safe(player, day):
             case 2:
                 weapon1 = player.weapons()
                 ring = player.rings()
+                ring2 = player.rings()
                 while True:
                     clear_screen()
                     print("ITEM SHOP".center(40))
@@ -60,11 +61,12 @@ def safe(player, day):
                                 "  2. Rot Pot - 100\n"
                                 f"  3. {weapon1} - 500 gold\n"
                                 f"  4. {ring} - 200 gold\n"
-                                "  5. Leave shop\n"
+                                f"  5. {ring2} - 200 gold\n"
+                                "  6. Leave shop\n"
                                 "Enter here: "
                                 )
                     
-                    while shop != "1" and shop != "2" and shop != "3" and shop != "4" and shop != "5":
+                    while shop != "1" and shop != "2" and shop != "3" and shop != "4" and shop != "5" and shop != "6":
                         shop = input("Enter a valid number: ")
                     shop = int(shop)
                     
@@ -82,8 +84,13 @@ def safe(player, day):
                             player.buy_ring(ring)
                             if player.health < player.max_hp:
                                 player.health = player.max_hp
-
+                        
                         case 5:
+                            player.buy_ring(ring2)
+                            if player.health < player.max_hp:
+                                player.health = player.max_hp
+
+                        case 6:
                             clear_screen()
                             break
 
