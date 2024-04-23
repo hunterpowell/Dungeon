@@ -67,9 +67,18 @@ class Player(Character):
         self.resolve -= resolve
 
     def weapon_atk(self):
-        return(super().attack() + self.on_hit + self.martial)
+        damage = (super().attack() + self.on_hit + self.martial)
+        heal = math.ceil(damage * (self.arcana * .05))
+        self.health += heal
+        print(f"You hit for {damage} damage!")
+        if heal > 0:    
+            print(f"You healed for {heal}hp!")
+        else:
+            print("")
+        return damage
     
     def special_atk(self, mob):
+        damage = 0
         match self.weapon:
             case "Fists":
                 damage = (super().attack() * 2 + self.on_hit + self.martial + self.lvl)
@@ -85,13 +94,13 @@ class Player(Character):
                 mob.defend(damage)
             case "Cleric's Chime":
                 healing = (random.randint(1,12) + 60 + self.lvl * self.attunement)
-                print(f"Healing word! You healed for {healing}hp!")
+                print(f"Healing word!")
                 self.health += healing
             case "Lifehunt Scythe":
                 damage = (super().attack() * 4 + self.on_hit + self.lvl)
                 if self.can_heal == True:
                     healing = math.ceil(damage*0.3)
-                    print(f"Sanguine Flare! You did {damage} damage, and healed for {healing}hp!")
+                    print(f"Sanguine Flare! You did {damage} damage")
                 else:
                     print(f"Sanguine Flare! You did {damage} damage")
                 mob.defend(damage)
@@ -101,6 +110,12 @@ class Player(Character):
                 print(f"Staff Infection! You did {damage} damage and poisoned the enemy!")
                 mob.defend(damage)
                 mob.poisoned = True
+        healing += math.ceil(damage * (self.arcana * .05))
+        if healing > 0:    
+            print(f"You healed for {healing}hp!")
+        else:
+            print("")
+        self.health += healing
 
     def buy_weapon(self, weapon):
         clear_screen()
@@ -189,6 +204,8 @@ class Player(Character):
                 self.finesse -= 5
             case "Duelist's secret":
                 self.max_charges -= 1
+            case "Arcanist's ring":
+                self.arcana += 2
 
     def buy_ring(self, ring):
         clear_screen()
@@ -369,6 +386,7 @@ class Player(Character):
         super().display()
         print("Level:       ", self.lvl)
         print("Experience:  ", self.xp)
+        print("Wpn charges: ", self.weapon_charges)
         print("Martial:     ", self.martial)
         print("Finesse:     ", self.finesse)
         print("Attunement:  ", self.attunement)

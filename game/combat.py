@@ -58,12 +58,12 @@ def fight(player):
                         damage = player.crit() + player.on_hit + player.martial
                         print(f"You crititcally hit for {damage} damage!")
                     else:
-                        damage = player.weapon_atk()
-                        print(f"You hit for {damage} damage!")                    
+                        damage = player.weapon_atk()                 
                     monster.defend(damage)
 
                 elif (hit + player.accuracy < monster.ac):
                     print("You missed!")
+                    print("")
 
                 # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
                 if monster.health <= 0:

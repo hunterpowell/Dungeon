@@ -9,6 +9,12 @@ def safe(player, day):
     max_heals = 5                   # limits amount of available potions per day
     max_pots = 2
 
+    weapon1 = player.weapons()
+    ring = player.rings()
+    ring2 = player.rings()
+    while ring2 == ring:
+        ring2 = player.rings()
+
     while True:
         print("SAFE ROOM".center(90))
         print("-" * 90)
@@ -49,9 +55,6 @@ def safe(player, day):
 
             # item shop
             case 2:
-                weapon1 = player.weapons()
-                ring = player.rings()
-                ring2 = player.rings()
                 while True:
                     clear_screen()
                     print("ITEM SHOP".center(40))
