@@ -42,7 +42,7 @@ class Player(Character):
             case "Fists":
                 return 0, 0, 0, 0, 0
             case "Sentient Shotgun":
-                return 2, 1, 0, 0, 0
+                return 2, 0, 1, 0, 0
             case "War Gauntlet":
                 return 1, 2, 0, 0, 0
             case "Cleric's Chime":
@@ -68,6 +68,17 @@ class Player(Character):
 
     def weapon_atk(self):
         damage = (super().attack() + self.on_hit + self.martial)
+        heal = math.ceil(damage * (self.arcana * .05))
+        self.health += heal
+        print(f"You hit for {damage} damage!")
+        if heal > 0:    
+            print(f"You healed for {heal}hp!")
+        else:
+            print("")
+        return damage
+    
+    def weapon_crit(self):
+        damage = (super.crit + self.on_hit + self.martial)
         heal = math.ceil(damage * (self.arcana * .05))
         self.health += heal
         print(f"You hit for {damage} damage!")

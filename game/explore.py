@@ -25,8 +25,6 @@ def explore(player):
                    "  3. Discard weapon\n"
                    "Enter here: "
                 )
-            while pickup.isdigit() == False:
-                pickup = input("Please enter a number: ")
             
             while pickup != "1" and pickup != "2" and pickup != "3":
                 pickup = input("Please enter a valid number: ")
@@ -39,8 +37,8 @@ def explore(player):
                     player.unequip_weapon(player.weapon_stats()[0], player.weapon_stats()[1], player.weapon_stats()[2], player.weapon_stats()[3], player.weapon_stats()[4])
                     player.weapon = weapon
                     player.equip_weapon(player.weapon_stats()[0], player.weapon_stats()[1], player.weapon_stats()[2], player.weapon_stats()[3], player.weapon_stats()[4])
-                    if player.weapon_charge == 0:
-                        player.weapon_charge = 1
+                    if player.weapon_charges == 0:
+                        player.weapon_charges = player.max_charges
                     break
                 
                 case 2:

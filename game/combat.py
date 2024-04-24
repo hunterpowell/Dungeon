@@ -55,8 +55,7 @@ def fight(player):
                 if (hit + player.accuracy + player.finesse >= monster.ac):
                     # crit if nat 20
                     if (hit == 20):
-                        damage = player.crit() + player.on_hit + player.martial
-                        print(f"You crititcally hit for {damage} damage!")
+                        damage = player.weapon_crit()
                     else:
                         damage = player.weapon_atk()                 
                     monster.defend(damage)

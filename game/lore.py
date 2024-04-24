@@ -30,27 +30,54 @@ def introduction():
 
 def combat_rules():
 
-    display_rules = input("Do you want to hear the rules of combat? [y] or [n]: ")
-    while (display_rules != "y") and (display_rules != "n"):
-        display_rules = input("Please enter [y] or [n]: ")
-
-    if display_rules == "y":
+    while True:
         clear_screen()
-        print(
-            "_________________________RULES______________________________\n"
-            "You will survive as long as your health remains above 0.\n"
-            "A mob will die if you deplete their health.\n"
-            "Overkilling a mob will heal you by half the amount you overkill by.\n"
-            "A boss will be denoted by a long description, and a much tougher fight.\n"
-            "Your stats will automatically increase every 5 levels.\n"
-            "Your special attack is weapon dependant and strengthens with levels.\n"
-            "Special attacks can be used once per day\n"
-            "Special attack resets upon picking up a new weapon\n"
-            "You MUST kill at least one boss per floor to acquire a staircase key.\n"
-            "Without a key, you cannot descend and you will die."
-        )
-        press_enter()
-    
+        display = input("What would you like to do?\n"
+                    "  1. Display rules of the dungeon.\n"
+                    "  2. Show brief explanation of stats\n"
+                    "  3. Begin the crawl\n"
+                    "Enter here: "
+                    )
+        while display != "1" and display != "2" and display != "3":
+            display = input("Please enter a valid number: ")
+
+        match display:
+            case "1":
+                clear_screen()
+                print("RULES".center(60))
+                print("-" * 60)
+                print(
+                    "You will survive as long as your health remains above 0.\n"
+                    "A mob will die if you deplete their health.\n"
+                    "Overkilling a mob will heal you by half the amount you overkill by.\n"
+                    "A boss will be denoted by a long description, and a much tougher fight.\n"
+                    "Your special attack is weapon dependant and strengthens with levels.\n"
+                    "Special attacks can be used once per day, this can be increased with items.\n"
+                    "All special attack charges replenish upon picking up a new weapon\n"
+                    "You MUST kill at least one boss per floor to acquire a staircase key.\n"
+                    "Without a key, you cannot descend and you will die."
+                )
+                press_enter()
+            
+            case "2":
+                clear_screen()
+                print("STATS".center(60))
+                print("-" * 60)
+                print(
+                    "Level:       Current player level. Stats automatically increase every 5 levels.\n"
+                    "Wpn charges: Total special attack charges you currently have.\n"
+                    "Martial:     Your martial ability. Increases on-hit damage.\n"
+                    "Finesse:     Your accuracy bonus. Improves attack rolls.\n"
+                    "Attunement:  Your magical prowess. Strengthens healing and status effects.\n"
+                    "Arcana:      A glimpse into the Void. Grants forbidden knowledge, imparting lifesteal.\n"
+                    "Resolve:     Your ability to ignore damage. Reduces incoming damage."
+                )
+                press_enter()
+
+            case "3":
+                clear_screen()
+                break
+
 
 def juicer_desc():
     print("YOU'VE ENCOUNTERED THE JUICER!\n".center(80))
@@ -122,36 +149,41 @@ def shotgun_desc():
         "Sentient Shotgun. It appears to be a full-auto shotgun with an infinite ammo enchantment.\n"
         "Special Attack: Bullet Rain. Sends a frankly comical amount of lead towards the enemy doing massive damage.\n"
         "Special attack damage roll: 10d6 + on_hit bonus + level\n"
-        "You swear you hear something speaking to you every shot, surely it's just your imagination."
+        "Grants +2 to martial ability and +1 to arcana.\n"
+        "You swear you hear something speaking to you every shot, something old and powerful. Surely it's just your imagination."
     )
     
 def gauntlet_desc():
     print(
         "War Gauntlet. A wrist bracer that turns into a spiked gauntlet when the hand is shaped into a fist.\n"
         "Special Attack: Rending Strike. A punch that the monster's grandchildren will feel.\n"
-        "Damage roll: 2d6 + 20 + on_hit bonus + level"
+        "Damage roll: 2d6 + 20 + on_hit bonus + level\n"
+        "Grants +2 to finesse and +1 to martial ability."
     )
 
 def chime_desc():
     print(
         "Cleric's Chime. A small chime impbued with divine energy.\n"
         "Special Attack: Healing Word. Massive spell that heals the caster for a significant amount.\n"
-        "Heal roll: 1d12 + 60 + (2 * level)"
+        "Heal roll: 1d12 + 60 + (2 * level)\n"
+        "Grants +2 to attunement and +1 to resolve."
     )
     
 def scythe_desc():
     print(
         "Lifehunt Scythe. Ethereal scythe with a shimmering red aura.\n"
         "Special Attack: Sanguine Flare. Sweeping attack that heals the attacker for 30% of damage done.\n"
-        "Damage roll: 8d6 + on_hit bonus + level"
+        "Damage roll: 8d6 + on_hit bonus + level\n"
+        "Grants +1 to martial, +1 to finesse, and +1 to arcana."
     )
 
 def staff_desc():
     print(
         "Staff of Rot. Large staff made of gnarled and twisted wood.\n"
         "Special Attack: Staff Infection. Cloud attack that inflicts poison on the enemy.\n"
-        "Special attack also does 4d6 + on_hit bonus + level"
-        "Poison damage per turn: %5 enemy max health + attunment"
+        "Special attack also does 4d6 + on_hit bonus + level\n"
+        "Poison damage per turn: %5 enemy max health + attunment\n"
+        "Grants +1 to martial ability and +2 to attunement"
     )
 
 def weapon_lore(weapon):
@@ -202,6 +234,18 @@ def ring_desc(ring):
                 "Grants +5 to martial ability.\n"
                 "Grants +5 to finesse.\n"
                 "Removes your ability to heal. (safe room still heals you)"
+            )
+        case "Duelist's secret":
+            print(
+                "Small emblem portraying two crossed daggers.\n"
+                "Grants +1 weapon charge.\n"
+                "This does stack with other items that grant extra weapon charges."
+            )
+        case "Arcanist's ring":
+            print(
+                "Plain red band with an ever-moving smoky pattern.\n"
+                "Grants +2 to arcana.\n"
+                "You swear you can see a glimpse of something much bigger than yourself..."
             )
     press_enter()
     clear_screen()
