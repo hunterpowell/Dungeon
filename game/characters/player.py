@@ -67,7 +67,7 @@ class Player(Character):
         self.resolve -= resolve
 
     def weapon_atk(self):
-        damage = (super().attack() + self.on_hit + self.martial)
+        damage = (super().attack() + self.martial)
         heal = math.ceil(damage * (self.arcana * .05))
         self.health += heal
         print(f"You hit for {damage} damage!")
@@ -78,7 +78,7 @@ class Player(Character):
         return damage
     
     def weapon_crit(self):
-        damage = (super.crit + self.on_hit + self.martial)
+        damage = (super().crit() + self.martial)
         heal = math.ceil(damage * (self.arcana * .05))
         self.health += heal
         print(f"You hit for {damage} damage!")
@@ -92,15 +92,15 @@ class Player(Character):
         damage = 0
         match self.weapon:
             case "Fists":
-                damage = (super().attack() * 2 + self.on_hit + self.martial + self.lvl)
+                damage = (super().attack() * 2 + self.martial + self.lvl)
                 print(f"Flurry of blows! You did {damage} damage!")
                 mob.defend(damage)
             case "Sentient Shotgun":
-                damage = (super().attack() * 5 + self.on_hit + self.martial + self.lvl)
+                damage = (super().attack() * 5 + self.martial + self.lvl)
                 print(f"Bullet rain! You did {damage} damage!")
                 mob.defend(damage)
             case "War Gauntlet":
-                damage = (super().attack() + 20 + self.on_hit + self.martial + self.lvl)
+                damage = (super().attack() + 20 + self.martial + self.lvl)
                 print(f"Rending Strike! You did {damage} damage!")
                 mob.defend(damage)
             case "Cleric's Chime":
@@ -108,7 +108,7 @@ class Player(Character):
                 print(f"Healing word!")
                 self.health += healing
             case "Lifehunt Scythe":
-                damage = (super().attack() * 4 + self.on_hit + self.lvl)
+                damage = (super().attack() * 4 + self.lvl)
                 if self.can_heal == True:
                     healing = math.ceil(damage*0.3)
                     print(f"Sanguine Flare! You did {damage} damage")
@@ -117,7 +117,7 @@ class Player(Character):
                 mob.defend(damage)
                 self.health += healing
             case "Staff of Rot":
-                damage = (super().attack() * 2 + self.on_hit + self.martial + self.lvl)
+                damage = (super().attack() * 2 + self.martial + self.lvl)
                 print(f"Staff Infection! You did {damage} damage and poisoned the enemy!")
                 mob.defend(damage)
                 mob.poisoned = True
@@ -195,6 +195,7 @@ class Player(Character):
                 self.finesse += 5
             case "Duelist's secret":
                 self.max_charges += 1
+                self.weapon_charges = self.max_charges
             case "Arcanist's ring":
                 self.arcana += 2
         

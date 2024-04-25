@@ -141,7 +141,7 @@ def fight(player):
         # enemy attacks
         enemy_attack = random.randint(1, 20)
         if (enemy_attack + monster.accuracy >= player.ac):
-            damage = monster.attack() + monster.on_hit
+            damage = monster.attack() - player.resolve
             print(f"Enemy hit you for {damage} damage!")
             player.defend(damage)
         else:
