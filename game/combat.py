@@ -57,7 +57,7 @@ def fight(player):
                     if (hit == 20):
                         damage = player.weapon_crit()
                     else:
-                        damage = player.weapon_atk()                 
+                        damage = player.weapon_atk()
                     monster.defend(damage)
 
                 elif (hit + player.accuracy < monster.ac):
