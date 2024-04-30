@@ -1,4 +1,5 @@
 import random
+import math
 
 class Character:
     def __init__(self, name, health, accuracy, on_hit, ac):
@@ -46,3 +47,8 @@ class Character:
         print("Armor:       ", self.ac)
 
         
+    def is_poisoned(self, opponent):
+        if self.poisoned == True:
+            poison = math.ceil((self.health / 20) + opponent.attunement)
+            print(f"{self.name} is poisoned! It took {poison} damage!")
+            self.health -= poison

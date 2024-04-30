@@ -117,6 +117,39 @@ def demon_desc():
     print(textwrap.fill(demon, 80))
     print(textwrap.fill(demon2, 80))
 
+
+def ralph_desc():
+    print("YOU'VE ENCOUNTERED RALPH\n".center(80))
+    ralph = ("Part earth rodent, part the embodiment of death, Frenzied Gerbils are regular mobs one might encounter on the fifth or seventh floors. But Ralph here is special. He has dedicated his existence to fighting and training in hopes that one day he might exact his revenge against the humans he so despises.")
+    ralph2 = ("He is fast, he is angry, and by the time you're done reading this, he's already halfway to your jugular.")
+    print(textwrap.fill(ralph, 80))
+    print(textwrap.fill(ralph2, 80))
+
+
+def krakaren_desc():
+    print("YOU'VE ENCOUNTERED A KRAKAREN\n".center(80))
+    krak = ("Part of a collective mind intent upon destroying any semblance of scientific progress in the universe, the Krakaren is the only communal brain entity in the galaxy who actually gets stupider as time moves on.")
+    krak2 = ("A writhing mass of tentacles covered it shrieking mouths, and far to many eyes, a Krakaren is shockingly hard to kill.")
+    print(textwrap.fill(krak, 80))
+    print(textwrap.fill(krak2, 80))
+
+
+def capra_desc():
+    print("YOU'VE ENCOUNTERED A CAPRA DEMON\n".center(80))
+    cap = ("When it's not busy ruining your day in the cramped quarters of its lair, it's probably watching reruns of \"How to be a Menace 101.\" Seriously, this demon's idea of interior decorating is just piles of discarded weapons and the occasional adventurer's remains.")
+    cap2 = ("In contrast to its asylum cousin, the capra demon is lean and muscular, sporting a skeletal head and a massive cleaver in either hand.")
+    print(textwrap.fill(cap, 80))
+    print(textwrap.fill(cap2, 80))
+
+
+def garg_desc():
+    print("YOU'VE ENCOUNTERED A BELL GARGOYLE\n".center(80))
+    garg = ("If you've ever wanted to meet a creature that's part stone statue, part flying nightmare, then the Bell Gargoyle is your dream come true. Picture this: you're strolling through a picturesque medieval cityscape, enjoying the architecture, when suddenly, BAM! You're face-to-face with a hulking, winged beast that looks like it's been hitting the gym since the Middle Ages.")
+    garg2 = ("It's lucky for you that you're only fighting one of these guys. Brandishing long halberds and bad attitudes, they often fight in packs ranging anywhere from two to eighty-nine members.")
+    print(textwrap.fill(garg, 80))
+    print(textwrap.fill(garg2, 80))
+
+
 def monster_lore(mob):
     match mob.name:
         case "JUICER":
@@ -135,7 +168,22 @@ def monster_lore(mob):
             demon_desc()
             press_enter()
             clear_screen()
-
+        case "RALPH":
+            ralph_desc()
+            press_enter()
+            clear_screen()
+        case "KRAKAREN":
+            krakaren_desc()
+            press_enter()
+            clear_screen()
+        case "CAPRA DEMON":
+            capra_desc()
+            press_enter()
+            clear_screen()
+        case "BELL GARGOYLE":
+            garg_desc()
+            press_enter()
+            clear_screen()
 
 def fist_desc():
     print(
@@ -245,7 +293,7 @@ def ring_desc(ring):
             print(
                 "Plain red band with an ever-moving smoky pattern.\n"
                 "Grants +2 to arcana.\n"
-                "You swear you can see a glimpse of something much bigger than yourself..."
+                "You swear you can see a glimpse of something swirling within the smoky tendrils..."
             )
     press_enter()
     clear_screen()

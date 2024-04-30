@@ -14,17 +14,18 @@ class Player(Character):
         self.xp = 0
         self.key = False
         self.can_heal = True
+        self.job = "<Unassigned>"
         self.ring1 = "None"
         self.ring2 = "None"
-        self.job = "<Unassigned>"
+        self.weapon = "Fists"
         self.max_charges = 1
         self.weapon_charges = 1
-        self.weapon = "Fists"
         self.martial = 0
         self.finesse = 0
         self.arcana = 0
         self.attunement = 0
         self.resolve = 0
+        self.floor = 1
 
     def weapons(self):
         weapon_list = [
@@ -387,12 +388,6 @@ class Player(Character):
             print("You found a key! You can now descend the stairs when the floor ends.")
             self.key = key
         press_enter()
-
-    def is_poisoned(self, mob):
-        if mob.poisoned == True:
-            poison = math.ceil((mob.health / 20) + self.attunement)
-            print(f"{mob.name} is poisoned! It took {poison} damage!")
-            mob.health -= poison
 
     def display_player(self):
         super().display()

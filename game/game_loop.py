@@ -5,7 +5,6 @@ from explore import explore
 
 def main_loop(player):
     
-    floor = 1
     while True:
         # psuedo-godmode if player name is Admin
         if player.name == "Admin":
@@ -31,7 +30,7 @@ def main_loop(player):
                 # explore
                 case 1:
                     clear_screen()
-                    explore(player, floor)
+                    explore(player)
                 
                 # heal
                 case 2:
@@ -51,13 +50,13 @@ def main_loop(player):
                 # safe room
                 case 5:
                     clear_screen()
-                    safe(player)
+                    safe(player, day)
                     day += 1
         
         if player.health > 0:
             print("You've descended the stairs! Congrats!                           (still a bitch tho)")
-            floor = 2
-            day = 1
+            player.floor = 2
+            day = 0
             player.display_player()
         else:
             player.death()

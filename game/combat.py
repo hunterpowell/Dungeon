@@ -4,16 +4,16 @@ from characters.mob import Mob
 from characters.boss import Boss
 from lore import monster_lore
 
-def fight(player, floor):
+def fight(player):
     
     rand = random.randint(1, 5)
 
     # 20% chance for boss, this chooses random boss and displays description, gives key if defeated
     if rand == 5:
-        if floor == 1 :
+        if player.floor == 1 :
             monster = Boss.random_boss1()
             money = random.randint(100, 200)
-        elif floor == 2:
+        elif player.floor == 2:
             monster = Boss.random_boss2()
             money = random.randint(200, 300)
         key = True
@@ -21,10 +21,10 @@ def fight(player, floor):
 
     # 80% chance for random mob, no key!
     else:
-        if floor == 1:
+        if player.floor == 1:
             monster = Mob.random_enemy1()
             money = random.randint(10, 30)
-        elif floor == 2:
+        elif player.floor == 2:
             monster = Mob.random_enemy2()
             money = random.randint(20, 60)
         key = False
@@ -77,7 +77,7 @@ def fight(player, floor):
                     player.monster_death(monster, key, money, max_hp)
                     break
                 
-                player.is_poisoned(monster)
+                monster.is_poisoned(player)
                 if monster.health <= 0:
                     player.monster_death(monster, key, money, max_hp)
                     break
@@ -99,7 +99,7 @@ def fight(player, floor):
                     player.monster_death(monster, key, money, max_hp)
                     break
                 
-                player.is_poisoned(monster)
+                monster.is_poisoned(player)
                 if monster.health <= 0:
                     player.monster_death(monster, key, money, max_hp)
                     break
@@ -121,7 +121,7 @@ def fight(player, floor):
                     print("COMBAT".center(40))
                     print("----------------------".center(40))
                     player.heal()
-                    player.is_poisoned(monster)
+                    monster.is_poisoned(player)
                     if monster.health <= 0:
                         player.monster_death(monster, key, money, max_hp)
                         break

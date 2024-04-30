@@ -4,12 +4,12 @@ from combat import fight
 from lore import weapon_lore
 
 
-def explore(player, floor):
+def explore(player):
     
     num = random.randint(0,3)
 
     if (num <= 2):
-        fight(player, floor)
+        fight(player)
     
     else:
         
