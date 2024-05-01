@@ -25,13 +25,18 @@ def introduction():
         print(textwrap.fill(intro, 80))
         
     name = input("What is your name? ")
+    clear_screen()
     return name
 
+
+def intro2():
+    tmp = "You've arrived on the second floor of the World Dungeon. In contrast to the dull greys of the first level, the floors here are white, and the walls are a porous grey stone. There is glowing lichen covering much of the ceiling and walls."
+    print(textwrap.fill(tmp, 80))
+    combat_rules()
 
 def combat_rules():
 
     while True:
-        clear_screen()
         display = input("What would you like to do?\n"
                     "  1. Display rules of the dungeon.\n"
                     "  2. Show brief explanation of stats\n"
@@ -297,3 +302,40 @@ def ring_desc(ring):
             )
     press_enter()
     clear_screen()
+
+def armor_desc(armor):
+    match armor:
+        case "Chainmail Breasplate":
+            print(
+                "Basic chainmail chestplate.\n"
+                "Grants +3 to resolve.\n"
+            )
+        case "Enchanted Trollskin Shirt of Pummeling":
+            print(
+                "Form fitted short-sleeve shirt made of trollskin.\n"
+                "Grants +3 to martial ability\n"
+                "Grants +1 to resolve."
+            )
+        case "Cloak of Obscurity":
+            print(
+                "Semi-transparent cloak designed to make you harder to hit.\n"
+                "Grants +5 to armor class."
+            )
+        case "Mithril Shirt":
+            print(
+                "Light chestpiece made of interlocking rings of shimmering white metal.\n"
+                "Grants +3 to resolve.\n"
+                "Grants +2 to armor class.\n"
+            )
+        case "Enchanted Suspenders of Suspension":
+            print(
+                "Who said suspenders aren't cool?\n"
+                "These allow you to suspend the rules of the game and use two additional weapon charge every day.\n"
+            )
+        case "Living Armor":
+            print(
+                "Plain, but solid looking armor with an unmistakable glow.\n"
+                "Grants +2 to resolve.\n"
+                "Grants +3 to arcana.\n"
+                "There's talk that living armor sustains itself on the blood of the wearer. Surely it's just a rumor"
+            )

@@ -18,6 +18,7 @@ class Player(Character):
         self.ring1 = "None"
         self.ring2 = "None"
         self.weapon = "Fists"
+        self.armor = "None"
         self.max_charges = 1
         self.weapon_charges = 1
         self.martial = 0
@@ -74,8 +75,6 @@ class Player(Character):
         print(f"You hit for {damage} damage!")
         if heal > 0:    
             print(f"You healed for {heal}hp!")
-        else:
-            print("")
         return damage
     
     def weapon_crit(self):
@@ -85,48 +84,42 @@ class Player(Character):
         print(f"You hit for {damage} damage!")
         if heal > 0:    
             print(f"You healed for {heal}hp!")
-        else:
-            print("")
         return damage
     
     def special_atk(self, mob):
         damage = 0
+        healing = 0
         match self.weapon:
             case "Fists":
-                damage = (super().attack() * 2 + self.martial + self.lvl)
-                print(f"Flurry of blows! You did {damage} damage!")
+                damage = (super().attack() * 2 + self.on_hit + self.martial + self.lvl)
+                print(f"Flurry of Blows! You did {damage} damage!")
                 mob.defend(damage)
             case "Sentient Shotgun":
-                damage = (super().attack() * 5 + self.martial + self.lvl)
-                print(f"Bullet rain! You did {damage} damage!")
+                damage = (super().attack() * 5 + self.on_hit + self.martial + self.lvl)
+                print(f"Bullet Rain! You did {damage} damage!")
                 mob.defend(damage)
             case "War Gauntlet":
-                damage = (super().attack() + 20 + self.martial + self.lvl)
+                damage = (super().attack() + 20 + self.on_hit + self.martial + self.lvl)
                 print(f"Rending Strike! You did {damage} damage!")
                 mob.defend(damage)
             case "Cleric's Chime":
                 healing = (random.randint(1,12) + 60 + self.lvl * self.attunement)
-                print(f"Healing word!")
-                self.health += healing
+                print(f"Healing Word!")
             case "Lifehunt Scythe":
-                damage = (super().attack() * 4 + self.lvl)
+                damage = (super().attack() * 4 + self.on_hit + self.martial + self.lvl)
                 if self.can_heal == True:
                     healing = math.ceil(damage*0.3)
-                    print(f"Sanguine Flare! You did {damage} damage")
-                else:
                     print(f"Sanguine Flare! You did {damage} damage")
                 mob.defend(damage)
                 self.health += healing
             case "Staff of Rot":
-                damage = (super().attack() * 2 + self.martial + self.lvl)
+                damage = (super().attack() * 2 + self.on_hit + self.martial + self.lvl)
                 print(f"Staff Infection! You did {damage} damage and poisoned the enemy!")
                 mob.defend(damage)
                 mob.poisoned = True
         healing += math.ceil(damage * (self.arcana * .05))
         if healing > 0:    
             print(f"You healed for {healing}hp!")
-        else:
-            print("")
         self.health += healing
 
     def buy_weapon(self, weapon):
@@ -281,6 +274,59 @@ class Player(Character):
                 case 3:
                     break
 
+    def armors(self):
+        armor_list = [
+                    "Chainmail Breastplate",
+                    "Enchanted Trollskin Shirt of Pummeling",
+                    "Cloak of Obscurity",
+                    "Mithril Shirt",
+                    "Enchanted Suspenders of Suspension",
+                    "Living Armor"
+                    ]
+        return random.choice(armor_list)
+
+    def equip_armor(self, armor):
+        match armor:
+            case "Chainmail Breastplate":
+                self.resolve += 3
+            case "Enchanted Trollskin Shirt of Pummeling":
+                self.resolve += 1
+                self.martial += 3
+            case "Cloak of Obscurity":
+                self.ac += 5
+            case "Mithril Shirt":
+                self.resolve += 3
+                self.ac += 2
+            case "Enchanted Suspenders of Suspension":
+                self.max_charges += 2
+            case "Living Armor":
+                self.resolve += 2
+                self.arcana += 3
+
+    def unequip_armor(self, armor):
+        match armor:
+            case "Chainmail Breastplate":
+                self.resolve -= 3
+            case "Enchanted Trollskin Shirt of Pummeling":
+                self.resolve -= 1
+                self.martial -= 3
+            case "Cloak of Obscurity":
+                self.ac -= 5
+            case "Mithril Shirt":
+                self.resolve -= 3
+                self.ac -= 2
+            case "Enchanted Suspenders of Suspension":
+                self.max_charges -= 2
+            case "Living Armor":
+                self.resolve -= 2
+                self.arcana -= 3
+
+    def hats(self, hat):
+        hat_list = [
+                "Sage's Big Hat",
+                ""  
+                ]
+
     def buy_pot(self, max):
         clear_screen()
         print("ITEM SHOP".center(40))
@@ -315,6 +361,7 @@ class Player(Character):
         print("Weapon:   ", self.weapon)
         print("Ring 1:   ", self.ring1)
         print("Ring 2:   ", self.ring2)
+        print("Armor:    ", self.armor)
         print("Key:      ", self.key)
         press_enter()
         clear_screen()

@@ -70,7 +70,6 @@ def fight(player):
 
                 elif (hit + player.accuracy < monster.ac):
                     print("You missed!")
-                    print("")
 
                 # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
                 if monster.health <= 0:
@@ -88,7 +87,7 @@ def fight(player):
                 print("COMBAT".center(40))
                 print("----------------------".center(40))
                 # ult
-                if player.weapon_charge >= 1:
+                if player.weapon_charges >= 1:
                     player.special_atk(monster)
                     player.weapon_charge -= 1
                 else:
@@ -98,7 +97,6 @@ def fight(player):
                 if monster.health <= 0:
                     player.monster_death(monster, key, money, max_hp)
                     break
-                
                 monster.is_poisoned(player)
                 if monster.health <= 0:
                     player.monster_death(monster, key, money, max_hp)
@@ -110,9 +108,9 @@ def fight(player):
                 print("COMBAT".center(40))
                 print("----------------------".center(40))
                 menu = input("What would you like to do?\n"
-                      f"  1. Drink healing potion ({player.potions} remaining)\n"
-                      f"  2. Throw rot pot ({player.rotpot} remaining)\n"
-                      "Enter here: ")
+                    f"  1. Drink healing potion ({player.potions} remaining)\n"
+                    f"  2. Throw rot pot ({player.rotpot} remaining)\n"
+                    "Enter here: ")
                 while menu != "1" and menu != "2":
                     menu = input("Please enter a valid number: ")
 
