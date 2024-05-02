@@ -19,6 +19,8 @@ class Player(Character):
         self.ring2 = "None"
         self.weapon = "Fists"
         self.armor = "None"
+        self.action = 1
+        self.max_actions = 1
         self.max_charges = 1
         self.weapon_charges = 1
         self.martial = 0

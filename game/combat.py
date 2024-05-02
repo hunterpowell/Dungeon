@@ -40,110 +40,124 @@ def fight(player):
     monster.display
 
     while (monster.health > 0) and (player.health > 0):
-        userin = input("\nWhat would you like to do?\n"
-                       "  1. Basic attack\n"
-                       "  2. Special Attack\n"
-                       "  3. Use item\n"
-                       "  4. Run away\n"
-                       "Enter here: ")
+        player.action = player.max_actions
+        while player.action > 0:
+            
+            userin = input("\nWhat would you like to do?\n"
+                        "  1. Basic attack\n"
+                        "  2. Special Attack\n"
+                        "  3. Use item\n"
+                        "  4. Run away\n"
+                        "Enter here: ")
 
-        while (userin != "1") and (userin != "2") and (userin != "3") and (userin != "4"):
-            userin = input("Please enter a valid number: ")
-        userin = int(userin)
+            while (userin != "1") and (userin != "2") and (userin != "3") and (userin != "4"):
+                userin = input("Please enter a valid number: ")
+            userin = int(userin)
 
-        match userin:
-            # basic attack
-            case 1:
-                
-                clear_screen()
-                print("COMBAT".center(40))
-                print("----------------------".center(40))
-                # attack roll to determine hit/miss
-                hit = random.randint(1, 20)
-                if (hit + player.accuracy + player.finesse >= monster.ac):
-                    # crit if nat 20
-                    if (hit == 20):
-                        damage = player.weapon_crit()
-                    else:
-                        damage = player.weapon_atk()
-                    monster.defend(damage)
-
-                elif (hit + player.accuracy < monster.ac):
-                    print("You missed!")
-
-                # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
-                if monster.health <= 0:
-                    player.monster_death(monster, key, money, max_hp)
-                    break
-                
-                monster.is_poisoned(player)
-                if monster.health <= 0:
-                    player.monster_death(monster, key, money, max_hp)
-                    break
-
-            # special attack
-            case 2:
-                clear_screen()
-                print("COMBAT".center(40))
-                print("----------------------".center(40))
-                # ult
-                if player.weapon_charges >= 1:
-                    player.special_atk(monster)
-                    player.weapon_charge -= 1
-                else:
-                    print("You wasted your turn dumbass! You don't have any weapon charges left.")
-
-                # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
-                if monster.health <= 0:
-                    player.monster_death(monster, key, money, max_hp)
-                    break
-                monster.is_poisoned(player)
-                if monster.health <= 0:
-                    player.monster_death(monster, key, money, max_hp)
-                    break
-                
-            # use item    
-            case 3: 
-                clear_screen()
-                print("COMBAT".center(40))
-                print("----------------------".center(40))
-                menu = input("What would you like to do?\n"
-                    f"  1. Drink healing potion ({player.potions} remaining)\n"
-                    f"  2. Throw rot pot ({player.rotpot} remaining)\n"
-                    "Enter here: ")
-                while menu != "1" and menu != "2":
-                    menu = input("Please enter a valid number: ")
-
-                if menu == "1":
-                    clear_screen()
-                    print("COMBAT".center(40))
-                    print("----------------------".center(40))
-                    player.heal()
-                    monster.is_poisoned(player)
-                    if monster.health <= 0:
-                        player.monster_death(monster, key, money, max_hp)
-                        break
-
-                if menu == "2":
-                    clear_screen()
-                    print("COMBAT".center(40))
-                    print("----------------------".center(40))
+            match userin:
+                # basic attack
+                case 1:
                     
-                    if player.rotpot > 0:
-                        monster.poisoned = True
-                        print(f"{monster.name} has been poisoned!")
+                    clear_screen()
+                    print("COMBAT".center(40))
+                    print("----------------------".center(40))
+                    # attack roll to determine hit/miss
+                    hit = random.randint(1, 20)
+                    if (hit + player.accuracy + player.finesse >= monster.ac):
+                        # crit if nat 20
+                        if (hit == 20):
+                            damage = player.weapon_crit()
+                        else:
+                            damage = player.weapon_atk()
+                        monster.defend(damage)
+
+                    elif (hit + player.accuracy < monster.ac):
+                        print("You missed!")
+
+                    player.action -= 1
+
+                # special attack
+                case 2:
+                    clear_screen()
+                    print("COMBAT".center(40))
+                    print("----------------------".center(40))
+                    # ult
+                    if player.weapon_charges >= 1:
+                        player.special_atk(monster)
+                        player.weapon_charge -= 1
                     else:
-                        print("You are out of rot pots! Way to waste your turn dumbass")
+                        print("You wasted your turn dumbass! You don't have any weapon charges left.")
+                    player.action -= 1
 
-            # run
-            case 4:
-                clear_screen()
-                loss = random.randint(25, 50)
-                print(f"You ran away! You dropped {loss} gold on the way out.                (bitch)\n")
-                player.gold -= loss
-                press_enter()
-                break
+                # use item    
+                case 3: 
+                    while True:
+                        clear_screen()
+                        print("COMBAT".center(40))
+                        print("----------------------".center(40))
+                        menu = input("What would you like to do?\n"
+                            f"  1. Drink healing potion ({player.potions} remaining)\n"
+                            f"  2. Throw rot pot ({player.rotpot} remaining)\n"
+                            "  3. Back to combat menu\n"
+                            "Enter here: ")
+                        while menu != "1" and menu != "2" and menu != "3":
+                            menu = input("Please enter a valid number: ")
 
+                        match menu:
+                            case "1":
+                                clear_screen()
+                                print("COMBAT".center(40))
+                                print("----------------------".center(40))
+                                player.heal()
+                                player.action -= 1
+                                break
+
+                            case "2":
+                                clear_screen()
+                                print("COMBAT".center(40))
+                                print("----------------------".center(40))
+                                
+                                if player.rotpot > 0:
+                                    monster.poisoned = True
+                                    print(f"{monster.name} has been poisoned!")
+                                else:
+                                    print("You are out of rot pots! Way to waste your turn dumbass")
+                                player.action -= 1
+                                break
+
+                            case "3":
+                                clear_screen()
+                                print("COMBAT".center(40))
+                                print("----------------------".center(40))
+                                print("-" * 40)
+                                print(f"{player.name} health - {player.health}/{player.max_hp}".center(40))
+                                print(f"{monster.name} health - {monster.health}/{max_hp}".center(40))
+                                print("-" * 40)
+                                break
+
+                # run
+                case 4:
+                    clear_screen()
+                    loss = random.randint(25, 50)
+                    print(f"You ran away! You dropped {loss} gold on the way out.                (bitch)\n")
+                    player.gold -= loss
+                    press_enter()
+                    break
+
+        if userin == 4:
+            break
+
+        # do stuff if monster dies, heal by overkill, get gold, add xp, check for level up
+        # check if dead before poison so hp doesn't go negative
+        if monster.health <= 0:
+            player.monster_death(monster, key, money, max_hp)
+            break
+        # poison proc, check if it kills
+        monster.is_poisoned(player)
+        if monster.health <= 0:
+            player.monster_death(monster, key, money, max_hp)
+            break
+        
         # enemy attacks
         enemy_attack = random.randint(1, 20)
         if (enemy_attack + monster.accuracy >= player.ac):
@@ -153,11 +167,12 @@ def fight(player):
         else:
             print("Enemy missed!")
 
+        # cute lil hp display
         print("-" * 40)
         print(f"{player.name} health - {player.health}/{player.max_hp}".center(40))
         if monster.health >= 0:
             print(f"{monster.name} health - {monster.health}/{max_hp}".center(40))
         else:
-            print(f"{monster.name} health - 0".center(40))
+            print(f"{monster.name} health - 0/{max_hp}".center(40))
         print("-" * 40)
 
