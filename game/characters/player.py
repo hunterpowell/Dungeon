@@ -2,7 +2,7 @@ import random
 import math
 from characters.character import Character
 from utils import clear_screen, press_enter 
-from lore import weapon_lore, ring_desc
+from lore import weapon_lore, ring_desc, armor_desc
 
 class Player(Character):
     def __init__(self, name):
@@ -36,7 +36,8 @@ class Player(Character):
                     "War Gauntlet",
                     "Cleric's Chime",
                     "Lifehunt Scythe",
-                    "Staff of Rot"                  #STAFF INFECTION
+                    "Staff of Rot",                  #STAFF INFECTION
+                    "Hammer of Mithrix"
                     ]
         return random.choice(weapon_list)
     
@@ -52,9 +53,11 @@ class Player(Character):
             case "Cleric's Chime":
                 return 0, 0, 0, 2, 1
             case "Lifehunt Scythe":
-                return 1, 1, 1, 0, 0
+                return 0, 1, 2, 0, 0
             case "Staff of Rot":
                 return 1, 0, 0, 2, 0
+            case "Hammer of Mithrix":
+                return 3, 0, 0, 0, 1
     
     def equip_weapon(self, martial, finesse, arcana, attunement, resolve):
         self.martial += martial
@@ -119,6 +122,10 @@ class Player(Character):
                 print(f"Staff Infection! You did {damage} damage and poisoned the enemy!")
                 mob.defend(damage)
                 mob.poisoned = True
+            case "Hammer of Mithrix":
+                damage = (super().attack() * 5 + self.on_hit + self.martial + self.lvl)
+                print(f"Earth Shatter! You did {damage} damage")
+                mob.defend(damage)
         healing += math.ceil(damage * (self.arcana * .05))
         if healing > 0:    
             print(f"You healed for {healing}hp!")
@@ -242,7 +249,7 @@ class Player(Character):
                             print(f"  2. {self.ring2}")
                             print("  3. Back to menu")
                             which = input("Enter here: ")
-                            while which != "1" and which != "2" and which != "3" and which != "4":
+                            while which != "1" and which != "2" and which != "3":
                                 which = input("Please enter a valid number: ")
 
                             if which == "1":
@@ -322,6 +329,44 @@ class Player(Character):
             case "Living Armor":
                 self.resolve -= 2
                 self.arcana -= 3
+
+    def buy_armor(self, armor):
+        clear_screen()
+        while True:
+            pickup = input(f"You selected {armor}\n"
+                "What would you like to do??\n"
+                "  1. Buy and equip armor (this will discard current armor)\n"
+                "  2. See armor description\n"
+                "  3. Return to shop\n"
+                "Enter here: "
+                )
+            while pickup.isdigit() == False:
+                pickup = input("Please enter a number: ")
+            
+            while pickup != "1" and pickup != "2" and pickup != "3":
+                pickup = input("Please enter a valid number: ")
+            
+            pickup = int(pickup)
+            match pickup:
+                case 1:
+                    if self.gold >= 500:    
+                        print(f"\n{armor} equipped!")
+                        self.armor(self.armor)
+                        self.armor = armor
+                        self.equip_armor(armor)
+                        self.gold -= 500
+                        press_enter()
+                        break
+                    else:
+                        print("You can't afford this armor! Skill issue.")
+                        press_enter()
+                        break
+                    
+                case 2:
+                    armor_desc(armor)
+
+                case 3:
+                    break
 
     def hats(self, hat):
         hat_list = [

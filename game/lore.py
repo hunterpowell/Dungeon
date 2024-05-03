@@ -224,10 +224,11 @@ def chime_desc():
     
 def scythe_desc():
     print(
-        "Lifehunt Scythe. Ethereal scythe with a shimmering red aura.\n"
+        "Lifehunt Scythe. Ethereal scythe with a shimmering red aura and a gem that looks like an eye in the head.\n"
         "Special Attack: Sanguine Flare. Sweeping attack that heals the attacker for 30% of damage done.\n"
         "Damage roll: 8d6 + on_hit bonus + level\n"
-        "Grants +1 to martial, +1 to finesse, and +1 to arcana."
+        "Grants +1 to finesse and +2 to arcana."
+        "Is that "
     )
 
 def staff_desc():
@@ -237,6 +238,14 @@ def staff_desc():
         "Special attack also does 4d6 + on_hit bonus + level\n"
         "Poison damage per turn: %5 enemy max health + attunment\n"
         "Grants +1 to martial ability and +2 to attunement"
+    )
+
+def hammer_of_m_desc():
+    print(
+        "Hammer of Mithrix. Massive hammer with a glowing gem in the center of the head.\n"
+        "Special Attack: Earth Shatter. Hammer slams into the ground and hits everything in a wide arc.\n"
+        "Damage roll: 10d6 + on_hit bonus + level\n"
+        "Grants +3 to martial, +1 to resolve."
     )
 
 def weapon_lore(weapon):
@@ -254,6 +263,8 @@ def weapon_lore(weapon):
             scythe_desc()
         case "Staff of Rot":
             staff_desc()
+        case "Hammer of Mithrix":
+            hammer_of_m_desc()
     press_enter()
     clear_screen()
 
@@ -337,5 +348,5 @@ def armor_desc(armor):
                 "Plain, but solid looking armor with an unmistakable glow.\n"
                 "Grants +2 to resolve.\n"
                 "Grants +3 to arcana.\n"
-                "There's talk that living armor sustains itself on the blood of the wearer. Surely it's just a rumor"
+                "There's talk that living armor sustains itself on the blood of the wearer. Surely it's just a rumor."
             )

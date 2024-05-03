@@ -1,7 +1,7 @@
 import random
-from utils import press_enter
+from utils import press_enter, clear_screen
 from combat import fight
-from lore import weapon_lore
+from lore import weapon_lore, ring_desc
 
 
 def explore(player):
@@ -13,8 +13,10 @@ def explore(player):
     
     else:
         
-        num2 = random.randint(0, 4)
+        num2 = random.randint(0, 5)
         weapon = player.weapons()
+        ring = player.rings()
+        armor = player.armors()
 
         while num2 == 4:
             pickup = input(f"You found a {weapon}!\n"
@@ -52,6 +54,62 @@ def explore(player):
             print("You found a healing potion!")
             player.potions += 1
             print(f"You now have {player.potions} potions.")
+
+        while num2 == 5:
+            pickup = input(f"You found a {ring}!\n"
+                "Equipping will remove any other ring you have.\n"
+                "What would you like to do??\n"
+                "  1. Equip ring\n"
+                "  2. See ring description\n"
+                "  3. Discard ring\n"
+                "Enter here: "
+            )
+            
+            while pickup != "1" and pickup != "2" and pickup != "3":
+                pickup = input("Please enter a valid number: ")
+            
+            pickup = int(pickup)
+            
+            match pickup:
+                case 1:
+                    if player.ring1 != "None" and player.ring2 != "None":
+                        clear_screen()
+                        print("Both of your ring slots are full. Which ring would you like to replace?")
+                        print(f"  1. {player.ring1}")
+                        print(f"  2. {player.ring2}")
+                        print("  3. Discard ring")
+                        which = input("Enter here: ")
+                        while which != "1" and which != "2" and which != "3":
+                            which = input("Please enter a valid number: ")
+
+                        if which == "1":
+                            player.unequip_ring(player.ring1)
+                            player.ring1 = "None"
+                        elif which == "2":
+                            player.unequip_ring(player.ring2)
+                            player.ring2 = "None"
+                        else:
+                            print(f"\n{ring} discarded. I sure hope you don't regret that in the near future!")
+                            break
+                    
+                    if player.ring1 == "None":    
+                        player.ring1 = ring
+                        player.equip_ring(ring)
+                    elif player.ring2 == "None":
+                        player.ring2 = ring
+                        player.equip_ring(ring)
+
+                    print(f"{ring} equipped!")
+                    press_enter()
+                    break
+
+                case 2:
+                    ring_desc(ring)
+
+                case 3:
+                    print(f"\n{ring} discarded. I sure hope you don't regret that in the near future!")
+                    break
+            
 
         if num2 == 0 or num2 == 1 or num2 == 2:
             print("You found some loot!")

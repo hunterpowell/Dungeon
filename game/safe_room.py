@@ -12,8 +12,10 @@ def safe(player, day):
     weapon1 = player.weapons()
     ring = player.rings()
     ring2 = player.rings()
+    #reroll second ring if two duplicates are rolled
     while ring2 == ring:
         ring2 = player.rings()
+    armor = player.armors
 
     while True:
         print("SAFE ROOM".center(90))
@@ -60,15 +62,28 @@ def safe(player, day):
                     print("ITEM SHOP".center(40))
                     print("----------------------------------------")
                     print("Current gold: ", player.gold)
-                    shop = input("  1. Healing potions - 50 gold\n"
-                                "  2. Rot Pot - 100\n"
-                                f"  3. {weapon1} - 500 gold\n"
-                                f"  4. {ring} - 200 gold\n"
-                                f"  5. {ring2} - 200 gold\n"
-                                "  6. Leave shop\n"
-                                "Enter here: "
-                                )
-                    
+                    if player.floor == 1:
+                        shop = input("  1. Healing potions - 50 gold\n"
+                                    "  2. Rot Pot - 100\n"
+                                    f"  3. {weapon1} - 500 gold\n"
+                                    f"  4. {ring} - 200 gold\n"
+                                    f"  5. {ring2} - 200 gold\n"
+                                    "  6. Leave shop\n"
+                                    "Enter here: "
+                                    )
+                    if player.floor == 2:
+                        shop = input("  1. Healing potions - 50 gold\n"
+                                    "  2. Rot Pot - 100\n"
+                                    f"  3. {armor} - 500 gold\n"
+                                    f"  4. {ring} - 200 gold\n"
+                                    f"  5. {ring2} - 200 gold\n"
+                                    "  6. Leave shop\n"
+                                    "Enter here: "
+                                    )
+                        
+
+
+                        
                     while shop != "1" and shop != "2" and shop != "3" and shop != "4" and shop != "5" and shop != "6":
                         shop = input("Enter a valid number: ")
                     shop = int(shop)
@@ -81,7 +96,10 @@ def safe(player, day):
                             max_pots = player.buy_pot(max_pots)
                         
                         case 3:
-                            player.buy_weapon(weapon1)
+                            if player.floor == 1:
+                                player.buy_weapon(weapon1)
+                            elif player.floor == 2:
+                                player.buy_armor(armor)
                         
                         case 4:
                             player.buy_ring(ring)
