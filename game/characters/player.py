@@ -1,7 +1,7 @@
 import random
 import math
 from characters.character import Character
-from utils import clear_screen, press_enter 
+from utils import clear_screen, press_enter, two_d6
 from lore import weapon_lore, ring_desc, armor_desc
 
 class Player(Character):
@@ -96,34 +96,34 @@ class Player(Character):
         healing = 0
         match self.weapon:
             case "Fists":
-                damage = (super().attack() * 2 + self.on_hit + self.martial + self.lvl)
+                damage = (two_d6() * 2 + self.on_hit + self.martial + self.lvl)
                 print(f"Flurry of Blows! You did {damage} damage!")
                 mob.defend(damage)
             case "Sentient Shotgun":
-                damage = (super().attack() * 5 + self.on_hit + self.martial + self.lvl)
+                damage = (two_d6() * 5 + self.on_hit + self.martial + self.lvl)
                 print(f"Bullet Rain! You did {damage} damage!")
                 mob.defend(damage)
             case "War Gauntlet":
-                damage = (super().attack() + 20 + self.on_hit + self.martial + self.lvl)
+                damage = (two_d6() + 20 + self.on_hit + self.martial + self.lvl)
                 print(f"Rending Strike! You did {damage} damage!")
                 mob.defend(damage)
             case "Cleric's Chime":
                 healing = (random.randint(1,12) + 60 + self.lvl * self.attunement)
                 print(f"Healing Word!")
             case "Lifehunt Scythe":
-                damage = (super().attack() * 4 + self.on_hit + self.martial + self.lvl)
+                damage = (two_d6() * 4 + self.on_hit + self.martial + self.lvl)
                 if self.can_heal == True:
                     healing = math.ceil(damage*0.3)
                     print(f"Sanguine Flare! You did {damage} damage")
                 mob.defend(damage)
                 self.health += healing
             case "Staff of Rot":
-                damage = (super().attack() * 2 + self.on_hit + self.martial + self.lvl)
+                damage = (two_d6() * 2 + self.on_hit + self.martial + self.lvl)
                 print(f"Staff Infection! You did {damage} damage and poisoned the enemy!")
                 mob.defend(damage)
                 mob.poisoned = True
             case "Hammer of Mithrix":
-                damage = (super().attack() * 5 + self.on_hit + self.martial + self.lvl)
+                damage = (two_d6() * 5 + self.on_hit + self.martial + self.lvl)
                 print(f"Earth Shatter! You did {damage} damage")
                 mob.defend(damage)
         healing += math.ceil(damage * (self.arcana * .05))
@@ -186,7 +186,7 @@ class Player(Character):
             case "Life ring":
                 self.max_hp += 25
             case "Havel's ring":
-                self.resolve += 5
+                self.resolve += 2
             case "Knight's ring":
                 self.martial += 2
             case "Gambler's token":
@@ -207,7 +207,7 @@ class Player(Character):
             case "Life ring":
                 self.max_hp -= 25
             case "Havel's ring":
-                self.resolve -= 5
+                self.resolve -= 2
             case "Knight's ring":
                 self.martial -= 2
             case "Gambler's token":
@@ -340,18 +340,15 @@ class Player(Character):
                 "  3. Return to shop\n"
                 "Enter here: "
                 )
-            while pickup.isdigit() == False:
-                pickup = input("Please enter a number: ")
             
             while pickup != "1" and pickup != "2" and pickup != "3":
                 pickup = input("Please enter a valid number: ")
             
-            pickup = int(pickup)
             match pickup:
-                case 1:
+                case "1":
                     if self.gold >= 500:    
                         print(f"\n{armor} equipped!")
-                        self.armor(self.armor)
+                        self.unequip_armor(self.armor)
                         self.armor = armor
                         self.equip_armor(armor)
                         self.gold -= 500
@@ -362,13 +359,13 @@ class Player(Character):
                         press_enter()
                         break
                     
-                case 2:
+                case "2":
                     armor_desc(armor)
 
-                case 3:
+                case "3":
                     break
 
-    def hats(self, hat):
+    def hats(self):
         hat_list = [
                 "Sage's Big Hat",
                 ""  
@@ -467,6 +464,7 @@ class Player(Character):
     def monster_death(self, monster, key, money, max_hp):
         print(f"\nYou beat the {monster.name}!")
         # heal by half of overkill
+        overkill = 0
         if self.can_heal == True:    
             overkill = (0 - monster.health)//2
         self.health += overkill

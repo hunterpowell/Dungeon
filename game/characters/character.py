@@ -20,11 +20,11 @@ class Character:
         if self.die_type == 6:
             tmp = random.randint(1, 6)
             tmp2 = random.randint(1, 6)
-            return(tmp + tmp2)
+            return(tmp + tmp2 + self.on_hit)
         elif self.die_type == 12:
             tmp = random.randint(1, 12)
             return(tmp)
-    
+        
     # accuracy roll crit 
     def crit(self):
         if self.die_type == 6:

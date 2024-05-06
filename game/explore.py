@@ -1,7 +1,7 @@
 import random
 from utils import press_enter, clear_screen
 from combat import fight
-from lore import weapon_lore, ring_desc
+from lore import weapon_lore, ring_desc, armor_desc
 
 
 def explore(player):
@@ -18,7 +18,7 @@ def explore(player):
         ring = player.rings()
         armor = player.armors()
 
-        while num2 == 4:
+        while num2 == 4 and player.floor == 1:
             pickup = input(f"You found a {weapon}!\n"
                    "Equipping will remove any other weapon you have.\n"
                    "What would you like to do??\n"
@@ -50,6 +50,36 @@ def explore(player):
                     print(f"\n{weapon} discarded. I sure hope you don't regret that in the near future!")
                     break
 
+        while num2 == 4 and player.floor == 2:
+            pickup = input(f"You found {armor}!\n"
+                   "What would you like to do??\n"
+                   "  1. Equip armor (this will discard current armor)\n"
+                   "  2. See armor description\n"
+                   "  3. Discard armor\n"
+                   "Enter here: "
+                )
+            
+            while pickup != "1" and pickup != "2" and pickup != "3":
+                pickup = input("Please enter a valid number: ")
+            
+            pickup = int(pickup)
+            match pickup:
+                # equips new weapon and resets special attack
+                case 1:
+                    print(f"\n{armor} equipped!")
+                    player.unequip_amor(player.armor)
+                    player.armor = armor
+                    player.equip_armor(armor)
+                    break
+                
+                case 2:
+                    armor_desc()
+
+                case 3:
+                    print(f"\n{armor} discarded. I sure hope you don't regret that in the near future!")
+                    break
+
+
         if num2 == 3: 
             print("You found a healing potion!")
             player.potions += 1
@@ -57,7 +87,6 @@ def explore(player):
 
         while num2 == 5:
             pickup = input(f"You found a {ring}!\n"
-                "Equipping will remove any other ring you have.\n"
                 "What would you like to do??\n"
                 "  1. Equip ring\n"
                 "  2. See ring description\n"

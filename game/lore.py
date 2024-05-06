@@ -30,7 +30,7 @@ def introduction():
 
 
 def intro2():
-    tmp = "You've arrived on the second floor of the World Dungeon. In contrast to the dull greys of the first level, the floors here are white, and the walls are a porous grey stone. There is glowing lichen covering much of the ceiling and walls."
+    tmp = "You've arrived on the second floor of the World Dungeon. In contrast to the dull greys of the first level, the floors here are white, and the walls are a porous light grey stone. There is glowing lichen covering much of the ceiling and walls."
     print(textwrap.fill(tmp, 80))
     combat_rules()
 
@@ -63,6 +63,7 @@ def combat_rules():
                     "Without a key, you cannot descend and you will die."
                 )
                 press_enter()
+                clear_screen()
             
             case "2":
                 clear_screen()
@@ -78,6 +79,7 @@ def combat_rules():
                     "Resolve:     Your ability to ignore damage. Reduces incoming damage."
                 )
                 press_enter()
+                clear_screen()
 
             case "3":
                 clear_screen()
@@ -279,7 +281,7 @@ def ring_desc(ring):
         case "Havel's ring":
             print(
                 "Dull grey ring that appears to be made of stone.\n"
-                "Grants +5 to resolve."
+                "Grants +2 to resolve."
             )
         case "Knight's ring":
             print(

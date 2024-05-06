@@ -15,7 +15,7 @@ def safe(player, day):
     #reroll second ring if two duplicates are rolled
     while ring2 == ring:
         ring2 = player.rings()
-    armor = player.armors
+    armor = player.armors()
 
     while True:
         print("SAFE ROOM".center(90))

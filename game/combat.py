@@ -84,7 +84,7 @@ def fight(player):
                     # ult
                     if player.weapon_charges >= 1:
                         player.special_atk(monster)
-                        player.weapon_charge -= 1
+                        player.weapon_charges -= 1
                     else:
                         print("You wasted your turn dumbass! You don't have any weapon charges left.")
                     player.action -= 1
