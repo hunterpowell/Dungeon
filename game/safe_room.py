@@ -5,7 +5,7 @@ def safe(player, day):
     # heals to 100hp if less than that, but doesn't erase overhealth
     if player.health < player.max_hp:
         player.health = player.max_hp
-    player.weapon_charge = player.max_charges
+    player.weapon_charges = player.max_charges
     max_heals = 5                   # limits amount of available potions per day
     max_pots = 2
 

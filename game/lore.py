@@ -201,7 +201,7 @@ def fist_desc():
 
 def shotgun_desc():
     print(
-        "Sentient Shotgun. It appears to be a full-auto shotgun with an infinite ammo enchantment.\n"
+        "Sentient Shotgun. A full-auto shotgun with an infinite ammo enchantment.\n"
         "Special Attack: Bullet Rain. Sends a frankly comical amount of lead towards the enemy doing massive damage.\n"
         "Special attack damage roll: 10d6 + on_hit bonus + level\n"
         "Grants +2 to martial ability and +1 to arcana.\n"
@@ -229,8 +229,8 @@ def scythe_desc():
         "Lifehunt Scythe. Ethereal scythe with a shimmering red aura and a gem that looks like an eye in the head.\n"
         "Special Attack: Sanguine Flare. Sweeping attack that heals the attacker for 30% of damage done.\n"
         "Damage roll: 8d6 + on_hit bonus + level\n"
-        "Grants +1 to finesse and +2 to arcana."
-        "Is that "
+        "Grants +1 to finesse and +2 to arcana.\n"
+        "Every swipe of the blade feels euphoric. Every swipe leaves you craving more..."
     )
 
 def staff_desc():
@@ -247,7 +247,7 @@ def hammer_of_m_desc():
         "Hammer of Mithrix. Massive hammer with a glowing gem in the center of the head.\n"
         "Special Attack: Earth Shatter. Hammer slams into the ground and hits everything in a wide arc.\n"
         "Damage roll: 10d6 + on_hit bonus + level\n"
-        "Grants +3 to martial, +1 to resolve."
+        "Grants +2 to martial, +1 to resolve."
     )
 
 def weapon_lore(weapon):
@@ -317,6 +317,7 @@ def ring_desc(ring):
     clear_screen()
 
 def armor_desc(armor):
+    clear_screen()
     match armor:
         case "Chainmail Breasplate":
             print(
@@ -352,3 +353,5 @@ def armor_desc(armor):
                 "Grants +3 to arcana.\n"
                 "There's talk that living armor sustains itself on the blood of the wearer. Surely it's just a rumor."
             )
+    press_enter()
+    clear_screen()

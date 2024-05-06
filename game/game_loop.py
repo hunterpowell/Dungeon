@@ -64,6 +64,7 @@ def main_loop(player):
         if player.health > 0:
             print("You've descended the stairs! Congrats!                      (still a bitch tho)\n")
             player.floor = 2
+            player.key = False
             day = 0
             intro2()
         else:

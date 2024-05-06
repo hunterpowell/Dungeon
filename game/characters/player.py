@@ -6,7 +6,7 @@ from lore import weapon_lore, ring_desc, armor_desc
 
 class Player(Character):
     def __init__(self, name):
-        super().__init__(name, health = 100, accuracy = 3, on_hit = 5, ac = 10)
+        super().__init__(name, health = 100, accuracy = 3, on_hit = 4, ac = 10)
         self.potions = 0
         self.rotpot = 0
         self.gold = 50
