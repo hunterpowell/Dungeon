@@ -75,6 +75,9 @@ def main_loop(player):
                 tmp = input("Please enter [y] or [n]")
             if tmp == "y":
                 player = Player(player.name)
+                player.floor = 1
+                player.key = False
+                day = 0
             else: 
                 exit()
             

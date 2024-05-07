@@ -129,7 +129,6 @@ def explore(player):
                         player.equip_ring(ring)
 
                     print(f"{ring} equipped!")
-                    press_enter()
                     break
 
                 case 2:

@@ -71,7 +71,7 @@ def fight(player):
                             damage = player.weapon_atk()
                         monster.defend(damage)
 
-                    elif (hit + player.accuracy < monster.ac):
+                    else:
                         print("You missed!")
 
                     player.action -= 1
