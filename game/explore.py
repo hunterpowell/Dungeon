@@ -14,6 +14,7 @@ def explore(player):
     else:
         
         num2 = random.randint(0, 5)
+        # TODO move these into their relevant loops, and add a system that makes finding duplicates impossible
         weapon = player.weapons()
         ring = player.rings()
         armor = player.armors()
