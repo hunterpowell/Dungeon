@@ -40,11 +40,11 @@ class Character:
     def display(self):
         print("      STATS")
         print("=================")
-        print("Name:        ", self.name)
-        print("Health:      ", self.health)
-        print("Accuracy:    ", self.accuracy)
-        print("On-hit bonus:", self.on_hit)
-        print("Armor:       ", self.ac)
+        print("Name:         ", self.name)
+        print("Health:       ", self.health)
+        print("Base accuracy:", self.accuracy)
+        print("Base on-hit:  ", self.on_hit)
+        print("Armor:        ", self.ac)
 
         
     def is_poisoned(self, opponent):

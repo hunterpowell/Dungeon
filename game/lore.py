@@ -73,10 +73,10 @@ def combat_rules():
                     "Level:       Current player level. Stats automatically increase every 5 levels.\n"
                     "Wpn charges: Total special attack charges you currently have.\n"
                     "Martial:     Your martial ability. Increases on-hit damage.\n"
-                    "Finesse:     Your accuracy bonus. Improves attack rolls.\n"
+                    "Finesse:     Your ability to hit a target. Improves accuracy rolls.\n"
                     "Attunement:  Your magical prowess. Strengthens healing and status effects.\n"
                     "Arcana:      A glimpse into the Void. Grants forbidden knowledge, imparting lifesteal.\n"
-                    "Resolve:     Your ability to ignore damage. Reduces incoming damage."
+                    "Resolve:     Your ability to ignore enemy attacks. Reduces incoming damage."
                 )
                 press_enter()
                 clear_screen()
@@ -220,7 +220,7 @@ def chime_desc():
     print(
         "Cleric's Chime. A small chime impbued with divine energy.\n"
         "Special Attack: Healing Word. Massive spell that heals the caster for a significant amount.\n"
-        "Heal roll: 1d12 + 60 + (2 * level)\n"
+        "Heal roll: 1d12 + 60 + level + (2 * attunement)\n"
         "Grants +2 to attunement and +1 to resolve."
     )
     
@@ -247,7 +247,7 @@ def hammer_of_m_desc():
         "Hammer of Mithrix. Massive hammer with a glowing gem in the center of the head.\n"
         "Special Attack: Earth Shatter. Hammer slams into the ground and hits everything in a wide arc.\n"
         "Damage roll: 10d6 + on_hit bonus + level\n"
-        "Grants +2 to martial, +1 to resolve."
+        "Grants +3 to martial"
     )
 
 def weapon_lore(weapon):

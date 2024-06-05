@@ -57,7 +57,7 @@ class Player(Character):
             case "Staff of Rot":
                 return 1, 0, 0, 2, 0
             case "Hammer of Mithrix":
-                return 3, 0, 0, 0, 1
+                return 3, 0, 0, 0, 0
     
     def equip_weapon(self, martial, finesse, arcana, attunement, resolve):
         self.martial += martial
@@ -108,7 +108,7 @@ class Player(Character):
                 print(f"Rending Strike! You did {damage} damage!")
                 mob.defend(damage)
             case "Cleric's Chime":
-                healing = (random.randint(1,12) + 60 + self.lvl * self.attunement)
+                healing = (random.randint(1,12) + 60 + self.lvl + (2 * self.attunement))
                 print(f"Healing Word!")
             case "Lifehunt Scythe":
                 damage = (two_d6() * 4 + self.on_hit + self.martial + self.lvl)
@@ -208,7 +208,7 @@ class Player(Character):
                 self.max_hp -= 25
             case "Havel's ring":
                 self.resolve -= 2
-            case "Knight's ring":
+            case "Knight's ring": 
                 self.martial -= 2
             case "Gambler's token":
                 self.martial -= 3
@@ -483,14 +483,14 @@ class Player(Character):
 
     def display_player(self):
         super().display()
-        print("Level:       ", self.lvl)
-        print("Experience:  ", self.xp)
-        print("Wpn charges: ", self.weapon_charges)
-        print("Martial:     ", self.martial)
-        print("Finesse:     ", self.finesse)
-        print("Attunement:  ", self.attunement)
-        print("Arcana:      ", self.arcana)
-        print("Resolve:     ", self.resolve)
+        print("Level:        ", self.lvl)
+        print("Experience:   ", self.xp)
+        print("Wpn charges:  ", self.weapon_charges)
+        print("Martial:      ", self.martial)
+        print("Finesse:      ", self.finesse)
+        print("Attunement:   ", self.attunement)
+        print("Arcana:       ", self.arcana)
+        print("Resolve:      ", self.resolve)
         press_enter()
         clear_screen()
 

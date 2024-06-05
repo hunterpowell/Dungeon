@@ -19,6 +19,8 @@ def main_loop(player):
             final_day = 5
         if player.floor == 2:
             final_day = 7
+        if player.floor == 3:
+            final_day = 10
         while day < final_day and player.health > 0:    
             
             clear_screen()
@@ -63,7 +65,7 @@ def main_loop(player):
         
         if player.health > 0:
             print("You've descended the stairs! Congrats!                      (still a bitch tho)\n")
-            player.floor = 2
+            player.floor += 1
             player.key = False
             day = 0
             intro2()
