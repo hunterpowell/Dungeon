@@ -14,11 +14,10 @@ def explore(player):
     else:
         
         num2 = random.randint(0, 5)
-        weapon = player.weapons()
-        ring = player.rings()
-        armor = player.armors()
 
         while num2 == 4 and player.floor == 1:
+            weapon = player.weapons()
+            
             pickup = input(f"You found a {weapon}!\n"
                    "Equipping will remove any other weapon you have.\n"
                    "What would you like to do??\n"
@@ -51,6 +50,8 @@ def explore(player):
                     break
 
         while num2 == 4 and player.floor == 2:
+            armor = player.armors()
+            
             pickup = input(f"You found {armor}!\n"
                    "What would you like to do??\n"
                    "  1. Equip armor (this will discard current armor)\n"
@@ -86,6 +87,8 @@ def explore(player):
             print(f"You now have {player.potions} potions.")
 
         while num2 == 5:
+            ring = player.rings()
+            
             pickup = input(f"You found a {ring}!\n"
                 "What would you like to do??\n"
                 "  1. Equip ring\n"
