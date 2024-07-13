@@ -57,7 +57,7 @@ class Player(Character):
             case "Staff of Rot":
                 return 1, 0, 0, 2, 0
             case "Hammer of Mithrix":
-                return 3, 0, 0, 0, 1
+                return 2, 0, 0, 0, 1
     
     def equip_weapon(self, martial, finesse, arcana, attunement, resolve):
         self.martial += martial
@@ -368,7 +368,8 @@ class Player(Character):
     def hats(self):
         hat_list = [
                 "Sage's Big Hat",
-                ""  
+                "Helm of Punching Things Really Hard", 
+                "Cinemetographer's Beret"                   # ACTION, ACTION, ACTION, gives an extra action
                 ]
 
     def buy_pot(self, max):

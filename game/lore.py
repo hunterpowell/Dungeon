@@ -34,8 +34,12 @@ def intro2():
     print(textwrap.fill(tmp, 80))
     combat_rules()
 
-def combat_rules():
+def intro3():
+    tmp = "You've arrived on the third floor of World Dungeon. <insert lore here>."
+    print(textwrap.fill(tmp, 80))
+    combat_rules()
 
+def combat_rules():
     while True:
         display = input("What would you like to do?\n"
                     "  1. Display rules of the dungeon.\n"

@@ -2,11 +2,11 @@ from characters.player import Player
 from utils import clear_screen, press_enter
 from safe_room import safe
 from explore import explore
-from lore import intro2
+from lore import intro2, intro3
 
 def main_loop(player):
     
-    day = 0
+    day = 1
 
     while True:
         # psuedo-godmode if player name is Admin
@@ -19,10 +19,12 @@ def main_loop(player):
             final_day = 5
         if player.floor == 2:
             final_day = 7
-        while day < final_day and player.health > 0:    
+        if player.floor == 3:
+            final_day = 10
+        while day <= final_day and player.health > 0:    
             
             clear_screen()
-            print(f"\t\t\tDay: {day + 1}\n\t\t----------------------")
+            print(f"\t\t\tDay: {day}\n\t\t----------------------")
             where = input("What would you like to do?\n"
                         "  1. Explore\n"
                         "  2. Use healing potion\n"
@@ -63,10 +65,14 @@ def main_loop(player):
         
         if player.health > 0:
             print("You've descended the stairs! Congrats!                      (still a bitch tho)\n")
-            player.floor = 2
             player.key = False
             day = 0
-            intro2()
+            if player.floor == 1:
+                player.floor = 2
+                intro2()
+            elif player.floor == 2:
+                player.floor = 3
+                intro3()
         else:
             player.death()  
             tmp = input("Would you like to play again? [y] or [n]: ")
@@ -77,7 +83,7 @@ def main_loop(player):
                 player = Player(player.name)
                 player.floor = 1
                 player.key = False
-                day = 0
+                day = 1
             else: 
                 exit()
             

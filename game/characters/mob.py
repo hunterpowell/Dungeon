@@ -8,9 +8,9 @@ class Mob(Character):
     @classmethod
     def random_enemy1(cls):
         enemies = [
-            ("Rat", 10, 2, 3, 1),
-            ("Goblin", 30, 5, 7, 5),
-            ("Slime", 50, 1, 3, 10),
+            ("Rat", 10, 2, 2, 1),
+            ("Goblin", 30, 5, 5, 5),
+            ("Slime", 50, 1, 1, 10),
             ("Scatterer", 20, 3, 5, 3),
             ("Rot Sticker", 25, 5, 3, 5)
         ]
