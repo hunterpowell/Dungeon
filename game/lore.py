@@ -254,7 +254,7 @@ def hammer_of_m_desc():
         "Grants +3 to martial"
     )
 
-def weapon_lore(weapon):
+def weapon_desc(weapon):
     clear_screen()
     match weapon:
         case "Fists":

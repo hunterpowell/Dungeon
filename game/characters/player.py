@@ -2,7 +2,7 @@ import random
 import math
 from characters.character import Character
 from utils import clear_screen, press_enter, two_d6
-from lore import weapon_lore, ring_desc, armor_desc
+from lore import weapon_desc, ring_desc, armor_desc
 
 class Player(Character):
     def __init__(self, name):
@@ -164,7 +164,7 @@ class Player(Character):
                         break
                     
                 case 2:
-                    weapon_lore(weapon)
+                    weapon_desc(weapon)
 
                 case 3:
                     break
@@ -369,7 +369,8 @@ class Player(Character):
         hat_list = [
                 "Sage's Big Hat",
                 "Helm of Punching Things Really Hard", 
-                "Cinemetographer's Beret"                   # ACTION, ACTION, ACTION, gives an extra action
+                "Cinemetographer's Beret",                  # ACTION, ACTION, ACTION, gives an extra action
+                "Mining Helmet"                             # who fckin knows man
                 ]
 
     def buy_pot(self, max):

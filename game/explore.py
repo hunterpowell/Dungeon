@@ -1,7 +1,7 @@
 import random
 from utils import press_enter, clear_screen
 from combat import fight
-from lore import weapon_lore, ring_desc, armor_desc
+from lore import weapon_desc, ring_desc, armor_desc
 
 
 def explore(player):
@@ -43,7 +43,7 @@ def explore(player):
                     break
                 
                 case 2:
-                    weapon_lore(weapon)
+                    weapon_desc(weapon)
 
                 case 3:
                     print(f"\n{weapon} discarded. I sure hope you don't regret that in the near future!")

@@ -68,6 +68,7 @@ def main_loop(player):
             player.floor += 1
             player.key = False
             day = 0
+            # TODO can maybe swap out for an iterator, but you still need a conditional for the intro i guess
             if player.floor == 1:
                 player.floor = 2
                 intro2()
