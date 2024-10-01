@@ -7,6 +7,9 @@ from lore import weapon_desc, ring_desc, armor_desc
 def explore(player):
     
     num = random.randint(0,3)
+    weapon = player.weapons()
+    ring = player.rings()
+    armor = player.armors()
 
     if (num <= 2):
         fight(player)
@@ -16,7 +19,6 @@ def explore(player):
         num2 = random.randint(0, 5)
 
         while num2 == 4 and player.floor == 1:
-            weapon = player.weapons()
             
             pickup = input(f"You found a {weapon}!\n"
                    "Equipping will remove any other weapon you have.\n"
@@ -50,7 +52,6 @@ def explore(player):
                     break
 
         while num2 == 4 and player.floor == 2:
-            armor = player.armors()
             
             pickup = input(f"You found {armor}!\n"
                    "What would you like to do??\n"
@@ -87,7 +88,6 @@ def explore(player):
             print(f"You now have {player.potions} potions.")
 
         while num2 == 5:
-            ring = player.rings()
             
             pickup = input(f"You found a {ring}!\n"
                 "What would you like to do??\n"
