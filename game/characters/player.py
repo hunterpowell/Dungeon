@@ -15,20 +15,25 @@ class Player(Character):
         self.key = False
         self.can_heal = True
         self.job = "<Unassigned>"
-        self.ring1 = "None"
-        self.ring2 = "None"
-        self.weapon = "Fists"
-        self.armor = "None"
+        # self.ring1 = "None"
+        # self.ring2 = "None"
+        # self.weapon = "Fists"
+        # self.armor = "None"
+        self.gear = {"ring1": "None",
+                     "ring2": "None",
+                     "weapon": "Fists",
+                     "armor": "None"
+                    }
         self.action = 1
         self.max_actions = 1
         self.max_charges = 1
         self.weapon_charges = 1
-        self.martial = 0
-        self.finesse = 0
-        self.arcana = 0
-        self.attunement = 0
-        self.resolve = 0
         self.floor = 1
+        self.stats = {"martial": 0, 
+                      "finesse": 0,
+                      "arcana": 0,
+                      "attunement": 0,
+                      "resolve": 0}
 
     def weapons(self):
         weapon_list = [
@@ -43,7 +48,7 @@ class Player(Character):
     
     def weapon_stats(self):
         # balancing numbers- martial, finesse, arcana, attunement, resolve
-        match self.weapon:
+        match self.gear["weapon"]:
             case "Fists":
                 return 0, 0, 0, 0, 0
             case "Sentient Shotgun":
@@ -60,22 +65,22 @@ class Player(Character):
                 return 2, 0, 0, 0, 1
     
     def equip_weapon(self, martial, finesse, arcana, attunement, resolve):
-        self.martial += martial
-        self.finesse += finesse
-        self.arcana += arcana
-        self.attunement += attunement
-        self.resolve += resolve
+        self.stats["martial"] += martial
+        self.stats["finesse"] += finesse
+        self.stats["arcana"] += arcana
+        self.stats["attunement"] += attunement
+        self.stats["resolve"] += resolve
 
     def unequip_weapon(self, martial, finesse, arcana, attunement, resolve):
-        self.martial -= martial
-        self.finesse -= finesse
-        self.arcana -= arcana
-        self.attunement -= attunement
-        self.resolve -= resolve
+        self.stats["martial"] -= martial
+        self.stats["finesse"] -= finesse
+        self.stats["arcana"] -= arcana
+        self.stats["attunement"] -= attunement
+        self.stats["resolve"] -= resolve
 
     def weapon_atk(self):
-        damage = (super().attack() + self.martial)
-        heal = math.ceil(damage * (self.arcana * .05))
+        damage = (super().attack() + self.stats["martial"])
+        heal = math.ceil(damage * (self.stats["arcana"] * .05))
         self.health += heal
         print(f"You hit for {damage} damage!")
         if heal > 0:    
@@ -83,8 +88,8 @@ class Player(Character):
         return damage
     
     def weapon_crit(self):
-        damage = (super().crit() + self.martial)
-        heal = math.ceil(damage * (self.arcana * .05))
+        damage = (super().crit() + self.stats["martial"])
+        heal = math.ceil(damage * (self.stats["arcana"] * .05))
         self.health += heal
         print(f"You hit for {damage} damage!")
         if heal > 0:    
@@ -94,39 +99,39 @@ class Player(Character):
     def special_atk(self, mob):
         damage = 0
         healing = 0
-        match self.weapon:
+        match self.gear["weapon"]:
             case "Fists":
-                damage = (two_d6() * 2 + self.on_hit + self.martial + self.lvl)
+                damage = (two_d6() * 2 + self.on_hit + self.stats["martial"] + self.lvl)
                 print(f"Flurry of Blows! You did {damage} damage!")
                 mob.defend(damage)
             case "Sentient Shotgun":
-                damage = (two_d6() * 5 + self.on_hit + self.martial + self.lvl)
+                damage = (two_d6() * 5 + self.on_hit + self.stats["martial"] + self.lvl)
                 print(f"Bullet Rain! You did {damage} damage!")
                 mob.defend(damage)
             case "War Gauntlet":
-                damage = (two_d6() + 20 + self.on_hit + self.martial + self.lvl)
+                damage = (two_d6() + 20 + self.on_hit + self.stats["martial"] + self.lvl)
                 print(f"Rending Strike! You did {damage} damage!")
                 mob.defend(damage)
             case "Cleric's Chime":
-                healing = (random.randint(1,12) + 60 + self.lvl + (2 * self.attunement))
+                healing = (random.randint(1,12) + 60 + self.lvl + (2 * self.stats["attunement"]))
                 print(f"Healing Word!")
             case "Lifehunt Scythe":
-                damage = (two_d6() * 4 + self.on_hit + self.martial + self.lvl)
+                damage = (two_d6() * 4 + self.on_hit + self.stats["martial"] + self.lvl)
                 if self.can_heal == True:
                     healing = math.ceil(damage*0.3)
                     print(f"Sanguine Flare! You did {damage} damage")
                 mob.defend(damage)
                 self.health += healing
             case "Staff of Rot":
-                damage = (two_d6() * 2 + self.on_hit + self.martial + self.lvl)
+                damage = (two_d6() * 2 + self.on_hit + self.stats["martial"] + self.lvl)
                 print(f"Staff Infection! You did {damage} damage and poisoned the enemy!")
                 mob.defend(damage)
                 mob.poisoned = True
             case "Hammer of Mithrix":
-                damage = (two_d6() * 5 + self.on_hit + self.martial + self.lvl)
+                damage = (two_d6() * 5 + self.on_hit + self.stats["martial"] + self.lvl)
                 print(f"Earth Shatter! You did {damage} damage")
                 mob.defend(damage)
-        healing += math.ceil(damage * (self.arcana * .05))
+        healing += math.ceil(damage * (self.stats["arcana"] * .05))
         if healing > 0:    
             print(f"You healed for {healing}hp!")
         self.health += healing
@@ -153,7 +158,7 @@ class Player(Character):
                     if self.gold >= 500:    
                         print(f"\n{weapon} equipped!")
                         self.unequip_weapon(self.weapon_stats()[0], self.weapon_stats()[1], self.weapon_stats()[2], self.weapon_stats()[3], self.weapon_stats()[4])
-                        self.weapon = weapon
+                        self.gear["weapon"] = weapon
                         self.equip_weapon(self.weapon_stats()[0], self.weapon_stats()[1], self.weapon_stats()[2], self.weapon_stats()[3], self.weapon_stats()[4])
                         self.gold -= 500
                         press_enter()
@@ -186,41 +191,41 @@ class Player(Character):
             case "Life ring":
                 self.max_hp += 25
             case "Havel's ring":
-                self.resolve += 2
+                self.stats["resolve"] += 2
             case "Knight's ring":
-                self.martial += 2
+                self.stats["martial"] += 2
             case "Gambler's token":
-                self.martial += 3
-                self.finesse -= 3
+                self.stats["martial"] += 3
+                self.stats["finesse"] -= 3
             case "Ring of divine suffering":
                 self.can_heal = False
-                self.martial += 5
-                self.finesse += 5
+                self.stats["martial"] += 5
+                self.stats["finesse"] += 5
             case "Duelist's secret":
                 self.max_charges += 1
                 self.weapon_charges = self.max_charges
             case "Arcanist's ring":
-                self.arcana += 2
+                self.stats["arcana"] += 2
         
     def unequip_ring(self, ring):
         match ring:
             case "Life ring":
                 self.max_hp -= 25
             case "Havel's ring":
-                self.resolve -= 2
+                self.stats["resolve"] -= 2
             case "Knight's ring": 
-                self.martial -= 2
+                self.stats["martial"] -= 2
             case "Gambler's token":
-                self.martial -= 3
-                self.finesse += 3
+                self.stats["martial"] -= 3
+                self.stats["finesse"] += 3
             case "Ring of divine suffering":
                 self.can_heal = False
-                self.martial -= 5
-                self.finesse -= 5
+                self.stats["martial"] -= 5
+                self.stats["finesse"] -= 5
             case "Duelist's secret":
                 self.max_charges -= 1
             case "Arcanist's ring":
-                self.arcana += 2
+                self.stats["arcana"] += 2
 
     def buy_ring(self, ring):
         clear_screen()
@@ -242,30 +247,30 @@ class Player(Character):
             match pickup:
                 case 1:
                     if self.gold >= 200:    
-                        if self.ring1 != "None" and self.ring2 != "None":
+                        if self.gear["ring1"] != "None" and self.gear["ring2"] != "None":
                             clear_screen()
                             print("Both of your ring slots are full. Which ring would you like to replace?")
-                            print(f"  1. {self.ring1}")
-                            print(f"  2. {self.ring2}")
+                            print(f"  1. {self.gear["ring1"]}")
+                            print(f"  2. {self.gear["ring2"]}")
                             print("  3. Back to menu")
                             which = input("Enter here: ")
                             while which != "1" and which != "2" and which != "3":
                                 which = input("Please enter a valid number: ")
 
                             if which == "1":
-                                self.unequip_ring(self.ring1)
-                                self.ring1 = "None"
+                                self.unequip_ring(self.gear["ring1"])
+                                self.gear["ring1"] = "None"
                             elif which == "2":
-                                self.unequip_ring(self.ring2)
-                                self.ring2 = "None"
+                                self.unequip_ring(self.gear["ring2"])
+                                self.gear["ring2"] = "None"
                             else:
                                 break
                         
-                        if self.ring1 == "None":    
-                            self.ring1 = ring
+                        if self.gear["ring1"] == "None":    
+                            self.gear["ring1"] = ring
                             self.equip_ring(ring)
-                        elif self.ring2 == "None":
-                            self.ring2 = ring
+                        elif self.gear["ring2"] == "None":
+                            self.gear["ring2"] = ring
                             self.equip_ring(ring)
 
                         print(f"{ring} equipped!")
@@ -297,38 +302,38 @@ class Player(Character):
     def equip_armor(self, armor):
         match armor:
             case "Chainmail Breastplate":
-                self.resolve += 3
+                self.stats["resolve"] += 3
             case "Enchanted Trollskin Shirt of Pummeling":
-                self.resolve += 1
-                self.martial += 3
+                self.stats["resolve"] += 1
+                self.stats["martial"] += 3
             case "Cloak of Obscurity":
                 self.ac += 5
             case "Mithril Shirt":
-                self.resolve += 3
+                self.stats["resolve"] += 3
                 self.ac += 2
             case "Enchanted Suspenders of Suspension":
                 self.max_charges += 2
             case "Living Armor":
-                self.resolve += 2
-                self.arcana += 3
+                self.stats["resolve"] += 2
+                self.stats["arcana"] += 3
 
     def unequip_armor(self, armor):
         match armor:
             case "Chainmail Breastplate":
-                self.resolve -= 3
+                self.stats["resolve"] -= 3
             case "Enchanted Trollskin Shirt of Pummeling":
-                self.resolve -= 1
-                self.martial -= 3
+                self.stats["resolve"] -= 1
+                self.stats["martial"] -= 3
             case "Cloak of Obscurity":
                 self.ac -= 5
             case "Mithril Shirt":
-                self.resolve -= 3
+                self.stats["resolve"] -= 3
                 self.ac -= 2
             case "Enchanted Suspenders of Suspension":
                 self.max_charges -= 2
             case "Living Armor":
-                self.resolve -= 2
-                self.arcana -= 3
+                self.stats["resolve"] -= 2
+                self.stats["arcana"] -= 3
 
     def buy_armor(self, armor):
         clear_screen()
@@ -348,8 +353,8 @@ class Player(Character):
                 case "1":
                     if self.gold >= 500:    
                         print(f"\n{armor} equipped!")
-                        self.unequip_armor(self.armor)
-                        self.armor = armor
+                        self.unequip_armor(self.gear["armor"])
+                        self.gear["armor"] = armor
                         self.equip_armor(armor)
                         self.gold -= 500
                         press_enter()
@@ -404,10 +409,10 @@ class Player(Character):
         print("Gold:     ", self.gold)
         print("Potions:  ", self.potions)
         print("Rot pots: ", self.rotpot)
-        print("Weapon:   ", self.weapon)
-        print("Ring 1:   ", self.ring1)
-        print("Ring 2:   ", self.ring2)
-        print("Armor:    ", self.armor)
+        print("Weapon:   ", self.gear["weapon"])
+        print("Ring 1:   ", self.gear["ring1"])
+        print("Ring 2:   ", self.gear["ring2"])
+        print("Armor:    ", self.gear["armor"])
         print("Key:      ", self.key)
         press_enter()
         clear_screen()
@@ -488,11 +493,11 @@ class Player(Character):
         print("Level:        ", self.lvl)
         print("Experience:   ", self.xp)
         print("Wpn charges:  ", self.weapon_charges)
-        print("Martial:      ", self.martial)
-        print("Finesse:      ", self.finesse)
-        print("Attunement:   ", self.attunement)
-        print("Arcana:       ", self.arcana)
-        print("Resolve:      ", self.resolve)
+        print("Martial:      ", self.stats["martial"])
+        print("Finesse:      ", self.stats["finesse"])
+        print("Attunement:   ", self.stats["attunement"])
+        print("Arcana:       ", self.stats["arcana"])
+        print("Resolve:      ", self.stats["resolve"])
         press_enter()
         clear_screen()
 

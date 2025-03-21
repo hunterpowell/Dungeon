@@ -63,7 +63,7 @@ def fight(player):
                     print("----------------------".center(40))
                     # attack roll to determine hit/miss
                     hit = random.randint(1, 20)
-                    if (hit + player.accuracy + player.finesse >= monster.ac):
+                    if (hit + player.accuracy + player.stats.get("finesse") >= monster.ac):
                         # crit if nat 20
                         if (hit == 20):
                             damage = player.weapon_crit()
@@ -161,7 +161,7 @@ def fight(player):
         # enemy attacks
         enemy_attack = random.randint(1, 20)
         if (enemy_attack + monster.accuracy >= player.ac):
-            damage = monster.attack() - player.resolve
+            damage = monster.attack() - player.stats["resolve"]
             print(f"Enemy hit you for {damage} damage!")
             player.defend(damage)
         else:

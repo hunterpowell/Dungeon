@@ -53,6 +53,7 @@ def main_loop(player):
                     clear_screen()
                     player.display_player()
 
+                # inv
                 case 4:
                     clear_screen()
                     player.inventory()
