@@ -422,11 +422,11 @@ class Player(Character):
             if (self.potions > 0):    
                 self.potions -= 1
                 self.health += 50
-                print("50hp restored!")
+                return ("50hp restored!")
             else:
-                print("You are out of healing potions! (dumbass)")
+               return ("You are out of healing potions! (dumbass)")
         else:
-            print("You cannot heal!")  
+            return("You cannot heal!")  
     
     def buy_heals(self, max):
         clear_screen()
@@ -485,17 +485,18 @@ class Player(Character):
         press_enter()
 
     def display_player(self):
-        super().display()
-        print("Level:        ", self.lvl)
-        print("Experience:   ", self.xp)
-        print("Wpn charges:  ", self.weapon_charges)
-        print("Martial:      ", self.stats["martial"])
-        print("Finesse:      ", self.stats["finesse"])
-        print("Attunement:   ", self.stats["attunement"])
-        print("Arcana:       ", self.stats["arcana"])
-        print("Resolve:      ", self.stats["resolve"])
-        press_enter()
-        clear_screen()
+        stats_text = super().display()
+        stats_text += (f"Level:         {self.lvl}\n")
+        stats_text += (f"Experience:    {self.xp}\n")
+        stats_text += (f"Wpn charges:   {self.weapon_charges}\n")
+        stats_text += (f"Martial:       {self.stats["martial"]}\n")
+        stats_text += (f"Finesse:       {self.stats["finesse"]}\n")
+        stats_text += (f"Attunement:    {self.stats["attunement"]}\n")
+        stats_text += (f"Arcana:        {self.stats["arcana"]}\n")
+        stats_text += (f"Resolve:       {self.stats["resolve"]}\n")
+
+
+        return stats_text
 
     def death(self):
         print("\nYOU DIED")

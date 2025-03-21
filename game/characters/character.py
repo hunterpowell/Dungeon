@@ -38,13 +38,15 @@ class Character:
             return(tmp + tmp2)
     
     def display(self):
-        print("      STATS")
-        print("=================")
-        print("Name:         ", self.name)
-        print("Health:       ", self.health)
-        print("Base accuracy:", self.accuracy)
-        print("Base on-hit:  ", self.on_hit)
-        print("Armor:        ", self.ac)
+        
+        stats_text = ("STATS\n")
+        stats_text += ("=================\n")
+        stats_text += (f"Name:       {self.name}\n")
+        stats_text += (f"Health:      {self.health}\n")
+        stats_text += (f"Base accuracy: {self.accuracy}\n")
+        stats_text += (f"Base on-hit:   {self.on_hit}\n")
+        stats_text += (f"Armor:        {self.ac}\n")
+        return stats_text
 
         
     def is_poisoned(self, opponent):

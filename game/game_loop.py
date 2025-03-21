@@ -10,6 +10,7 @@ class GameLoop:
     def __init__(self, root):
         self.root = root
         self.root.title("World Dungeon")
+        self.root.geometry("650x650")
 
         self.player = None
         self.day = 1
@@ -55,10 +56,15 @@ class GameLoop:
         self.health_label.config(text = f"Health: {self.player.health}")
     
     def add_text(self, text):
-        self.text_area.config(state = tk.NORMAL)
-        self.text_area.insert(tk.END, text)
+        # self.text_area.config(state = tk.NORMAL)
+        # self.text_area.insert(tk.END, text)
+        # self.text_area.see(tk.END)
+        # self.text_area.config(state = tk.DISABLED)
+        self.text_area.config(state=tk.NORMAL)
+        self.text_area.insert(tk.END, text, "center")
+        self.text_area.tag_configure("center", justify="center")
         self.text_area.see(tk.END)
-        self.text_area.config(state = tk.DISABLED)
+        self.text_area.config(state=tk.DISABLED)
 
     def clear_text(self):
         self.text_area.config(state=tk.NORMAL)
@@ -73,9 +79,11 @@ class GameLoop:
         self.add_text(intro_text)
 
         lore_btn = tk.Button(self.button_frame, text = "Hear Lore", command = self.show_lore)
+        lore_btn.config(height = 3, width = 10)
         lore_btn.pack(side = tk.LEFT, padx = 5)
 
         blind_btn = tk.Button(self.button_frame, text = "Go in Blind", command = self.ask_name)
+        blind_btn.config(height = 3, width = 10)
         blind_btn.pack(side = tk.RIGHT, padx = 5)
 
     def show_lore(self):
@@ -88,6 +96,7 @@ class GameLoop:
         self.add_text(lore_text)
 
         continue_btn = tk.Button(self.button_frame, text = "Continue", command=self.ask_name)
+        continue_btn.config(height = 3, width = 10)
         continue_btn.pack()
 
     def ask_name(self):
@@ -114,9 +123,16 @@ class GameLoop:
         self.show_combat_rules()
 
     def show_combat_rules(self):
+        # TODO this just gets skiped rn
         self.clear_text()
         self.clear_buttons()
         self.add_text("BRUHASHDFH")
+        back_btn = tk.Button(self.button_frame, text="Continue", 
+                           command=self.show_main_menu)
+        back_btn.config(height = 3, width = 10)
+        back_btn.pack(side=tk.BOTTOM, pady=10)
+        self.show_main_menu()
+
 
     def show_main_menu(self):
         self.clear_text()
@@ -129,39 +145,63 @@ class GameLoop:
 
         explore_btn = tk.Button(self.button_frame, text = "Explore", 
                                 command = self.handle_explore)
+        explore_btn.config(height = 3, width = 15)
         explore_btn.pack(side = tk.LEFT, padx = 5)
         
         heal_btn = tk.Button(self.button_frame, text="Use Healing Potion", 
                            command = self.handle_heal)
+        heal_btn.config(height = 3, width = 15)
         heal_btn.pack(side = tk.LEFT, padx=5)
         
         stats_btn = tk.Button(self.button_frame, text="Show Stats", 
                             command = self.show_stats)
+        stats_btn.config(height = 3, width = 15)
         stats_btn.pack(side = tk.LEFT, padx=5)
         
         inv_btn = tk.Button(self.button_frame, text="Check Inventory", 
                           command = self.show_inv)
+        inv_btn.config(height = 3, width = 15)
         inv_btn.pack(side = tk.LEFT, padx=5)
         
         safe_btn = tk.Button(self.button_frame, text="Go to Safe Room", 
                            command = self.go_to_safe)
+        safe_btn.config(height = 3, width = 15)
         safe_btn.pack(side = tk.LEFT, padx=5)
         
 
     def handle_explore(self):
         self.clear_text()
+        self.clear_buttons()
         
         self.add_text("Exploring...")
         
         back_btn = tk.Button(self.button_frame, text="Continue", 
                            command=self.show_main_menu)
+        back_btn.config(height = 3, width = 10)
         back_btn.pack(side=tk.BOTTOM, pady=10)
 
     def handle_heal(self):
-        pass
+        self.clear_text()
+        self.clear_buttons()
+
+        self.add_text(self.player.heal())
+
+        self.update_health()
+
+        back_btn = tk.Button(self.button_frame, text="Continue", 
+                           command=self.show_main_menu)
+        back_btn.config(height = 3, width = 10)
+        back_btn.pack(side=tk.BOTTOM, pady=10)
 
     def show_stats(self):
-        pass
+        self.clear_text()
+        self.clear_buttons()
+
+        self.add_text(self.player.display_player())
+        back_btn = tk.Button(self.button_frame, text="Continue", 
+                           command=self.show_main_menu)
+        back_btn.config(height = 3, width = 10)
+        back_btn.pack(side=tk.BOTTOM, pady=10)
 
     def show_inv(self):
         pass
