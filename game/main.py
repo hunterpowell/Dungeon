@@ -4,6 +4,6 @@ from game_loop import main_loop
 
 if __name__ == "__main__":
 
-    p1 = Player(introduction())
+    player = Player(introduction())
     combat_rules()
-    main_loop(p1)
+    main_loop(player)

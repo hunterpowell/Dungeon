@@ -15,10 +15,6 @@ class Player(Character):
         self.key = False
         self.can_heal = True
         self.job = "<Unassigned>"
-        # self.ring1 = "None"
-        # self.ring2 = "None"
-        # self.weapon = "Fists"
-        # self.armor = "None"
         self.gear = {"ring1": "None",
                      "ring2": "None",
                      "weapon": "Fists",
