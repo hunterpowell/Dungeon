@@ -400,18 +400,17 @@ class Player(Character):
         return max
 
     def inventory(self):
-        print("    INVENTORY")
-        print("=================")
-        print("Gold:     ", self.gold)
-        print("Potions:  ", self.potions)
-        print("Rot pots: ", self.rotpot)
-        print("Weapon:   ", self.gear["weapon"])
-        print("Ring 1:   ", self.gear["ring1"])
-        print("Ring 2:   ", self.gear["ring2"])
-        print("Armor:    ", self.gear["armor"])
-        print("Key:      ", self.key)
-        press_enter()
-        clear_screen()
+        # inv_text =("INVENTORY\n")
+        # inv_text +=("=================\n")
+        inv_text =(f"Gold:      {self.gold}\n")
+        inv_text +=(f"Potions:   {self.potions}\n")
+        inv_text +=(f"Rot pots:  {self.rotpot}\n")
+        inv_text +=(f"Weapon:    {self.gear["weapon"]}\n")
+        inv_text +=(f"Ring 1:    {self.gear["ring1"]}\n")
+        inv_text +=(f"Ring 2:    {self.gear["ring2"]}\n")
+        inv_text +=(f"Armor:     {self.gear["armor"]}\n")
+        inv_text +=(f"Key:       {self.key}\n")
+        return inv_text
     
     def usable_items(self):
         print("Potions:  ", self.potions)

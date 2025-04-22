@@ -234,7 +234,40 @@ class GameLoop:
         back_btn.pack(side=tk.BOTTOM, pady=10)
 
     def show_inv(self):
-        pass
+
+        self.clear_text()
+        self.clear_buttons()
+        
+        self.text_area.config(state=tk.NORMAL)
+        
+        # Create tags for centered header and left-aligned content
+        self.text_area.tag_configure("center", justify="center")
+        self.text_area.tag_configure("left", justify="left")
+        
+        # Add centered header
+        self.text_area.insert(tk.END, "INVENTORY\n", "center")
+        self.text_area.insert(tk.END, "===================\n", "center")
+        
+        # Add left-aligned inventory items
+        inventory_text = self.player.inventory()
+        
+        # Insert the inventory with left alignment but add spaces for centering
+        # Calculate appropriate padding to center the block
+        max_line_length = max(len(line) for line in inventory_text.split('\n'))
+        width = self.text_area.winfo_width() // 10  # Approximate width in characters
+        padding = " " * ((width - max_line_length) // 2)
+        
+        padded_inventory = "\n".join(padding + line for line in inventory_text.split('\n'))
+        self.text_area.insert(tk.END, padded_inventory, "left")
+        
+        self.text_area.see(tk.END)
+        self.text_area.config(state=tk.DISABLED)
+        
+        back_btn = tk.Button(self.button_frame, text="Continue", 
+                        command=self.show_main_menu)
+        back_btn.config(height=3, width=10)
+        back_btn.pack(side=tk.BOTTOM, pady=10)
+
 
     def go_to_safe(self):
         pass
