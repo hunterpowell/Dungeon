@@ -13,6 +13,7 @@ class GameLoop:
         self.root.geometry("650x650")
 
         self.player = None
+        self.floor = 1
         self.day = 1
         self.final_day = 5
 
@@ -28,13 +29,29 @@ class GameLoop:
         self.info_frame = tk.Frame(self.main_frame, bg = "black")
         self.info_frame.pack(fill = "x", padx = 10, pady = 5)
 
+        #right side
+        self.right_info_frame = tk.Frame(self.info_frame, bg = "black")
+        self.right_info_frame.pack(side = tk.RIGHT)
+
+        # new frame for floor and day
+        self.left_info_frame = tk.Frame(self.info_frame, bg = "black")
+        self.left_info_frame.pack(side = tk.LEFT)
+
+        # floor info
+        self.floor_label = tk.Label(self.left_info_frame, text = "Floor: 1", fg = "white", bg = "black", font = ("Courier", 12))
+        self.floor_label.pack(anchor = "w")
+
         # day info
-        self.day_label = tk.Label(self.info_frame, text = "Day: 1", fg = "white", bg = "black", font = ("Courier", 12))
-        self.day_label.pack(side = tk.LEFT)
+        self.day_label = tk.Label(self.left_info_frame, text = "Day: 1", fg = "white", bg = "black", font = ("Courier", 12))
+        self.day_label.pack(anchor = "w")
 
         # health info
-        self.health_label = tk.Label(self.info_frame, text = "Health: 100", fg = "white", bg = "black", font = ("Courier", 12))
-        self.health_label.pack(side = tk.RIGHT)
+        self.health_label = tk.Label(self.right_info_frame, text = "Health: 100", fg = "white", bg = "black", font = ("Courier", 12))
+        self.health_label.pack(anchor = "e")
+
+        # weapon charges
+        self.weapon_label = tk.Label(self.right_info_frame, text = "Wpn Charges: 1", fg = "white", bg = "black", font = ("Courier", 12))
+        self.weapon_label.pack(anchor = "e")
 
         # text area
         self.text_area = tk.Text(self.main_frame, bg = "black", fg = "white", font = ("Courier", 12), wrap = tk.WORD)
@@ -49,17 +66,23 @@ class GameLoop:
         for widget in self.button_frame.winfo_children():
             widget.destroy()
 
+    def update_floor(self):
+        self.floor_label.config(text = f"Floor: {self.floor}")
+
     def update_day(self):
         self.day_label.config(text = f"Day: {self.day}")
 
     def update_health(self):
         self.health_label.config(text = f"Health: {self.player.health}")
+
     
     def add_text(self, text):
-        # self.text_area.config(state = tk.NORMAL)
-        # self.text_area.insert(tk.END, text)
-        # self.text_area.see(tk.END)
-        # self.text_area.config(state = tk.DISABLED)
+        self.text_area.config(state = tk.NORMAL)
+        self.text_area.insert(tk.END, text)
+        self.text_area.see(tk.END)
+        self.text_area.config(state = tk.DISABLED)
+
+    def add_centered_text(self, text):
         self.text_area.config(state=tk.NORMAL)
         self.text_area.insert(tk.END, text, "center")
         self.text_area.tag_configure("center", justify="center")
@@ -75,7 +98,8 @@ class GameLoop:
         self.clear_text()
         self.clear_buttons()
 
-        intro_text = ("You have awoken at the bottom of the stairs in a bizarre place.\n")
+        intro_text = ("You have awoken at the bottom of the stairs in a bizarre place."
+                      "You have nothing but the clothes on your back, what would you like to do?")
         self.add_text(intro_text)
 
         lore_btn = tk.Button(self.button_frame, text = "Hear Lore", command = self.show_lore)
@@ -103,7 +127,7 @@ class GameLoop:
         self.clear_text()
         self.clear_buttons()
 
-        self.add_text("What is your name?\n")
+        self.add_centered_text("What is your name?\n")
 
         name_entry = tk.Entry(self.button_frame)
         name_entry.pack(side = tk.LEFT, padx = 5)
@@ -123,15 +147,21 @@ class GameLoop:
         self.show_combat_rules()
 
     def show_combat_rules(self):
-        # TODO this just gets skiped rn
         self.clear_text()
         self.clear_buttons()
-        self.add_text("BRUHASHDFH")
+        self.add_text("-You will survive as long as your health remains above 0.\n"
+                    "-A mob will die if you deplete their health.\n"
+                    "-Overkilling a mob will heal you by half the amount you overkill by.\n"
+                    "-A boss will be denoted by a long description, and a much tougher fight.\n"
+                    "-Your special attack is weapon dependant and strengthens with levels.\n"
+                    "-Special attacks can be used once per day, this can be increased with items.\n"
+                    "-All special attack charges replenish upon picking up a new weapon\n"
+                    "-You MUST kill at least one boss per floor to acquire a staircase key.\n"
+                    "-Without a key, you cannot descend and you will die.")
         back_btn = tk.Button(self.button_frame, text="Continue", 
                            command=self.show_main_menu)
         back_btn.config(height = 3, width = 10)
         back_btn.pack(side=tk.BOTTOM, pady=10)
-        self.show_main_menu()
 
 
     def show_main_menu(self):
@@ -141,7 +171,7 @@ class GameLoop:
         self.update_health()
         self.update_day()
 
-        self.add_text("What would you like to do?")
+        self.add_centered_text("What would you like to do?")
 
         explore_btn = tk.Button(self.button_frame, text = "Explore", 
                                 command = self.handle_explore)
@@ -173,7 +203,7 @@ class GameLoop:
         self.clear_text()
         self.clear_buttons()
         
-        self.add_text("Exploring...")
+        self.add_centered_text("Exploring...")
         
         back_btn = tk.Button(self.button_frame, text="Continue", 
                            command=self.show_main_menu)
@@ -184,7 +214,7 @@ class GameLoop:
         self.clear_text()
         self.clear_buttons()
 
-        self.add_text(self.player.heal())
+        self.add_centered_text(self.player.heal())
 
         self.update_health()
 
@@ -197,7 +227,7 @@ class GameLoop:
         self.clear_text()
         self.clear_buttons()
 
-        self.add_text(self.player.display_player())
+        self.add_centered_text(self.player.display_player())
         back_btn = tk.Button(self.button_frame, text="Continue", 
                            command=self.show_main_menu)
         back_btn.config(height = 3, width = 10)
